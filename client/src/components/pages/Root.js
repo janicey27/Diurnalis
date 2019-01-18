@@ -4,7 +4,7 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        Root
+        Hi!!! If you see this then nothing broke too terribly.
       </div>
     )
     ;
