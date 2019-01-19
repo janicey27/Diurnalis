@@ -5,6 +5,9 @@ html {
 body {
     margin: 0;
     height: 100%;
+    background-image: url('../components/images/paper.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #root {
@@ -17,8 +20,22 @@ body {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     text-align: center;
-    color: rgb(88, 44, 44);
+    color: rgb(255, 0, 0);
     display: flex;
     flex-direction: column;
+
+    
 }
 
+.box{
+    width: 500px;
+    border: 25px solid black;
+    padding: 25px;
+    margin: 25px;
+    background-color: black;
+    filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30;
+    opacity: 0.3;
+
+}
