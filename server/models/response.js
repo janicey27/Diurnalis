@@ -4,10 +4,9 @@ const mongoose = require('mongoose');
 // define a schema
 const ResponseModelSchema = new mongoose.Schema ({
     creatorID       : String,
-    creatorUsername : String,
-    date            : Integer,
-    year            : Integer,
-    question        : String, // do we need this? / where are we storing questions / how are we retrieving questions
+    creatorUsername : { type: String, lowercase: true },
+    date            : Number,
+    year            : Number,
     response        : String
 });
 

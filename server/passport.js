@@ -10,14 +10,14 @@ passport.use(new GoogleStrategy({
   callbackURL: '/auth/google/callback'
 }, function(accessToken, refreshToken, profile, done) {
   User.findOne({
-    'googleid': profile.id
+    googleID: profile.id
   }, function(err, user) {
     if (err) return done(err);
 
     if (!user) {
       const user = new User({
-        name: profile.displayName,
-        googleid: profile.id
+        firstName: profile.name.givenName,
+        googleID: profile.id
       });
 
       user.save(function(err) {
