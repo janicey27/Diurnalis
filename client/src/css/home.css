@@ -3,12 +3,20 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    
+}
+
+.home {
+    background-image: url('../components/public/paper.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .title{
     font-family: 'Open Sans', sans-serif;
     font-size: 250%;
     font-weight: 1000;
+    
 
 }
 

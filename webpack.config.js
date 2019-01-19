@@ -44,6 +44,7 @@ module.exports = {
     hot: true,
     proxy: {
       '/api': 'http://localhost:3000',
+      '/q': 'http://localhost:3000',
     }
   }
 };
