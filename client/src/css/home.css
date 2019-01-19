@@ -47,3 +47,65 @@ body {
     from, to { border-color: transparent }
     50% { border-color: orange; }
   }
+
+  .bigbox{
+    width: 75vw;
+    min-width: 300px;
+    height: 60vh;
+    padding: 25px;
+    margin: 25px;
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30;
+    position: absolute;
+    top: calc(15vh);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: black;
+  }
+
+  .submit{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 50px;
+      border: 3px solid #73AD21;
+  }
+
+  .btn {
+    width: 20%;
+    align-self: center;
+    cursor: pointer;
+    font-size: 30px;
+    background-color: transparent;
+    line-height: 1;
+    color: #3281ff;
+    border: 3px solid #3281ff;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration-line: none;
+}
+
+.btn:hover{
+    background-color: #3281ff;
+    color: white;
+}
+
+.response{
+    position: relative;
+    top: 20px;
+}
+
+.question-group{
+    position: relative;
+    top: 30px;
+}
