@@ -58,7 +58,8 @@ router.post(
             year            : 0, // TODO
             response        : req.body.response
         });
-  
+        
+        // TODO keep?
         newResponse.save(function(err, response) {
             User.findOne({ _id: req.user._id },function(err, user) {
                 user.last_post = req.body.content;
@@ -69,6 +70,7 @@ router.post(
             });
             if (err) console.log(err);
         });
+        
         res.send({});
   }
 );
@@ -78,6 +80,8 @@ router.post(
     connect.ensureLoggedIn(),
     function(req, res) {
         // req.body.parent
+
+        res.send({});
     }
 );
 

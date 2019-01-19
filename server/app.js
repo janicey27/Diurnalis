@@ -49,10 +49,8 @@ app.get('/logout', function(req, res) {
   res.redirect('/'); 
 });
 
-/*
 app.use('/api', api);
 app.use(express.static(publicPath));
-*/
 
 // 404 route
 app.use(function(req, res, next) {
