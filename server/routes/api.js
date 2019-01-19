@@ -29,20 +29,27 @@ router.get('/user', function(req, res) {
     });
 });
 
+router.post('/user', function(req, res) {
+    const updatedUser = {};
+
+    if (req.name) updatedUser.name = req.body.name;
+    if (req.username) updatedUser.username = req.body.username;
+    if (req.timeZone) updatedUser.timeZone = req.body.timeZone;
+    if (req.privacy) updatedUser.defaultPrivacy = req.body.privacy;
+
+    User.findOneAndUpdate({ _id: req.body.id }, updatedUser, function(err, user) {
+        res.send({});
+    });
+});
+
 router.get('/questions', function(req, res) {
     Question.find({}, function(err, questions) {
         res.send(questions);
     })
-})
-
-router.get('/question', function(req, res) {
-    Question.findOne({ question: req.query.question }, function(err, question) {
-        res.send(question);
-    })
-})
+});
 
 router.get('/responses', function(req, res) {
-    Response.find({}, function(err, responses) {
+    Response.find({ date: req.query.date }, function(err, responses) {
         res.send(responses);
     });
 });
@@ -51,36 +58,37 @@ router.post(
     '/response',
     connect.ensureLoggedIn(),
     function(req, res) {
+        const currentUser = User.findOne({ _id: req.user._id }, function(err, user) {
+            return user;
+        });
+
         const newResponse = new Response({
-            creatorID       : req.user.googleID,
-            creatorUsername : req.user.username,
+            creatorID       : currentUser._id,
+            creatorUsername : currentUser.username,
             date            : 0,
             year            : 0, // TODO
-            response        : req.body.response
+            content         : req.body.content,
+            upvotes         : 0
         });
         
         // TODO keep?
         newResponse.save(function(err, response) {
-            User.findOne({ _id: req.user._id },function(err, user) {
-                user.last_post = req.body.content;
-                user.save(); // this is OK, because the following lines of code are not reliant on the state of user, so we don't have to shove them in a callback. 
-                // configure socketio
-                const io = req.app.get('socketio');
-                io.emit("post", { creator_id: story.id, creator_name: user.name, content: req.body.content });
-            });
-            if (err) console.log(err);
+            const io = req.app.get('socketio');
+            io.emit("post", response);
         });
-        
+
         res.send({});
-  }
+    }
 );
 
 router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        // req.body.parent
-
+        Response.findOneAndUpdate({ _id: req.body.parent._id }, { upvotes: req.body.parent.upvotes + 1 }, function(err, user) {
+            const io = req.app.get('socketio');
+            io.emit("upvote", response);
+        });
         res.send({});
     }
 );
