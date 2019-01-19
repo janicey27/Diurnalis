@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // define a schema
 const UserModelSchema = new mongoose.Schema ({
-    googleID        : String,
-    firstName       : String,
+    googleid        : String,
+    name            : String,
     username        : { type: String, lowercase: true },
     timeZone        : Number,
     defaultPrivacy  : String
