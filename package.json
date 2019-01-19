@@ -20,6 +20,7 @@
   "homepage": "https://github.com/mit6148/aca-fresh#readme",
   "dependencies": {
     "connect-ensure-login": "^0.1.1",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "file-loader": "^3.0.1",
