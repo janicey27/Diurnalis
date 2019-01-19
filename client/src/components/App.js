@@ -14,8 +14,7 @@ class App extends React.Component {
           <Route exact path="/q" component={TodayQuestion}/>
         </Switch>
       </div>
-    )
-    ;
+    );
   }
 }
 
