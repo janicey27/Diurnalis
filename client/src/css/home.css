@@ -68,32 +68,22 @@ body {
     color: black;
   }
 
-  .submit{
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 200px;
-      height: 50px;
-      border: 3px solid #73AD21;
-  }
 
   .btn {
-    width: 20%;
     align-self: center;
     cursor: pointer;
     font-size: 30px;
     background-color: transparent;
     line-height: 1;
-    color: #3281ff;
     border: 3px solid #3281ff;
     margin-top: 15px;
-    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     border-radius: 10px;
     text-decoration-line: none;
 }
+
 
 .btn:hover{
     background-color: #3281ff;
@@ -103,9 +93,17 @@ body {
 .response{
     position: relative;
     top: 20px;
+    left: 30px;
+    text-align: left
 }
 
 .question-group{
     position: relative;
     top: 30px;
+}
+
+.button-group{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }

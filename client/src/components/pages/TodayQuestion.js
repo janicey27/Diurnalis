@@ -4,6 +4,29 @@ import "../../css/app.css"
 import TodayDate from "./TodayDate"
 
 export default class TodayQuestion extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            value: '',
+            privacy: "private"
+        }
+    }
+    
+    handlePrivacy = (event) => {
+        this.setState({
+            privacy: event.target.value
+        })
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            value: event.target.value 
+        });
+    }
+    
+    
+
     /*handleSubmit = (event) => {
         event.preventDefault();
         this.props.addStory(this.state.value);
@@ -33,14 +56,20 @@ export default class TodayQuestion extends React.Component {
                 <div className="question-group">
                     old questions go here
                     <div className="response">
-                        type here
+                        <form onSubmit={this.handleSubmit}>
+                            <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                        </form>
                     </div>
                 </div>
                 <div className="button-group">
-                    <button type="submit" className="btn submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                    <select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
+                        <option value = "private" >Private</option> 
+                        <option value = "anonymous" >Anonymous</option>
+                        <option value = "public" >Public</option>
+                    </select>
+                    <button type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
                 </div>
             </div>
-
         )
     }
 }
