@@ -53,12 +53,11 @@ body {
     min-width: 300px;
     height: 60vh;
     padding: 25px;
-    margin: 25px;
     background-color: rgba(0, 0, 0, 0.3);
     filter: alpha(opacity=30);
     filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
     -moz-opacity: 0.30;
-    position: absolute;
+    position: relative;
     top: calc(15vh);
     left: 50%;
     transform: translateX(-50%);

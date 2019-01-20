@@ -15,7 +15,7 @@ body {
     height: 100%;
 }
 
-.center{
+.center {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -28,7 +28,7 @@ body {
     
 }
 
-.box{
+.box {
     width: 500px;
     border: 25px solid black;
     padding: 25px;
@@ -39,4 +39,28 @@ body {
     -moz-opacity: 0.30;
     opacity: 0.3;
 
+}
+
+.settings {
+    position: fixed; 
+    top: 5px; 
+    right: 5px;
+    float: right;
+}
+
+.page {
+    height: 100vh;
+    width: 100vw;
+}
+
+.today {
+    background-color: rgb(126, 126, 228);
+}
+
+.timeline {
+    background-color: rgb(231, 129, 192);
+}
+
+.explore {
+    background-color: rgb(255, 229, 143);
 }

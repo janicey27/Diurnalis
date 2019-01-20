@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import Timeline from "./pages/Timeline"
 import Monthline from "./modules/Monthline"
 import TodayQuestion from "./pages/TodayQuestion";
+import Universe from "./pages/Universe";
 
 class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/q" component={TodayQuestion}/>
           <Route exact path="/t" component={Timeline}/>
+          <Route exact path='/u' component={Universe}/>
         </Switch>
       </div>
     );

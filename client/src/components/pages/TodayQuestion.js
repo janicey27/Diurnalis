@@ -1,15 +1,15 @@
 import React from "react";
 import "../../css/home.css";
-import "../../css/app.css"
-import TodayDate from "./TodayDate"
+import "../../css/app.css";
+import TodayDate from "./TodayDate";
 
 export default class TodayQuestion extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            value: {/* what you already submitted today*/},
-            privacy: {/* your settings for this post*/},
+            value: '', //* what you already submitted today*/}
+            privacy: 'private', //your settings for this post
             submitted: false
         }
     }

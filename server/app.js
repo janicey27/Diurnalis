@@ -40,6 +40,10 @@ app.get(["/t"], (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"))
 })
 
+app.get(["/u"], (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
+
 // authentication routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
