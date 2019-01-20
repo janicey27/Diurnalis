@@ -14,7 +14,7 @@ const api = require('./routes/api');
 
 // initialize express app
 const app = express();
-const publicPath = path.resolve(__dirname, '..', 'socket/dist');
+const publicPath = path.resolve(__dirname, '..', 'client/dist');
 
 // set POST request body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,6 +30,14 @@ app.use(session({
 // hook up passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get(["/q"], (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
+
+app.get(["/t"], (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
 
 // authentication routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -65,7 +73,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send({
     status: err.status,
-    message: err.message,
+    message: err.message
   });
 });
 

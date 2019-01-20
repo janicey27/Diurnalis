@@ -1,0 +1,26 @@
+.page-container {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #efefef;
+}
+
+.container {
+    
+    bottom: 0px;
+}
+
+
+
+.month-bar {
+    position: absolute;
+    bottom: 10px;
+    padding: 20px;
+    left: 70px;
+}
+
+.monthline {
+    position: absolute;
+    bottom: 150px;
+    padding: 15px;
+    left: 150px;
+}

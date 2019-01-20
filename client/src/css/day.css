@@ -1,0 +1,28 @@
+.timeline ol li:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  .timeline ol li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 1px);
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgb(126, 211, 205);
+    z-index: 5
+  }
+
+  li.active::after {
+      background:#568d4e !important
+  }
+
+  li.inactive::after {
+      background:#a8a8a8 !important
+  }
+
+
+ 
