@@ -12,6 +12,9 @@ const router = express.Router();
 // api endpoints
 router.get('/test', function(req, res) {
     res.send('reeeee');
+    console.log("Hi there!")
+    const io = req.app.get('socketio');
+    io.emit("test");
 });
 
 router.get('/whoami', function(req, res) {
@@ -23,19 +26,13 @@ router.get('/whoami', function(req, res) {
     }
 });
 
-router.get('/user', function(req, res) {
-    User.findOne({ _id: req.query._id }, function(err, user) {
-        res.send(user);
-    });
-});
-
 router.post('/user', function(req, res) {
     const updatedUser = {};
 
-    if (req.name) updatedUser.name = req.body.name;
-    if (req.username) updatedUser.username = req.body.username;
-    if (req.timeZone) updatedUser.timeZone = req.body.timeZone;
-    if (req.privacy) updatedUser.defaultPrivacy = req.body.privacy;
+    if (req.body.name) updatedUser.name = req.body.name;
+    if (req.body.username) updatedUser.username = req.body.username;
+    if (req.body.timeZone) updatedUser.timeZone = parseInt(req.body.timeZone);
+    if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
 
     User.findOneAndUpdate({ _id: req.body.id }, updatedUser, function(err, user) {
         res.send({});
@@ -49,7 +46,14 @@ router.get('/questions', function(req, res) {
 });
 
 router.get('/responses', function(req, res) {
-    Response.find({ date: req.query.date }, function(err, responses) {
+    const filters = { privacy: {$in: ["public", "anonymous"]} }; // TODO add privacy filter
+    if (req.query.id) filters._id = req.query.id;
+    filters.date = parseInt(req.query.date); // TODO some sort of random pull? so we don't get too many
+    if (req.query.year) filters.year = parseInt(req.query.year);
+    // TODO retrieve all responses or just the user
+    const count = req.count; // TODO
+
+    Response.find(filters, function(err, responses) {
         res.send(responses);
     });
 });
@@ -65,9 +69,10 @@ router.post(
         const newResponse = new Response({
             creatorID       : currentUser._id,
             creatorUsername : currentUser.username,
-            date            : 0,
-            year            : 0, // TODO
+            date            : parseInt(req.body.date),
+            year            : parseInt(req.body.year),
             content         : req.body.content,
+            privacy         : req.body.privacy,
             upvotes         : 0
         });
         

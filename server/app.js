@@ -35,6 +35,10 @@ app.get(["/q"], (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"))
 })
 
+app.get(["/t"], (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"))
+})
+
 // authentication routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
@@ -69,7 +73,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send({
     status: err.status,
-    message: err.message,
+    message: err.message
   });
 });
 

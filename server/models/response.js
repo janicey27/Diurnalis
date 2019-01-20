@@ -8,6 +8,7 @@ const ResponseModelSchema = new mongoose.Schema ({
     date            : Number,
     year            : Number,
     content         : String,
+    privacy         : String,
     upvotes         : Number
 });
 

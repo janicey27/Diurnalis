@@ -2,7 +2,9 @@ import React from "react";
 import "../css/app.css";
 import Route from "react-router-dom/es/Route";
 import Switch from "react-router-dom/es/Switch"
-import Home from "./pages/Home";
+import Home from "./pages/Home"
+import Timeline from "./pages/Timeline"
+import Monthline from "./modules/Monthline"
 import TodayQuestion from "./pages/TodayQuestion";
 
 class App extends React.Component {
@@ -12,10 +14,10 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/q" component={TodayQuestion}/>
+          <Route exact path="/t" component={Timeline}/>
         </Switch>
       </div>
-    )
-    ;
+    );
   }
 }
 

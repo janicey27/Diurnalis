@@ -1,0 +1,25 @@
+.timeline {
+    white-space: nowrap;
+    overflow-x: hidden;
+  }
+
+  .timeline ol {
+    font-size: 0;
+    width: 100vw;
+    padding: 50px 0;
+  }
+
+  .timeline ol li {
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
+    width: 25px;
+    height: 6px;
+    background: #c1c1c1;
+  }
+
+  
+  
+  
+
+  

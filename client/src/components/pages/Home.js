@@ -3,6 +3,7 @@ import "../../css/home.css";
 import "../../css/app.css"
 
 export default class Home extends React.Component {
+    
     componentDidMount() {
         document.body.classList.add("home");
     }
@@ -19,7 +20,14 @@ export default class Home extends React.Component {
                 <div className="enter">
                     <a className="login" href="/auth/google">Login</a>
                 </div>
+                <div onClick={this.testFunc}>Test</div>
             </div>
         )
     }
+
+    testFunc = () => {    
+      fetch('/api/test')
+      .then(console.log("hello"))
+    }
+
 }
