@@ -7,9 +7,12 @@ const Question = require('../models/question');
 const Response = require('../models/response');
 const User = require('../models/user');
 
+// Express router
 const router = express.Router();
 
-// api endpoints
+
+// api GET endpoints
+
 router.get('/test', function(req, res) {
     res.send('reeeee');
     console.log("Hi there!")
@@ -26,19 +29,6 @@ router.get('/whoami', function(req, res) {
     }
 });
 
-router.post('/user', function(req, res) {
-    const updatedUser = {};
-
-    if (req.body.name) updatedUser.name = req.body.name;
-    if (req.body.username) updatedUser.username = req.body.username;
-    if (req.body.timeZone) updatedUser.timeZone = parseInt(req.body.timeZone);
-    if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
-
-    User.findOneAndUpdate({ _id: req.body.id }, updatedUser, function(err, user) {
-        res.send({});
-    });
-});
-
 router.get('/questions', function(req, res) {
     Question.find({}, function(err, questions) {
         res.send(questions);
@@ -47,7 +37,7 @@ router.get('/questions', function(req, res) {
 
 router.get('/responses', function(req, res) {
     const filters = { privacy: {$in: ["public", "anonymous"]} }; // TODO add privacy filter
-    if (req.query.id) filters._id = req.query.id;
+    if (parseBoolean(req.body.me)) filters._id = req.user._id;
     filters.date = parseInt(req.query.date); // TODO some sort of random pull? so we don't get too many
     if (req.query.year) filters.year = parseInt(req.query.year);
     // TODO retrieve all responses or just the user
@@ -55,6 +45,22 @@ router.get('/responses', function(req, res) {
 
     Response.find(filters, function(err, responses) {
         res.send(responses);
+    });
+});
+
+
+// api POST endpoints
+
+router.post('/user', function(req, res) {
+    const updatedUser = {};
+
+    if (req.body.name) updatedUser.name = req.body.name;
+    if (req.body.username) updatedUser.username = req.body.username;
+    if (req.body.timeZone) updatedUser.timeZone = parseInt(req.body.timeZone);
+    if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
+
+    User.findOneAndUpdate({ _id: req.user._id }, updatedUser, function(err, user) {
+        res.send({});
     });
 });
 
@@ -76,7 +82,6 @@ router.post(
             upvotes         : 0
         });
         
-        // TODO keep?
         newResponse.save(function(err, response) {
             const io = req.app.get('socketio');
             io.emit("post", response);
@@ -90,10 +95,14 @@ router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        Response.findOneAndUpdate({ _id: req.body.parent._id }, { upvotes: req.body.parent.upvotes + 1 }, function(err, user) {
-            const io = req.app.get('socketio');
-            io.emit("upvote", response);
-        });
+        Response.findOneAndUpdate(
+            { _id: req.body.parent._id },
+            { upvotes: req.body.parent.upvotes + 1 - 2*parseBoolean(req.body.remove)},
+            function(err, user) {
+                const io = req.app.get('socketio');
+                io.emit("upvote", response);
+            }
+        );
         res.send({});
     }
 );
