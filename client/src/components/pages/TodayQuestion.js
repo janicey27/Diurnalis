@@ -8,8 +8,9 @@ export default class TodayQuestion extends React.Component {
         super(props);
         
         this.state = {
-            value: '',
-            privacy: "private"
+            value: {/* what you already submitted today*/},
+            privacy: {/* your settings for this post*/},
+            submitted: false
         }
     }
     
@@ -27,24 +28,38 @@ export default class TodayQuestion extends React.Component {
     
     
 
-    /*handleSubmit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addStory(this.state.value);
+        //save content;
+        //save privacy settings;
         this.setState({
-            value: '' 
+            submitted: true
         });
-    }*/
 
-    /*<div className="input-group my-3">
-                    <form onSubmit={this.handleSubmit}>
-                        <input type="text" placeholder="New Story" value={this.state.value} onChange={this.handleChange} className="form-control"/>
-                    </form>
-                </div>
-                <div className="input-group-append">
-                    <button type="submit" className="btn btn-outline-primary" value="Submit" onClick={this.handleSubmit}>Submit</button>
-                </div>*/
+    }
+
+    handleEdit = (event) => {
+        this.setState({
+            submitted: false
+        })
+    }
 
     render() {
+        const submitted = this.state.submitted;
+        let button;
+        let form;
+
+        if (submitted) {
+            button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
+            form = <div>{this.state.value}</div>;
+        } else {
+            button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
+            form = <form onSubmit={this.handleSubmit}>
+                    <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                    </form>;
+        }
+        
+
         return(
             <div className="bigbox">
                 <div className="date">
@@ -52,13 +67,13 @@ export default class TodayQuestion extends React.Component {
                 </div> 
                 <div className="question">
                     Today's question goes here
+                    {/*query today's question*/}
                 </div>
                 <div className="question-group">
                     old questions go here
+                    {/*query old responses*/}
                     <div className="response">
-                        <form onSubmit={this.handleSubmit}>
-                            <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
-                        </form>
+                        {form}
                     </div>
                 </div>
                 <div className="button-group">
@@ -67,7 +82,7 @@ export default class TodayQuestion extends React.Component {
                         <option value = "anonymous" >Anonymous</option>
                         <option value = "public" >Public</option>
                     </select>
-                    <button type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>
+                    {button}
                 </div>
             </div>
         )
