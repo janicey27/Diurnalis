@@ -31,6 +31,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// test routes
 app.get(["/q"], (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"))
 })
@@ -58,6 +59,7 @@ app.get('/logout', function(req, res) {
   res.redirect('/'); 
 });
 
+// api route
 app.use('/api', api);
 app.use(express.static(publicPath));
 
