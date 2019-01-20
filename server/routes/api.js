@@ -36,12 +36,20 @@ router.get('/questions', function(req, res) {
 });
 
 router.get('/responses', function(req, res) {
-    const filters = { privacy: {$in: ["public", "anonymous"]} }; // TODO add privacy filter
-    if (parseBoolean(req.body.me)) filters._id = req.user._id;
-    filters.date = parseInt(req.query.date); // TODO some sort of random pull? so we don't get too many
+    const filters = {};
+    if (req.query.me === 'true') {
+        if (req.user) {
+            filters._id = req.user._id;
+        } else {
+            // return res.send({});
+        }
+    } else {
+        filters.privacy = {$in: ["public", "anonymous"]}
+    }
+    if (req.query.date) filters.date = parseInt(req.query.date);
     if (req.query.year) filters.year = parseInt(req.query.year);
-    // TODO retrieve all responses or just the user
-    const count = req.count; // TODO
+
+    const count = req.count; // TODO some sort of random pull? so we don't get too many
 
     Response.find(filters, function(err, responses) {
         res.send(responses);
@@ -72,19 +80,46 @@ router.post(
             return user;
         });
 
-        const newResponse = new Response({
-            creatorID       : currentUser._id,
-            creatorUsername : currentUser.username,
-            date            : parseInt(req.body.date),
-            year            : parseInt(req.body.year),
-            content         : req.body.content,
-            privacy         : req.body.privacy,
-            upvotes         : 0
-        });
-        
-        newResponse.save(function(err, response) {
-            const io = req.app.get('socketio');
-            io.emit("post", response);
+        let responseDate = parseInt(req.body.date);
+        let responseYear = parseInt(req.body.year);
+
+        Response.findOne({
+            creatorID   : currentUser._id,
+            date        : responseDate,
+            year        : responseYear
+        }, function(err, response) {
+            if (!response) {
+                const newResponse = new Response({
+                    creatorID       : currentUser._id,
+                    creatorUsername : currentUser.username,
+                    date            : responseDate,
+                    year            : responseYear,
+                    content         : req.body.content,
+                    privacy         : req.body.privacy,
+                    upvotes         : 0
+                });
+                
+                console.log("pls");
+                newResponse.save(function(err, response) {
+                    const io = req.app.get('socketio');
+                    io.emit("post", response);
+                });
+                console.log("thanks");
+            } else {
+                console.log("uh");
+                Response.findOneAndUpdate(
+                    { _id: response._id },
+                    {
+                        content : req.body.content, // TODO for some reason response is not updating
+                        privacy : req.body.privacy
+                    },
+                    function(err, response) {
+                        const io = req.app.get('socketio');
+                        io.emit("edit", response);
+                    }
+                );
+                console.log(response);
+            }
         });
 
         res.send({});
@@ -97,7 +132,7 @@ router.post(
     function(req, res) {
         Response.findOneAndUpdate(
             { _id: req.body.parent._id },
-            { upvotes: req.body.parent.upvotes + 1 - 2*parseBoolean(req.body.remove)},
+            { upvotes: req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1)},
             function(err, user) {
                 const io = req.app.get('socketio');
                 io.emit("upvote", response);

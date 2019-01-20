@@ -12,7 +12,15 @@ export default class Home extends React.Component {
         document.body.classList.remove("home");
     }
 
+    // GET user
+    getUser = () => {
+        fetch('/api/whoami')
+            .then(res => res.json())
+            .then(res => console.log(res));
+    }
+
     render() {
+        this.getUser();
         return (
             <div className="center box"> 
                 <div className="title">Journal</div>
