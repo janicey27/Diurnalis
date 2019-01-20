@@ -7,13 +7,13 @@ class Monthline extends React.Component {
     setMonthLength = (inputMonth) => {
         console.log("hi")
         if (inputMonth == "jan" ||inputMonth ==  "mar" ||inputMonth ==  "may" || inputMonth == "jul" || inputMonth == "aug" ||inputMonth ==  "oct" || inputMonth == "dec") {
-            this.setState({monthLength: 1})
+            this.setState({monthLength: 31})
         }
         else if (inputMonth == "feb") {
-            this.setState({monthLength: 2})
+            this.setState({monthLength: 28})
         }
         else {
-            this.setState({monthLength: 3})
+            this.setState({monthLength: 30})
         }
     }
 
@@ -21,7 +21,7 @@ class Monthline extends React.Component {
         super(props);
         
         this.state = {
-            monthLength: 30,
+            monthLength: 2,
             dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] 
         }
 
