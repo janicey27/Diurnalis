@@ -1,5 +1,6 @@
 import React from 'react';
-import "../css/timeline.css";
+import "../../css/timeline.css";
+import Month from "../modules/Month.js"
 
 class Timeline extends React.Component {
 
@@ -9,44 +10,47 @@ class Timeline extends React.Component {
 
     render(){
         return (
-            <div className='page-container'>
-                <div className="month-bar">
-                    <div className="row justify-content-center">
+            <div className='page-container justify-content-center'>
+                <div className="monthline">
+                    
+                </div>
+                <div className="month-bar ">
+                    <div className="row no-gutters">
                         <div className="col-sm">
-                            <img src={require("../circle.png")} />
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                         <div className="col-sm">
-                        One of three columns
-                        </div>
+                        <Month />
+                         </div>
                         <div className="col-sm">
-                        One of three columns
-                        </div>
+                        <Month /> 
+                         </div>
                         <div className="col-sm">
-                        One of three columns
+                        <Month /> 
                         </div>
                     </div>
                 </div>
