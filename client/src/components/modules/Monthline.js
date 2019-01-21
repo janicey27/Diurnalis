@@ -1,6 +1,7 @@
 import React from "react";
-import "../../css/monthline.css";
+import "../../css/timeline.css";
 import Day from "./Day"
+import DayEntry from "./DayEntry"
 
 class Monthline extends React.Component {
   
@@ -11,7 +12,8 @@ class Monthline extends React.Component {
         
         this.state = {
             monthLength: 2,
-            dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] 
+            dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] ,
+            showEntry: false
         }
 
     
@@ -40,12 +42,24 @@ class Monthline extends React.Component {
             this.setMonthLength(this.props.selectedMonth);  
         }
     }
+
+    changeShowState = () => {
+        console.log("click registered !")
+        this.setState(prevState => ({
+            showEntry: !prevState.showEntry
+          }));
+      };
   
     render() {
         
+        var entryComponent = this.state.showEntry ? (<DayEntry/>) : (null);
+
     return (
         <div>
-
+            <section>
+                {entryComponent}
+                
+            </section>
         
             <section className="timeline">
                 <ol>
@@ -54,6 +68,7 @@ class Monthline extends React.Component {
                         <Day
                             key={y}
                             activity={this.state.dayEntries[y]}
+                            entryFunction={this.changeShowState}
                         />
                     ))} 
 

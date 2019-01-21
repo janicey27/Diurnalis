@@ -2,6 +2,8 @@
     min-width: 100vw;
     min-height: 100vh;
     position: relative;
+    align-content: center;
+    background-color: #efefef;
 }
 
 .container {
@@ -23,4 +25,74 @@
     bottom: 150px;
     padding: 15px;
     left: 150px;
+    
 }
+
+/* MONTH */
+
+.timeline {
+    white-space: nowrap;
+    overflow-x: hidden;
+    background-color: #efefef;
+  }
+
+  .timeline ol {
+    font-size: 0;
+    width: 100vw;
+    padding: 50px 0;
+  }
+
+  .timeline ol li {
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
+    width: 25px;
+    height: 6px;
+    background: #c1c1c1;
+    pointer-events: none;
+  }
+
+  
+  
+  
+
+  /* Day */
+  .timeline ol li:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  .timeline ol li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 1px);
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: rgb(126, 211, 205);
+    z-index: 5;
+    pointer-events: auto
+
+  }
+
+  li.active::after {
+      background:#568d4e !important
+  }
+
+  li.inactive::after {
+      background:#a8a8a8 !important
+  }
+
+
+ /* ENTRY */
+
+ .entry-container {
+     position: relative;
+     bottom: 20px;
+     width: calc(100vw * .6);
+     height: calc(100vh * 0.4);
+     background-color: #f3efbe;
+     padding: 20px;
+ }
