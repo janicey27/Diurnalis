@@ -7,6 +7,7 @@ import Timeline from "./pages/Timeline"
 import Root from "./pages/Root"
 import TodayQuestion from "./pages/TodayQuestion";
 import Universe from "./pages/Universe";
+import NavBar from "./pages/NavBar";
 
 class App extends React.Component {
 
@@ -25,6 +26,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <NavBar
+          userInfo={this.state.userInfo}
+          logout={this.logout}
+        />
         <Switch>
           <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} />}/>
           <Route exact path="/q" component={TodayQuestion}/>

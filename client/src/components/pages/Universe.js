@@ -12,9 +12,6 @@ export default class Universe extends React.Component {
     render() {
         return (
             <div className = "universe"> 
-                <div className = "settings">
-                    Settings
-                </div>
                 <div className = "page explore">
                     <Explore/>
                 </div>
