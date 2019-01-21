@@ -1,9 +1,9 @@
 // dependencies
 const express = require('express');
 const connect = require('connect-ensure-login');
+const fs = require('fs');
 
 // models
-const Question = require('../models/question');
 const Response = require('../models/response');
 const User = require('../models/user');
 
@@ -30,29 +30,49 @@ router.get('/whoami', function(req, res) {
 });
 
 router.get('/questions', function(req, res) {
-    
+    fs.readFile('../questions.json', 'utf8', function (err, data) {
+        console.log(data);
+        data = JSON.parse(data);
+        res.send(JSON.stringify(data));
+    });
 });
 
 router.get('/responses', function(req, res) {
     const filters = {};
-    if (req.query.me === 'true') {
-        if (req.isAuthenticated()) {
-            filters._id = req.user._id;
-        } else {
-            // return res.send({});
-        }
-    } else {
-        filters.privacy = {$in: ["public", "anonymous"]}
-    }
-    if (req.query.day !== null) filters.day = parseInt(req.query.day);
-    if (req.query.month !== null) filters.month = parseInt(req.query.month);
-    if (req.query.year !== null) filters.year = parseInt(req.query.year);
+
+    if (req.query.day) filters.day = parseInt(req.query.day);
+    if (req.query.month) filters.month = parseInt(req.query.month);
+    if (req.query.year) filters.year = parseInt(req.query.year);
 
     const count = req.count; // TODO some sort of random pull? so we don't get too many
 
-    Response.find(filters, function(err, responses) {
-        res.send(responses);
-    });
+    if (req.query.me === 'true') {
+        if (req.isAuthenticated()) {
+            filters.creatorID = req.user._id;
+            Response.find(filters, function(err, responses) {
+                res.send(responses);
+            });
+        } else {
+            console.log("no responses because user not logged in");
+            return res.send({});
+        }
+    } else {
+        let responses = [];
+        filters.privacy = "public";
+        Response.find(filters, function(err, publicResponses) {
+            responses = responses.concat(publicResponses);
+            filters.privacy = "anonymous";
+            Response.find(filters, function(err, anonResponses) {
+                let i;
+                for (i=0; i<anonResponses.length; i++) {
+                    anonResponses[i].username = "anonymous"; // uncertain if this works
+                    console.log(anonResponses[i]);
+                }
+                responses = responses.concat(anonResponses);
+                res.send(responses);
+            });
+        });
+    }
 });
 
 
@@ -75,56 +95,54 @@ router.post(
     '/response',
     connect.ensureLoggedIn(),
     function(req, res) {
-        const currentUser = User.findOne({ _id: req.user._id }, function(err, user) {
-            return user;
-        });
+        const responseDay = parseInt(req.body.day);
+        const responseMonth = parseInt(req.body.month);
+        const responseYear = parseInt(req.body.year);
 
-        let responseDay = parseInt(req.body.day);
-        let responseMonth = parseInt(req.body.month);
-        let responseYear = parseInt(req.body.year);
-
-        Response.findOne({
-            creatorID   : currentUser._id,
-            day         : responseDay,
-            month       : responseMonth,
-            year        : responseYear
-        }, function(err, response) {
-            if (!response) {
-                const newResponse = new Response({
-                    creatorID       : currentUser._id,
-                    creatorUsername : currentUser.username,
-                    day             : responseDay,
-                    month           : responseMonth,
-                    year            : responseYear,
-                    content         : req.body.content,
-                    privacy         : req.body.privacy,
-                    upvotes         : 0
-                });
-                
-                console.log("pls");
-                newResponse.save(function(err, response) {
-                    const io = req.app.get('socketio');
-                    io.emit("post", response);
-                });
-                console.log("thanks");
-            } else {
-                console.log("uh");
-                Response.findOneAndUpdate(
-                    { _id: response._id },
-                    {
-                        content : req.body.content, // TODO for some reason response is not updating
-                        privacy : req.body.privacy
-                    },
-                    function(err, response) {
+        User.findOne({ _id: req.user._id }, function(err, currentUser) {    
+            Response.findOne({
+                creatorID   : currentUser._id,
+                day         : responseDay,
+                month       : responseMonth,
+                year        : responseYear
+            }, function(err, response) {
+                if (!response) {
+                    const newResponse = new Response({
+                        creatorID       : currentUser._id,
+                        creatorUsername : currentUser.username,
+                        day             : responseDay,
+                        month           : responseMonth,
+                        year            : responseYear,
+                        content         : req.body.content,
+                        privacy         : req.body.privacy,
+                        upvotes         : 0
+                    });
+                    
+                    console.log("pls");
+                    newResponse.save(function(err, response) {
                         const io = req.app.get('socketio');
-                        io.emit("edit", response);
-                    }
-                );
-                console.log(response);
-            }
+                        io.emit("post", response);
+                        console.log("thanks");
+                        res.send({});
+                    });
+                } else {
+                    console.log("uh");
+                    Response.findOneAndUpdate(
+                        { _id: response._id },
+                        {
+                            content : req.body.content, // TODO for some reason response is not updating
+                            privacy : req.body.privacy
+                        },
+                        function(err, response) {
+                            const io = req.app.get('socketio');
+                            io.emit("edit", response);
+                            console.log("edited!");
+                            res.send({});
+                        }
+                    );
+                }
+            });
         });
-
-        res.send({});
     }
 );
 

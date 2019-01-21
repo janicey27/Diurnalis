@@ -7,7 +7,6 @@
 }
 
 .container {
-    
     bottom: 0px;
 }
 
@@ -25,8 +24,8 @@
     bottom: 150px;
     padding: 15px;
     left: 150px;
-    
 }
+
 
 /* MONTH */
 
@@ -34,15 +33,15 @@
     white-space: nowrap;
     overflow-x: hidden;
     background-color: #efefef;
-  }
+}
 
-  .timeline ol {
+.timeline ol {
     font-size: 0;
     width: 100vw;
     padding: 50px 0;
-  }
+}
 
-  .timeline ol li {
+.timeline ol li {
     position: relative;
     display: inline-block;
     list-style-type: none;
@@ -50,18 +49,15 @@
     height: 6px;
     background: #c1c1c1;
     pointer-events: none;
-  }
+}
 
-  
-  
-  
 
-  /* Day */
-  .timeline ol li:not(:first-child) {
+/* Day */
+.timeline ol li:not(:first-child) {
     margin-left: 10px;
-  }
+}
 
-  .timeline ol li:not(:last-child)::after {
+.timeline ol li:not(:last-child)::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -74,25 +70,24 @@
     background: rgb(126, 211, 205);
     z-index: 5;
     pointer-events: auto
+}
 
-  }
+li.active::after {
+    background:#568d4e !important
+}
 
-  li.active::after {
-      background:#568d4e !important
-  }
-
-  li.inactive::after {
-      background:#a8a8a8 !important
-  }
+li.inactive::after {
+    background:#a8a8a8 !important
+}
 
 
- /* ENTRY */
+/* ENTRY */
 
- .entry-container {
-     position: relative;
-     bottom: 20px;
-     width: calc(100vw * .6);
-     height: calc(100vh * 0.4);
-     background-color: #f3efbe;
-     padding: 20px;
+.entry-container {
+    position: relative;
+    bottom: 20px;
+    width: calc(100vw * .6);
+    height: calc(100vh * 0.4);
+    background-color: #f3efbe;
+    padding: 20px;
  }

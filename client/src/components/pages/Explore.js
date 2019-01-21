@@ -13,13 +13,27 @@ export default class Explore extends React.Component{
 
     }
 
-
     handleClick = () => {
         this.setState({
           numStars: this.state.numStars + 1,
           
         }) 
       }
+    componentDidMount() {
+        this.getPastResponses();
+    }
+  
+    // GET all responses for today
+    getPastResponses = () => {
+        fetch('/api/responses?day=' + this.props.day + '&month=' + this.props.month + '&year=' + this.props.year)
+            .then(res => res.json())
+            .then(
+                responses => {
+                    console.log("responses retrieved!");
+                    console.log(responses);
+                }
+            );
+    }
 
     render(){
         const stars = []; 
