@@ -8,8 +8,9 @@ export default class TodayQuestion extends React.Component {
         super(props);
         
         this.state = {
-            date: 0, // date and year should probably be props passed down from somewhere above
-            year: 0,
+            day: 32, // day, month, and year should probably be props passed down from somewhere above
+            month: 13,
+            year: 1000,
             value: {/* what you already submitted today*/},
             privacy: {/* your settings for this post*/},
             submitted: false,
@@ -63,7 +64,7 @@ export default class TodayQuestion extends React.Component {
         let todayResponses = [];
         let i;
         for (i=0; i<this.state.userResponses.length; i++) {
-            if (this.state.userResponses[i].date === this.state.date) {
+            if ((this.state.userResponses[i].day === this.state.day) && (this.state.userResponses[i].month === this.state.month)) {
                 todayResponses.push(this.state.userResponses[i]);
             }
         }
@@ -77,8 +78,9 @@ export default class TodayQuestion extends React.Component {
     // POST response content and details
     postResponse = () => {
         const body = {
-            date: this.state.date, // DATE
-            year: this.state.year, // YEAR
+            day: this.state.day,
+            month: this.state.month,
+            year: this.state.year,
             content: this.state.value,
             privacy: this.state.privacy
         };

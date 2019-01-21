@@ -1,13 +1,18 @@
 import React from "react";
+import Home from "./Home";
+import Universe from "./Universe";
 
 class Root extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return (
-      <div>
-        Hi!!! If you see this then nothing broke too terribly.
-      </div>
+    return (this.props.userInfo !== null ?
+      <Universe /> :
+      <Home />
     )
-    ;
   }
 }
 

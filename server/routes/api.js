@@ -30,9 +30,7 @@ router.get('/whoami', function(req, res) {
 });
 
 router.get('/questions', function(req, res) {
-    Question.find({}, function(err, questions) {
-        res.send(questions);
-    })
+    
 });
 
 router.get('/responses', function(req, res) {
@@ -46,7 +44,8 @@ router.get('/responses', function(req, res) {
     } else {
         filters.privacy = {$in: ["public", "anonymous"]}
     }
-    if (req.query.date !== null) filters.date = parseInt(req.query.date);
+    if (req.query.day !== null) filters.day = parseInt(req.query.day);
+    if (req.query.month !== null) filters.month = parseInt(req.query.month);
     if (req.query.year !== null) filters.year = parseInt(req.query.year);
 
     const count = req.count; // TODO some sort of random pull? so we don't get too many
@@ -80,19 +79,22 @@ router.post(
             return user;
         });
 
-        let responseDate = parseInt(req.body.date);
+        let responseDay = parseInt(req.body.day);
+        let responseMonth = parseInt(req.body.month);
         let responseYear = parseInt(req.body.year);
 
         Response.findOne({
             creatorID   : currentUser._id,
-            date        : responseDate,
+            day         : responseDay,
+            month       : responseMonth,
             year        : responseYear
         }, function(err, response) {
             if (!response) {
                 const newResponse = new Response({
                     creatorID       : currentUser._id,
                     creatorUsername : currentUser.username,
-                    date            : responseDate,
+                    day             : responseDay,
+                    month           : responseMonth,
                     year            : responseYear,
                     content         : req.body.content,
                     privacy         : req.body.privacy,
