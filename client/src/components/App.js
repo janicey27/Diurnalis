@@ -10,54 +10,60 @@ import Universe from "./pages/Universe";
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      userInfo: null
+        this.state = {
+            userInfo: null
+        }
     }
-  }
 
-  componentDidMount() {
-    this.getUser();
-  }
+    componentDidMount() {
+        this.getUser();
+        this.getQuestions();
+    }
 
-  render() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} />}/>
-          <Route exact path="/q" component={TodayQuestion}/>
-          <Route exact path="/t" component={Timeline}/>
-          <Route exact path='/u' component={Universe}/>
-        </Switch>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Switch>
+                    <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} />}/>
+                    <Route exact path="/q" component={TodayQuestion}/>
+                    <Route exact path="/t" component={Timeline}/>
+                    <Route exact path='/u' component={Universe}/>
+                    </Switch>
+            </div>
+        );
+    }
 
-  logout = () => {
-      this.setState({
-          userInfo: null
-      })
-  };
+    logout = () => {
+        this.setState({
+            userInfo: null
+        });
+    };
 
-  getUser = () => {    
-      fetch('/api/whoami')
-      .then(res => res.json())
-      .then(
-          userObj => {
-              if (userObj._id !== undefined) {
-                  this.setState({ 
-                      userInfo: userObj
-                  });
-              } else {
-                  this.setState({ 
-                      userInfo: null
-                  });
-              }
-          }
-      );
-  }
+    getUser = () => {    
+        fetch('/api/whoami')
+            .then(res => res.json())
+            .then(
+                userObj => {
+                    if (userObj._id !== undefined) {
+                        this.setState({ 
+                            userInfo: userObj
+                        });
+                    } else {
+                        this.setState({ 
+                            userInfo: null
+                        });
+                    }
+                }
+            );
+    }
+
+    getQuestions = () => {
+        fetch('/api/questions')
+            .then(questions => {console.log("hi"); console.log(questions)});
+    }
 
 }
 

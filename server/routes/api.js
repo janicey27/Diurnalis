@@ -1,6 +1,7 @@
 // dependencies
 const express = require('express');
 const connect = require('connect-ensure-login');
+const fs = require('fs');
 
 // models
 const Response = require('../models/response');
@@ -29,7 +30,11 @@ router.get('/whoami', function(req, res) {
 });
 
 router.get('/questions', function(req, res) {
-    res.sendFile('../questions.json')
+    fs.readFile('../questions.json', 'utf8', function (err, data) {
+        console.log(data);
+        data = JSON.parse(data);
+        res.send(JSON.stringify(data));
+    });
 });
 
 router.get('/responses', function(req, res) {
@@ -90,9 +95,9 @@ router.post(
     '/response',
     connect.ensureLoggedIn(),
     function(req, res) {
-        let responseDay = parseInt(req.body.day);
-        let responseMonth = parseInt(req.body.month);
-        let responseYear = parseInt(req.body.year);
+        const responseDay = parseInt(req.body.day);
+        const responseMonth = parseInt(req.body.month);
+        const responseYear = parseInt(req.body.year);
 
         User.findOne({ _id: req.user._id }, function(err, currentUser) {    
             Response.findOne({
