@@ -49,7 +49,10 @@ class Monthline extends React.Component {
                 <ol>
                     
                     {Array.from(Array(this.state.monthLength).keys()).map(y => (
-                        <Day activity={this.state.dayEntries[y]}/>
+                        <Day
+                            key={y}
+                            activity={this.state.dayEntries[y]}
+                        />
                     ))} 
 
                     
