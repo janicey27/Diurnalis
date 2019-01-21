@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const ResponseModelSchema = new mongoose.Schema ({
     creatorID       : String,
     creatorUsername : { type: String, lowercase: true },
-    date            : Number,
+    day             : Number,
+    month           : Number,
     year            : Number,
     content         : String,
     privacy         : String,

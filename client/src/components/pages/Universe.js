@@ -10,7 +10,7 @@ export default class Universe extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <div className = "universe"> 
                 <div className = "settings">
                     Settings
