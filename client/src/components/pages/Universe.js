@@ -16,7 +16,7 @@ export default class Universe extends React.Component {
                     Settings
                 </div>
                 <div className = "page explore">
-                    <Explore/>
+                    <Explore day={32} month={13} year={1000}/>
                 </div>
                 <div className = "page today">
                     <TodayQuestion/>

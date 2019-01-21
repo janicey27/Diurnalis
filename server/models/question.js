@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 // define a schema
 const QuestionModelSchema = new mongoose.Schema ({
-    date        : Number,
+    day         : Number,
+    month       : Number,
     question    : String
 });
 

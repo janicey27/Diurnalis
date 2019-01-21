@@ -16,8 +16,10 @@ passport.use(new GoogleStrategy({
 
     if (!user) {
       const user = new User({
-        name: profile.displayName,
-        googleid: profile.id
+        name: profile.name.givenName,
+        username: profile.name.givenName + profile.name.familyName, // TODO remove, set username upon first login
+        googleid: profile.id,
+        defaultPrivacy: "private" // TODO remove, set upon first login
       });
 
       user.save(function(err) {

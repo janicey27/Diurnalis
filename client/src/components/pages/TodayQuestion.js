@@ -22,7 +22,6 @@ export default class TodayQuestion extends React.Component {
     componentDidMount() { // for testing purposes
         this.getUser();
         this.getPastResponses();
-        this.getTodayResponses();
     }
     
     handlePrivacy = (event) => {
@@ -50,7 +49,6 @@ export default class TodayQuestion extends React.Component {
             .then(res => res.json())
             .then(
                 responses => {
-                    console.log(responses);
                     this.setState({ userResponses: responses });
                     console.log("past responses retrieved!");
                     console.log(this.state.userResponses);
@@ -92,6 +90,7 @@ export default class TodayQuestion extends React.Component {
             body: JSON.stringify(body)
         }).then(() => {
             console.log("posted!");
+            console.log(body);
         });
     };
 
