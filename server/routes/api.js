@@ -29,7 +29,7 @@ router.get('/whoami', function(req, res) {
 });
 
 router.get('/questions', function(req, res) {
-    res.json();
+    res.sendFile('../questions.json')
 });
 
 router.get('/responses', function(req, res) {

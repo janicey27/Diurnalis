@@ -1,8 +1,22 @@
-{
-    "questions": {
+[
+    {
+        "day": 32,
+        "month": 13,
+        "year": 1000,
+        "content": "This is a test question?"
+    },
+
+    {
         "day": 21,
         "month": 1,
         "year": 2019,
-        "question": "What is your name?"
+        "content": "What is your name?"
+    },
+    
+    {
+        "day": 22,
+        "month": 1,
+        "year": 2019,
+        "content": "Is this question boring?"
     }
-}
+]
