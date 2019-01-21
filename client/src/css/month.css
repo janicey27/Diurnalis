@@ -3,6 +3,10 @@ div.label {
 
 }
 
+div.image {
+    height: calc(100vw / 15);
+}
+
 div.jan {
     content: url("../components/public/circle.png");
     

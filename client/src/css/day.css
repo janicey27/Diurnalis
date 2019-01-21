@@ -13,7 +13,9 @@
     transform: translateY(-50%);
     border-radius: 50%;
     background: rgb(126, 211, 205);
-    z-index: 5
+    z-index: 5;
+    pointer-events: auto
+
   }
 
   li.active::after {

@@ -9,13 +9,57 @@ class Timeline extends React.Component {
         super(props);
 
         this.state = {
-            month: ""
+            month: "",
+            userResponses: [],
+            questions: []
         }
 
     }
 
     handleClick(inputMonth) {
         this.setState({month: inputMonth})
+    }
+
+    // GET past responses
+    getPastResponses = () => {
+        fetch('/api/responses?me=true')
+            .then(res => res.json())
+            .then(
+                responses => {
+                    console.log(responses);
+                    this.setState({ userResponses: responses });
+                    console.log("past responses retrieved!");
+                    console.log(this.state.userResponses);
+                }
+            );
+    }
+
+    getAllQuestions = () => {
+        fetch('/api/questions')
+            .then(res => res.json())
+            .then(
+                questions => {
+                    console.log(questions);
+                    this.setState({ questions: questions });
+                    console.log("all questions retrieved!");
+                    console.log(this.state.questions);
+                }
+            );
+    }
+
+    getTodayResponses = () => { //change this!
+        let todayResponses = [];
+        let i;
+        for (i=0; i<this.state.userResponses.length; i++) {
+            if (this.state.userResponses[i].date === this.state.date) {
+                todayResponses.push(this.state.userResponses[i]);
+            }
+        }
+        // sort todayResponses by descending years
+        todayResponses.sort((a, b) => (b.year - a.year));
+        this.setState({ pastResponses: todayResponses });
+        console.log("today's responses retrieved!");
+        console.log(todayResponses);
     }
 
     render(){

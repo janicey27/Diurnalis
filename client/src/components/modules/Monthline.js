@@ -4,6 +4,19 @@ import Day from "./Day"
 
 class Monthline extends React.Component {
   
+    
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            monthLength: 2,
+            dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] 
+        }
+
+    
+    }
+
     setMonthLength = (inputMonth) => {
         console.log("hi")
         if (inputMonth == "jan" ||inputMonth ==  "mar" ||inputMonth ==  "may" || inputMonth == "jul" || inputMonth == "aug" ||inputMonth ==  "oct" || inputMonth == "dec") {
@@ -15,17 +28,6 @@ class Monthline extends React.Component {
         else {
             this.setState({monthLength: 30})
         }
-    }
-
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            monthLength: 2,
-            dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] 
-        }
-
-    
     }
 
     componentDidMount() {
