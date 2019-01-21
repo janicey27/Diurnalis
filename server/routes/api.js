@@ -38,7 +38,7 @@ router.get('/questions', function(req, res) {
 router.get('/responses', function(req, res) {
     const filters = {};
     if (req.query.me === 'true') {
-        if (req.user) {
+        if (req.isAuthenticated()) {
             filters._id = req.user._id;
         } else {
             // return res.send({});
@@ -46,8 +46,8 @@ router.get('/responses', function(req, res) {
     } else {
         filters.privacy = {$in: ["public", "anonymous"]}
     }
-    if (req.query.date) filters.date = parseInt(req.query.date);
-    if (req.query.year) filters.year = parseInt(req.query.year);
+    if (req.query.date !== null) filters.date = parseInt(req.query.date);
+    if (req.query.year !== null) filters.year = parseInt(req.query.year);
 
     const count = req.count; // TODO some sort of random pull? so we don't get too many
 
