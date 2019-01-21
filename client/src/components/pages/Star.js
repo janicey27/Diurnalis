@@ -5,25 +5,13 @@ import "../../css/app.css";
 export default class Star extends React.Component{
     constructor(props){
         super(props);
-
-        this.state = {
-            top: '10vh',
-            left: '10vw',
-        }
-    }
-
-    setStyle = (event) => {
-        const top = String(Math.random()*100)+'vh'
-        const left = String(Math.random()*100)+'vw'
-        this.setState({
-            top: top,
-            left: left,
-        })
     }
 
     render(){
         return(
-            <div className = "star" style={{top: this.state.top, left: this.state.left}} onClick={this.setStyle}> 
+            <div className = "star" 
+                style={{top: this.props.top, left: this.props.left,
+                        height: this.props.size, width: this.props.size}}> 
                 
             </div>
         )
