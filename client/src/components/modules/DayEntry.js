@@ -9,7 +9,8 @@ class Root extends React.Component {
         // selectedMonth: this.props.selectedMonth,
         // dayIndex: 0
         todaysQuestion: "Sorry, the question for this day is currently unavailable.",
-        todaysResponses: "You have no entries for this question!"
+        todaysResponses: [],
+        hasResponses: false
     }
 
 }
@@ -35,12 +36,12 @@ class Root extends React.Component {
     var hasResponse = false;
     for (i=0; i<responses.length; i++) {
       if (responses[i][0] === this.props.selectedMonth && responses[i][1] === this.props.dayIndex+1) {
-        this.setState({todaysResponses: responses[i][3]})
+        this.setState({todaysResponses: [...this.state.todaysResponses, responses[i][2]]})
         hasResponse = true;
       }
     }
     if (hasResponse == false) {
-      this.setState({todaysResponses: "You have no entries for this question!"})
+      this.setState({hasResponses: false})
     }
   }
 
@@ -65,11 +66,17 @@ class Root extends React.Component {
 }
 
   render() {
+    
+    var responseComponent = this.state.hasResponse ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
+
     return (
       <div className = "entry-container">
         <h4>Selected date: {this.props.selectedMonth}/{this.props.dayIndex+1} </h4>
+
         <h2>{this.state.todaysQuestion}</h2>
-        <p>{this.state.todaysResponses}</p>
+
+        <p>{responseComponent}</p>
+        
         
       </div>
     )

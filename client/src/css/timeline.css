@@ -16,14 +16,14 @@
     position: absolute;
     bottom: 10px;
     padding: 20px;
-    left: 70px;
+    left: 40px;
 }
 
 .monthline {
     position: absolute;
     bottom: 150px;
     padding: 15px;
-    left: 150px;
+    left: 40px;
 }
 
 
@@ -45,7 +45,7 @@
     position: relative;
     display: inline-block;
     list-style-type: none;
-    width: 25px;
+    width: calc(100vw / 60);
     height: 6px;
     background: #c1c1c1;
     pointer-events: none;

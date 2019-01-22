@@ -13,7 +13,7 @@ class Monthline extends React.Component {
         this.state = {
             selectedMonth: "",
             monthLength: 0,
-            dayEntries: [],//["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] ,
+            dayEntries: [],
             showEntry: false,
             selectedDay: -1,
             responseArray: []
@@ -46,8 +46,6 @@ class Monthline extends React.Component {
             activityArray.push("inactive");
 
         }
-       
-        // var monthIndex = this.props.selectedMonth;
         
         const responses = this.props.responseArray;
         var j;
