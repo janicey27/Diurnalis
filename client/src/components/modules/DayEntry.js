@@ -1,4 +1,5 @@
 import React from "react";
+import PastResponses from "./PastResponses";
 
 class Root extends React.Component {
   
@@ -36,13 +37,17 @@ class Root extends React.Component {
     var hasResponse = false;
     for (i=0; i<responses.length; i++) {
       if (responses[i][0] === this.props.selectedMonth && responses[i][1] === this.props.dayIndex+1) {
-        this.setState({todaysResponses: [...this.state.todaysResponses, responses[i][2]]})
+        var joined = this.state.todaysResponses
+        joined.push(responses[i][2])
+        this.setState({todaysResponses: joined})
         hasResponse = true;
+        this.setState({hasResponses: true})
       }
     }
     if (hasResponse == false) {
       this.setState({hasResponses: false})
     }
+    
   }
 
   componentDidMount() {
@@ -60,14 +65,16 @@ class Root extends React.Component {
         // console.log("component did Update");
         // console.log(this.props.selectedDay);
         // this.updateEntry(this.props.selectedDay);
+        this.state.todaysResponses =[];
         this.getQuestionOfDay();
         this.getResponsesOfDay();
+        
     }
 }
 
   render() {
     
-    var responseComponent = this.state.hasResponse ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
+    var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
 
     return (
       <div className = "entry-container">
