@@ -14,10 +14,10 @@ const router = express.Router();
 // api GET endpoints
 
 router.get('/test', function(req, res) {
-    res.send('reeeee');
     console.log("Hi there!")
     const io = req.app.get('socketio');
     io.emit("test");
+    res.send('reeeee');
 });
 
 router.get('/whoami', function(req, res) {
@@ -29,12 +29,45 @@ router.get('/whoami', function(req, res) {
     }
 });
 
+// TODO fix
 router.get('/questions', function(req, res) {
-    fs.readFile('../questions.json', 'utf8', function (err, data) {
+    /*
+    fs.readFile('../questions.json', { encoding: 'utf8' }, function(err, data) {
         console.log(data);
         data = JSON.parse(data);
         res.send(JSON.stringify(data));
     });
+    */
+    data = [
+        {
+            "day": 32,
+            "month": 13,
+            "year": 1000,
+            "content": "This is a test question?"
+        },
+    
+        {
+            "day": 21,
+            "month": 1,
+            "year": 2019,
+            "content": "What is your name?"
+        },
+        
+        {
+            "day": 22,
+            "month": 1,
+            "year": 2019,
+            "content": "Is this question boring?"
+        },
+
+        {
+            "day": 23,
+            "month": 1,
+            "year": 2019,
+            "content": "Did you accomplish what you wanted to today?"
+        }
+    ];
+    res.send(JSON.stringify(data));
 });
 
 router.get('/responses', function(req, res) {

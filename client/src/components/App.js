@@ -9,18 +9,25 @@ import TodayQuestion from "./pages/TodayQuestion";
 import Universe from "./pages/Universe";
 import NavBar from "./pages/NavBar";
 
+const reader = new FileReader();
+reader.onload = (e) => {
+    this.state.questions = reader.result;
+}
+
 class App extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      userInfo: null
+      userInfo: null,
+      questions: null,
     }
   }
 
   componentDidMount() {
     this.getUser();
+    this.getAllQuestions();
   }
 
   render() {
@@ -62,6 +69,39 @@ class App extends React.Component {
               }
           }
       );
+  }
+
+  // get all questions
+  getAllQuestions = () => {
+      
+      fetch('/api/questions')
+          .then(res => res.json())
+          .then(
+              questions => {
+                  console.log(questions);
+                  this.setState({ questions: questions });
+                  console.log("all questions retrieved!");
+                  console.log(this.state.questions);
+              }
+          );
+        
+
+    /*
+    reader.readAsText('/public/questions.json');
+    console.log("questions retrieved!");
+    console.log(this.state.questions);
+    */
+
+    /*
+    fs.readFile('/public/questions.json', 'utf8', function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+            questions = data;
+        }
+    });
+    */
   }
 
 }
