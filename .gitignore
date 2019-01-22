@@ -2,6 +2,7 @@
 .DS_STORE
 /*.log
 node_modules
-dist/bundle.js
+client/dist/bundle.js
+client/dist/*.jpg
 package-lock.json
 .env
