@@ -11,9 +11,10 @@ export default class TodayQuestion extends React.Component {
             day: 32, // day, month, and year should probably be props passed down from somewhere above
             month: 13,
             year: 1000,
-            value: {/* what you already submitted today*/},
-            privacy: {/* your settings for this post*/},
+            value: '',//* what you already submitted today*/}
+            privacy: 'private',//* change to default,
             submitted: false,
+            responded: false,
             userResponses: [],
             pastResponses: []
         }
@@ -22,6 +23,7 @@ export default class TodayQuestion extends React.Component {
     componentDidMount() { // for testing purposes
         this.getUser();
         this.getPastResponses();
+        this.updateResponded();
     }
     
     handlePrivacy = (event) => {
@@ -91,31 +93,51 @@ export default class TodayQuestion extends React.Component {
         }).then(() => {
             console.log("posted!");
             console.log(body);
-        });
+        }).then(() => {
+            this.getPastResponses();
+        })
     };
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.postResponse();
         this.setState({
-            submitted: true
+            submitted: true,
+            responded: true,
         });
     }
 
     handleEdit = (event) => {
         this.setState({
-            submitted: false
+            submitted: false,
         });
+    }
+
+    updateResponded = () => {
+        if (!this.state.pastResponses && this.state.pastResponses[0].year == this.state.year){
+            this.setState({
+                responded: true,
+            })
+            console.log("user did respond")
+        }
     }
 
     render() {
         const submitted = this.state.submitted;
+        const responded = this.state.responded;
         let button;
         let form;
-
-        if (submitted) {
-            button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
-            form = <div>{this.state.value}</div>;
+        
+        if (responded) {
+            if (submitted) {
+                button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
+                form = <div>{this.state.pastResponses[0]}</div>;
+            } else {
+                button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
+                form = <form onSubmit={this.handleSubmit}>
+                        <input id="daily-response" type="text" placeholder="Your Response" value={this.state.pastResponses[0]} onChange={this.handleChange}/>
+                        </form>;
+            }
         } else {
             button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
             form = <form onSubmit={this.handleSubmit}>

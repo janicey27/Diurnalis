@@ -48,7 +48,7 @@ body {
     border: 25px solid black;
     padding: 25px;
     margin: 25px;
-    background-color: black;
+    background-color: rgb(255, 239, 239);
     filter: alpha(opacity=30);
     filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
     -moz-opacity: 0.30;
@@ -81,7 +81,7 @@ body {
 }
 
 .explore {
-    background-color: rgb(12, 11, 37);
+    background-color: rgb(212, 211, 255);
 }
 
 .navbar{
