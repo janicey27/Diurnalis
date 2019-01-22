@@ -16,11 +16,10 @@ export default class Home extends React.Component {
         return (
             <div className="center box"> 
                 <div className="title">Journal</div>
-                <div className="subtitle typewriter">Question preview</div> {/*Query today's question*/}
+                <div className="subtitle typewriter">Are you ready to answer?</div> {/*Query today's question*/}
                 <div className="enter">
                     <a className="login" href="/auth/google">Login</a>
                 </div>
-                <div onClick={this.testFunc}>Test</div>
             </div>
         )
     }

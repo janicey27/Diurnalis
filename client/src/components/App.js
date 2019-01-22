@@ -21,13 +21,11 @@ class App extends React.Component {
 
     this.state = {
       userInfo: null,
-      questions: null,
     }
   }
 
   componentDidMount() {
     this.getUser();
-    this.getAllQuestions();
   }
 
   render() {
@@ -69,21 +67,7 @@ class App extends React.Component {
               }
           }
       );
-  }
 
-  // get all questions
-  getAllQuestions = () => {
-      
-      fetch('/api/questions')
-          .then(res => res.json())
-          .then(
-              questions => {
-                  console.log(questions);
-                  this.setState({ questions: questions });
-                  console.log("all questions retrieved!");
-                  console.log(this.state.questions);
-              }
-          );
         
 
     /*
