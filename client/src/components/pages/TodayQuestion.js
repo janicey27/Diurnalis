@@ -116,12 +116,12 @@ export default class TodayQuestion extends React.Component {
 
     updateResponded = () => {
         if (this.state.pastResponses.length > 0){
-            if (this.state.pastResponses[0].year == this.state.year){
+            if (this.state.pastResponses[0].year === this.state.year){
                 this.setState({
                     responded: true,
                     submitted: true,
                     value: this.state.pastResponses[0].content,
-                })
+                });
             }
             console.log("user has responded");
         }
@@ -130,14 +130,14 @@ export default class TodayQuestion extends React.Component {
     render() {
         const submitted = this.state.submitted;
         const responded = this.state.responded;
-        let oldRes; 
+        let oldRes;
         let button;
         let form;
         
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
-                form = <div>{this.state.pastResponses[0].content}</div>;
+                form = <div>{this.state.value}</div>;
             } else {
                 button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
                 form = <form onSubmit={this.handleSubmit}>
@@ -151,7 +151,7 @@ export default class TodayQuestion extends React.Component {
                     </form>;
         }
 
-        if (this.state.pastResponses.length == 0){
+        if (this.state.pastResponses.length === 0){
             oldRes = null;
         } else {
             // display all past responses for today's question
