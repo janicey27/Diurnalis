@@ -82,7 +82,9 @@ router.get('/responses', function(req, res) {
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
             filters.creatorID = req.user._id;
+            console.log("ok");
             Response.find(filters, function(err, responses) {
+                console.log(responses);
                 res.send(responses);
             });
         } else {
