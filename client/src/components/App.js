@@ -9,11 +9,6 @@ import TodayQuestion from "./pages/TodayQuestion";
 import Universe from "./pages/Universe";
 import NavBar from "./pages/NavBar";
 
-const reader = new FileReader();
-reader.onload = (e) => {
-    this.state.questions = reader.result;
-}
-
 class App extends React.Component {
 
   constructor(props) {
@@ -67,6 +62,7 @@ class App extends React.Component {
               }
           }
       );
+    }
 
   // get all questions
   getAllQuestions = () => {
