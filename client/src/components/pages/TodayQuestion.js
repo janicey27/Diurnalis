@@ -8,10 +8,10 @@ export default class TodayQuestion extends React.Component {
         super(props);
         
         this.state = {
-            day: 32, // day, month, and year should probably be props passed down from somewhere above
+            day: 34, // day, month, and year should probably be props passed down from somewhere above
             month: 13,
-            year: 1000,
-            value: null, /* what you already submitted today*/
+            year: 2006,
+            value: '', /* what you already submitted today*/
             privacy: "private", /* your settings for this post*/
             submitted: false,
             responded: false,
@@ -23,7 +23,6 @@ export default class TodayQuestion extends React.Component {
     componentDidMount() { // for testing purposes
         this.getUser();
         this.getPastResponses();
-        this.updateResponded();
     }
     
     handlePrivacy = (event) => {
@@ -55,8 +54,10 @@ export default class TodayQuestion extends React.Component {
                     console.log("past responses retrieved!");
                     console.log(this.state.userResponses);
                     this.getTodayResponses();
-                }
-            );
+                } 
+            ).then(() => {
+                this.updateResponded();
+            })
     }
 
     // select responses for current date
@@ -114,28 +115,33 @@ export default class TodayQuestion extends React.Component {
     }
 
     updateResponded = () => {
-        if (!this.state.pastResponses && this.state.pastResponses[0].year == this.state.year){
-            this.setState({
-                responded: true,
-            })
-            console.log("user did respond")
+        if (this.state.pastResponses){
+            if (this.state.pastResponses[0].year == this.state.year){
+                this.setState({
+                    responded: true,
+                    submitted: true,
+                    value: this.state.pastResponses[0].content,
+                })
+            }
+            console.log("user has responded");
         }
     }
 
     render() {
         const submitted = this.state.submitted;
         const responded = this.state.responded;
+        let oldRes; 
         let button;
         let form;
         
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
-                form = <div>{this.state.pastResponses[0]}</div>;
+                form = <div>{this.state.pastResponses[0].content}</div>;
             } else {
                 button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
                 form = <form onSubmit={this.handleSubmit}>
-                        <input id="daily-response" type="text" placeholder="Your Response" value={this.state.pastResponses[0]} onChange={this.handleChange}/>
+                        <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                         </form>;
             }
         } else {
@@ -143,6 +149,21 @@ export default class TodayQuestion extends React.Component {
             form = <form onSubmit={this.handleSubmit}>
                     <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                     </form>;
+        }
+
+        if (this.state.pastResponses.length == 0){
+            oldRes = null;
+        } else {
+            // display all past responses for today's question
+            if (responded){
+                oldRes = Array.from(Array(this.state.pastResponses.length-1).keys()).map(i => (
+                    <div key={this.state.pastResponses[i+1].year} className="response">{this.state.pastResponses[i+1].content}</div>
+                ))
+            } else {
+                oldRes = Array.from(Array(this.state.pastResponses.length).keys()).map(i => (
+                    <div key={this.state.pastResponses[i].year} className="response">{this.state.pastResponses[i].content}</div>
+                ))
+            }
         }
 
         return(
@@ -155,14 +176,11 @@ export default class TodayQuestion extends React.Component {
                     {/*query today's question*/}
                 </div>
                 <div className="question-group">
-                    old questions go here
-                    {// display all past responses for today's question
-                    Array.from(Array(this.state.pastResponses.length).keys()).map(i => (
-                        <div key={this.state.pastResponses[i].year} className="response">{this.state.pastResponses[i].content}</div>
-                    ))}
                     <div className="response">
                         {form}
                     </div>
+                    {oldRes}
+                    <div></div>
                 </div>
                 <div className="button-group">
                     <select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
