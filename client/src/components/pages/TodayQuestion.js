@@ -8,15 +8,12 @@ export default class TodayQuestion extends React.Component {
         super(props);
         
         this.state = {
-            day: 34, // day, month, and year should probably be props passed down from somewhere above
-            month: 13,
-            year: 1000,
             value: '', /* what you already submitted today*/
             privacy: "private", /* your settings for this post*/
             submitted: false,
             responded: false,
             userResponses: [],
-            pastResponses: []
+            pastResponses: [],
         }
     }
 
@@ -65,7 +62,7 @@ export default class TodayQuestion extends React.Component {
         let todayResponses = [];
         let i;
         for (i=0; i<this.state.userResponses.length; i++) {
-            if ((this.state.userResponses[i].day === this.state.day) && (this.state.userResponses[i].month === this.state.month)) {
+            if ((this.state.userResponses[i].day === this.props.day) && (this.state.userResponses[i].month === this.props.month)) {
                 todayResponses.push(this.state.userResponses[i]);
             }
         }
@@ -76,12 +73,14 @@ export default class TodayQuestion extends React.Component {
         console.log(todayResponses);
     }
 
+    
+
     // POST response content and details
     postResponse = () => {
         const body = {
-            day: this.state.day,
-            month: this.state.month,
-            year: this.state.year,
+            day: this.props.day,
+            month: this.props.month,
+            year: this.props.year,
             content: this.state.value,
             privacy: this.state.privacy
         };
@@ -116,7 +115,7 @@ export default class TodayQuestion extends React.Component {
 
     updateResponded = () => {
         if (this.state.pastResponses.length > 0){
-            if (this.state.pastResponses[0].year === this.state.year){
+            if (this.state.pastResponses[0].year == this.props.year){
                 this.setState({
                     responded: true,
                     submitted: true,
@@ -172,7 +171,7 @@ export default class TodayQuestion extends React.Component {
                     <TodayDate/>
                 </div> 
                 <div className="question">
-                    Today's question goes here
+                    {this.props.question}
                     {/*query today's question*/}
                 </div>
                 <div className="question-group">

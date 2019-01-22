@@ -56,7 +56,6 @@ export default class Explore extends React.Component{
         return(
             <div className = "sky">
                 {stars}
-                <button className = "tester" onClick = {this.handleClick}></button> 
             </div>
         )
     }
