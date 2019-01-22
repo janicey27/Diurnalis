@@ -20,9 +20,6 @@ class Timeline extends React.Component {
         this.setState({month: inputMonth})
     }
 
-<<<<<<< Updated upstream
-    
-=======
     // GET past responses
     getPastResponses = () => {
         fetch('/api/responses?me=true')
@@ -51,7 +48,6 @@ class Timeline extends React.Component {
         console.log("today's responses retrieved!");
         console.log(todayResponses);
     }
->>>>>>> Stashed changes
 
     render(){
         return (
