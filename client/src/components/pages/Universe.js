@@ -9,9 +9,9 @@ export default class Universe extends React.Component {
         super(props)
 
         this.state = {
-            day: 23,
+            day: 22,
             month: 1,
-            year: 2001,
+            year: 2019,
             questions: null,
             question: '',
         }
