@@ -11,8 +11,8 @@ export default class TodayQuestion extends React.Component {
             day: 32, // day, month, and year should probably be props passed down from somewhere above
             month: 13,
             year: 1000,
-            value: '',//* what you already submitted today*/}
-            privacy: 'private',//* change to default,
+            value: null, /* what you already submitted today*/
+            privacy: "private", /* your settings for this post*/
             submitted: false,
             responded: false,
             userResponses: [],
