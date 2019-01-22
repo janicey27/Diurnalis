@@ -40,9 +40,11 @@ export default class Explore extends React.Component{
         
         for (var i = 0; i < this.state.numStars; i++) { 
             stars.push(<Star 
+                id={String(i)}
                 top={String(Math.random()*100)+'vh'} 
                 left={String(Math.random()*100)+'vw'}
                 size={String(Math.random()*20)+'px'} // to be updated based on like data
+                content="filler content"
                 //also need to pass in attributes like # of likes
                 //content, etc.
                 />)
@@ -51,7 +53,7 @@ export default class Explore extends React.Component{
         return(
             <div className = "sky">
                 {stars}
-                <button onClick = {this.handleClick}></button> 
+                <button className = "tester" onClick = {this.handleClick}></button> 
             </div>
         )
     }
