@@ -10,7 +10,7 @@ class Root extends React.Component {
 
   render() {
     return (this.props.userInfo !== null ?
-      <Universe /> :
+      <Universe questions={this.props.questions}/> :
       <Home />
     )
   }

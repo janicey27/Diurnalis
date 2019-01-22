@@ -12,10 +12,14 @@ class Timeline extends React.Component {
             month: "",
             monthLength: 0,
             questionArray: [[1, 1, "This is a question for Jan 1?"], [1, 22, "This is a question for Jan 22?"], [2, 7, "“This is a question for Feb 7?”"]],
-            responseArray: [[1, 1, [2018, "“Here’s my response to Jan 1 2018.”"]], [1, 22, [2017, "“Here’s my response to Jan 22 2017.”"]], [2, 7, [2018, "“Here’s my response to Feb 7 2018”"]]]
+            responseArray: [[1, 1, [2018, "“Here’s my response to Jan 1 2018.”"]], [1, 1, [2014, "“Here’s my response to Jan 1 2014!!!!!!.”"]],[1, 22, [2017, "“Here’s my response to Jan 22 2017.”"]], [2, 7, [2018, "“Here’s my response to Feb 7 2018”"]]]
 
         }
+    }
 
+    componentDidMount() {
+        this.formatQuestions();
+        this.getPastResponses();
     }
 
     handleClick(inputMonth, inputLength) {
@@ -33,23 +37,29 @@ class Timeline extends React.Component {
                     this.setState({ userResponses: responses });
                     console.log("past responses retrieved!");
                     console.log(this.state.userResponses);
+                    this.formatResponses();
                 }
             );
     }
 
-    getTodayResponses = () => { //change this!
-        let todayResponses = [];
-        let i;
-        for (i=0; i<this.state.userResponses.length; i++) {
-            if (this.state.userResponses[i].date === this.state.date) {
-                todayResponses.push(this.state.userResponses[i]);
-            }
+    formatQuestions = () => {
+        let questionsArr = [], oneQuestion, i;
+        for (i=0; i<this.props.questions.length; i++) {
+            question = this.props.questions[i];
+            oneQuestion = [question.month, question.day, question.content];
+            questionsArr.push(oneQuestion);
         }
-        // sort todayResponses by descending years
-        todayResponses.sort((a, b) => (b.year - a.year));
-        this.setState({ pastResponses: todayResponses });
-        console.log("today's responses retrieved!");
-        console.log(todayResponses);
+        questionArray = questionsArr;
+    }
+
+    formatResponses = () => {
+        let responsesArr = [], oneResponse = [], i;
+        for (i=0; i<this.state.userResponses.length; i++) {
+            response = this.state.userResponses[i];
+            oneResponse = [response.month, response.day, [response.year, response.content]];
+            responsesArr.push(oneResponse);
+        }
+        responseArray = responsesArr;
     }
 
     render(){

@@ -72,7 +72,7 @@ export default class Universe extends React.Component {
                     />
                 </div>
                 <div className = "page timeline">
-                    <Timeline/>
+                    <Timeline questions={this.props.questions}/>
                 </div>
             </div>
         )

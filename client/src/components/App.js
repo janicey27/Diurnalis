@@ -9,11 +9,6 @@ import TodayQuestion from "./pages/TodayQuestion";
 import Universe from "./pages/Universe";
 import NavBar from "./pages/NavBar";
 
-const reader = new FileReader();
-reader.onload = (e) => {
-    this.state.questions = reader.result;
-}
-
 class App extends React.Component {
 
   constructor(props) {
@@ -36,7 +31,7 @@ class App extends React.Component {
           logout={this.logout}
         />
         <Switch>
-          <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} />}/>
+          <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} questions={this.state.questions}/>}/>
           <Route exact path="/q" component={TodayQuestion}/>
           <Route exact path="/t" component={Timeline}/>
           <Route exact path='/u' component={Universe}/>
@@ -67,25 +62,20 @@ class App extends React.Component {
               }
           }
       );
+    }
 
-        
-
-    /*
-    reader.readAsText('/public/questions.json');
-    console.log("questions retrieved!");
-    console.log(this.state.questions);
-    */
-
-    /*
-    fs.readFile('/public/questions.json', 'utf8', function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(data);
-            questions = data;
-        }
-    });
-    */
+  // get all questions
+  getAllQuestions = () => {
+      fetch('/api/questions')
+          .then(res => res.json())
+          .then(
+              questions => {
+                  console.log(questions);
+                  this.setState({ questions: questions });
+                  console.log("all questions retrieved!");
+                  console.log(this.state.questions);
+              }
+          );
   }
 
 }

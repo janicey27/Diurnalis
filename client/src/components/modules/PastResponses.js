@@ -1,6 +1,4 @@
 import React from "react";
-import Home from "./Home";
-import Universe from "./Universe";
 
 class Root extends React.Component {
 
@@ -8,10 +6,21 @@ class Root extends React.Component {
     super(props);
   }
 
+
+  componentDidMount() {
+      console.log(this.props.responses)
+      console.log(this.props.responses.length)
+  }
+
   render() {
     return (
         
-        <div>hi</div>
+        <div>
+            {Array.from(Array(this.props.responses.length).keys()).map(y => (
+               <div>  {this.props.responses[y][0]}:  {this.props.responses[y][1]} </div>
+            ))} 
+
+        </div>
     )
   }
 }
