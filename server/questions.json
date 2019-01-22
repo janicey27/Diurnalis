@@ -18,5 +18,19 @@
         "month": 1,
         "year": 2019,
         "content": "Is this question boring?"
+    },
+
+    {
+        "day": 23,
+        "month": 1,
+        "year": 2019,
+        "content": "Did you accomplish what you wanted to today?"
+    },
+
+    {
+        "day": 23,
+        "month": 1,
+        "year": 2019,
+        "content": "As of this moment, are you happy?"
     }
 ]
