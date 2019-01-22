@@ -6,10 +6,15 @@ class Root extends React.Component {
     constructor(props) {
         super(props);
 
-        
+        this.state = {
+            //key: this.props.key
+        }
         
     }
 
+    componentDidMount() {
+       // console.log(this.props.key)
+    }
   
     render() {
         
@@ -18,10 +23,8 @@ class Root extends React.Component {
         return (
             
             
-            <li className={this.props.activity} onClick={() => this.props.entryFunction()}>
-                <div>
-                <time>1934</time> At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                </div>
+            <li className={this.props.activity} onClick={() => this.props.entryFunction(this.props.dayIndex)}>
+                
                 
             </li>
             

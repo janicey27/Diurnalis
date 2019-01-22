@@ -11,9 +11,11 @@ class Monthline extends React.Component {
         super(props);
         
         this.state = {
-            monthLength: 2,
+            selectedMonth: "",
+            monthLength: 0,
             dayEntries: ["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] ,
-            showEntry: false
+            showEntry: false,
+            selectedDay: 0
         }
 
     
@@ -32,10 +34,7 @@ class Monthline extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.props.selectedMonth)
-        this.setMonthLength(this.props.selectedMonth);
-    }
+    
 
     componentDidUpdate(prevProps) {
         if (this.props.selectedMonth != prevProps.selectedMonth) {
@@ -43,22 +42,22 @@ class Monthline extends React.Component {
         }
     }
 
-    changeShowState = () => {
-        console.log("click registered !")
-        this.setState(prevState => ({
-            showEntry: !prevState.showEntry
-          }));
+    entryFunction = (setDay) => {
+        console.log("click registered !");
+        // this.setState(prevState => ({
+        //     showEntry: !prevState.showEntry
+        //   }));
+        this.setState({selectedDay: setDay});
       };
   
     render() {
         
-        var entryComponent = this.state.showEntry ? (<DayEntry/>) : (null);
+        //var entryComponent = this.state.showEntry ? (<DayEntry/>) : (<DayEntry/>);
 
     return (
         <div>
             <section>
-                {entryComponent}
-                
+                 <DayEntry selectedDay={this.state.selectedDay} selectedMonth={this.state.selectedMonth}/>
             </section>
         
             <section className="timeline">
@@ -67,8 +66,9 @@ class Monthline extends React.Component {
                     {Array.from(Array(this.state.monthLength).keys()).map(y => (
                         <Day
                             key={y}
+                            dayIndex = {y}
                             activity={this.state.dayEntries[y]}
-                            entryFunction={this.changeShowState}
+                            entryFunction={this.entryFunction}
                         />
                     ))} 
 
