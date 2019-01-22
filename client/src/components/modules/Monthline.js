@@ -15,7 +15,7 @@ class Monthline extends React.Component {
             monthLength: 0,
             dayEntries: [],//["active","inactive","inactive","active","active","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","active","inactive","inactive","active","inactive","active","active","inactive","inactive","active","inactive"] ,
             showEntry: false,
-            selectedDay: 0,
+            selectedDay: -1,
             responseArray: []
         }
 
@@ -47,12 +47,12 @@ class Monthline extends React.Component {
 
         }
        
-        var monthIndex = this.props.selectedMonth;
-        var j;
+        // var monthIndex = this.props.selectedMonth;
+        
         const responses = this.props.responseArray;
-
+        var j;
         for (j=0; j<responses.length; j++) { //iterates through responseArray to find days with entries
-            if (responses[j][0]===monthIndex) {
+            if (responses[j][0]===this.props.selectedMonth) {
                 var activeIndex = responses[j][1]-1; 
                 activityArray[activeIndex] = "active";
             }   
@@ -85,7 +85,7 @@ class Monthline extends React.Component {
     return (
         <div>
             <section>
-                 <DayEntry selectedDay={this.state.selectedDay} selectedMonth={this.props.selectedMonth}/>
+                 <DayEntry dayIndex={this.state.selectedDay} selectedMonth={this.props.selectedMonth} questionArray={this.props.questionArray} responseArray={this.props.responseArray}/>
             </section>
         
             <section className="timeline">
