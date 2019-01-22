@@ -12,7 +12,7 @@ export default class Universe extends React.Component {
             day: 22,
             month: 1,
             year: 2019,
-            questions: null,
+            questions: [],
             question: '',
         }
     }
@@ -23,20 +23,19 @@ export default class Universe extends React.Component {
 
     // get all questions
     getAllQuestions = () => {
-      
         fetch('/api/questions')
             .then(res => res.json())
             .then(
-                questions => {
-                    console.log(questions);
-                    this.setState({ questions: questions });
+                questionArr => {
+                    console.log(questionArr);
+                    this.setState({ questions: questionArr });
                     console.log("all questions retrieved!");
                     console.log(this.state.questions);
                 }
             ).then(() => {
                 this.getTodayQuestion();
             });
-        }
+    }
     
     // get today's question
     getTodayQuestion = () => {
@@ -72,7 +71,7 @@ export default class Universe extends React.Component {
                     />
                 </div>
                 <div className = "page timeline">
-                    <Timeline questions={this.props.questions}/>
+                    <Timeline questions={this.state.questions}/>
                 </div>
             </div>
         )
