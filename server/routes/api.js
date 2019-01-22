@@ -81,8 +81,9 @@ router.get('/responses', function(req, res) {
 
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
+            console.log(req.user._id);
             filters.creatorID = req.user._id;
-            console.log("ok");
+            console.log("ok " + JSON.stringify(filters));
             Response.find(filters, function(err, responses) {
                 console.log(responses);
                 res.send(responses);
@@ -101,7 +102,7 @@ router.get('/responses', function(req, res) {
                 let i;
                 for (i=0; i<anonResponses.length; i++) {
                     anonResponses[i].username = "anonymous"; // uncertain if this works
-                    console.log(anonResponses[i]);
+                    // console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
                 res.send(responses);
@@ -134,7 +135,9 @@ router.post(
         const responseMonth = parseInt(req.body.month);
         const responseYear = parseInt(req.body.year);
 
-        User.findOne({ _id: req.user._id }, function(err, currentUser) {    
+        console.log("User: " + req.user._id);
+        User.findOne({ _id: req.user._id }, function(err, currentUser) {  
+            console.log("Current User: " + currentUser._id);
             Response.findOne({
                 creatorID   : currentUser._id,
                 day         : responseDay,
@@ -152,16 +155,17 @@ router.post(
                         privacy         : req.body.privacy,
                         upvotes         : 0
                     });
-                    
-                    console.log("pls");
+                    console.log(newResponse.creatorID);
                     newResponse.save(function(err, response) {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
                         const io = req.app.get('socketio');
                         io.emit("post", response);
-                        console.log("thanks");
                         res.send({});
                     });
                 } else {
-                    console.log("uh");
                     Response.findOneAndUpdate(
                         { _id: response._id },
                         {

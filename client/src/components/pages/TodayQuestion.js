@@ -11,8 +11,8 @@ export default class TodayQuestion extends React.Component {
             day: 32, // day, month, and year should probably be props passed down from somewhere above
             month: 13,
             year: 1000,
-            value: {/* what you already submitted today*/},
-            privacy: {/* your settings for this post*/},
+            value: null, /* what you already submitted today*/
+            privacy: "private", /* your settings for this post*/
             submitted: false,
             userResponses: [],
             pastResponses: []
@@ -22,6 +22,7 @@ export default class TodayQuestion extends React.Component {
     componentDidMount() { // for testing purposes
         this.getUser();
         this.getPastResponses();
+        // set default privacy
     }
     
     handlePrivacy = (event) => {
