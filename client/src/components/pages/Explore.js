@@ -43,7 +43,7 @@ export default class Explore extends React.Component{
         
         for (var i = 0; i < this.state.todayResponses.length; i++) { 
             stars.push(<Star 
-                id={String(i)}
+                key={i}
                 top={String(Math.random()*100)+'vh'} 
                 left={String(Math.random()*100)+'vw'}
                 size={String(Math.random()*20)+'px'} // to be updated based on like data

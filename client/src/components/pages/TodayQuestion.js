@@ -10,11 +10,7 @@ export default class TodayQuestion extends React.Component {
         this.state = {
             day: 34, // day, month, and year should probably be props passed down from somewhere above
             month: 13,
-<<<<<<< Updated upstream
-            year: 2006,
-=======
             year: 1000,
->>>>>>> Stashed changes
             value: '', /* what you already submitted today*/
             privacy: "private", /* your settings for this post*/
             submitted: false,
@@ -119,7 +115,7 @@ export default class TodayQuestion extends React.Component {
     }
 
     updateResponded = () => {
-        if (this.state.pastResponses){
+        if (this.state.pastResponses.length > 0){
             if (this.state.pastResponses[0].year == this.state.year){
                 this.setState({
                     responded: true,
