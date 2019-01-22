@@ -2,6 +2,7 @@
 const express = require('express');
 const connect = require('connect-ensure-login');
 const fs = require('fs');
+const path = require('path');
 
 // models
 const Response = require('../models/response');
@@ -14,10 +15,10 @@ const router = express.Router();
 // api GET endpoints
 
 router.get('/test', function(req, res) {
-    res.send('reeeee');
     console.log("Hi there!")
     const io = req.app.get('socketio');
     io.emit("test");
+    res.send('reeeee');
 });
 
 router.get('/whoami', function(req, res) {
@@ -29,8 +30,9 @@ router.get('/whoami', function(req, res) {
     }
 });
 
+// TODO fix
 router.get('/questions', function(req, res) {
-    fs.readFile('../questions.json', 'utf8', function (err, data) {
+    fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
         console.log(data);
         data = JSON.parse(data);
         res.send(JSON.stringify(data));
@@ -48,8 +50,11 @@ router.get('/responses', function(req, res) {
 
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
+            console.log(req.user._id);
             filters.creatorID = req.user._id;
+            console.log("ok " + JSON.stringify(filters));
             Response.find(filters, function(err, responses) {
+                console.log(responses);
                 res.send(responses);
             });
         } else {
@@ -66,7 +71,7 @@ router.get('/responses', function(req, res) {
                 let i;
                 for (i=0; i<anonResponses.length; i++) {
                     anonResponses[i].username = "anonymous"; // uncertain if this works
-                    console.log(anonResponses[i]);
+                    // console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
                 res.send(responses);
@@ -99,7 +104,9 @@ router.post(
         const responseMonth = parseInt(req.body.month);
         const responseYear = parseInt(req.body.year);
 
-        User.findOne({ _id: req.user._id }, function(err, currentUser) {    
+        console.log("User: " + req.user._id);
+        User.findOne({ _id: req.user._id }, function(err, currentUser) {  
+            console.log("Current User: " + currentUser._id);
             Response.findOne({
                 creatorID   : currentUser._id,
                 day         : responseDay,
@@ -117,16 +124,17 @@ router.post(
                         privacy         : req.body.privacy,
                         upvotes         : 0
                     });
-                    
-                    console.log("pls");
+                    console.log(newResponse.creatorID);
                     newResponse.save(function(err, response) {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
                         const io = req.app.get('socketio');
                         io.emit("post", response);
-                        console.log("thanks");
                         res.send({});
                     });
                 } else {
-                    console.log("uh");
                     Response.findOneAndUpdate(
                         { _id: response._id },
                         {

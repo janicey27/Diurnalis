@@ -23,7 +23,7 @@ export default class Star extends React.Component{
 
         return(
             <div>
-                <div className = "star" id= {this.props.id}
+                <div className="star"
                     style={{top: this.props.top, left: this.props.left,
                         height: this.props.size, width: this.props.size}}
                     onClick={this.handleClick}> 
