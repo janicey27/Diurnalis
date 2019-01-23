@@ -7,8 +7,8 @@ class Root extends React.Component {
     super(props);
     
     this.state = {
-        // selectedMonth: this.props.selectedMonth,
-        // dayIndex: 0
+        selectedMonth: 2, //later change this to default to today!!!!
+        dayIndex: 6,
         todaysQuestion: "Sorry, the question for this day is currently unavailable.",
         todaysResponses: [],
         hasResponses: false
@@ -20,7 +20,7 @@ class Root extends React.Component {
     var i;
     var gotQuestion = false;
     for (i=0; i<questions.length; i++) {
-      if (questions[i][0] === this.props.selectedMonth && questions[i][1] === this.props.dayIndex+1) {
+      if (questions[i][0] === this.state.selectedMonth && questions[i][1] === this.state.dayIndex+1) {
         this.setState({todaysQuestion: questions[i][2]})
         gotQuestion = true;
       }
@@ -36,7 +36,7 @@ class Root extends React.Component {
     var i;
     var hasResponse = false;
     for (i=0; i<responses.length; i++) {
-      if (responses[i][0] === this.props.selectedMonth && responses[i][1] === this.props.dayIndex+1) {
+      if (responses[i][0] === this.state.selectedMonth && responses[i][1] === this.state.dayIndex+1) {
         var joined = this.state.todaysResponses
         joined.push(responses[i][2])
         this.setState({todaysResponses: joined})
@@ -52,24 +52,39 @@ class Root extends React.Component {
 
   componentDidMount() {
     // console.log("day entry mounted!")
-    
+    // this.setState({selectedMonth: 2})
+    // this.setState({dayIndex: 6});
+    this.getQuestionOfDay();
+    this.getResponsesOfDay();
+    console.log("mounted")
+    console.log(this.state.todaysQuestion)
   }
 
-  updateEntry(inputDay) {
-    // console.log("update function fired!!")
-    // this.setState({dayIndex: inputDay});
+  gettem() {
+    this.getQuestionOfDay();
+    this.getResponsesOfDay();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.dayIndex != prevProps.dayIndex) {
+    // 
+    if (this.props.dayIndex != prevProps.dayIndex) { //switching days
         // console.log("component did Update");
         // console.log(this.props.selectedDay);
         // this.updateEntry(this.props.selectedDay);
-        this.state.todaysResponses =[];
-        this.getQuestionOfDay();
-        this.getResponsesOfDay();
+        // console.log(this.props.dayIndex)
+        this.setState((prevState, props) => ({dayIndex: props.dayIndex}), this.gettem);
+        this.setState({todaysResponses: []});
+        
         
     }
+    else if (this.props.selectedMonth !=prevProps.selectedMonth) { //switching months
+      console.log("new month");
+      this.setState({todaysResponses: []});
+      this.setState({dayIndex: 0})
+      this.setState((prevState, props) => ({selectedMonth: props.selectedMonth}), this.gettem);
+
+    }
+
 }
 
   render() {
@@ -78,11 +93,11 @@ class Root extends React.Component {
 
     return (
       <div className = "entry-container">
-        <h4>Selected date: {this.props.selectedMonth}/{this.props.dayIndex+1} </h4>
-
+        <h4>Selected date: {this.state.selectedMonth}/{this.state.dayIndex+1} </h4>
+      
         <h2>{this.state.todaysQuestion}</h2>
 
-        <p>{responseComponent}</p>
+        <div>{responseComponent}</div>
         
         
       </div>

@@ -46,7 +46,7 @@ export default class Explore extends React.Component{
                 key={i}
                 top={String(Math.random()*100)+'vh'} 
                 left={String(Math.random()*100)+'vw'}
-                size={String(Math.random()*20)+'px'} // to be updated based on like data
+                size={String(Math.random()*20+5)+'px'} // to be updated based on like data
                 content= {this.state.todayResponses[i].content}
                 //also need to pass in attributes like # of likes
                 //content, etc.

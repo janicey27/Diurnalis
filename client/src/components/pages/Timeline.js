@@ -33,10 +33,10 @@ class Timeline extends React.Component {
             .then(res => res.json())
             .then(
                 responses => {
-                    console.log(responses);
+                    // console.log(responses);
                     this.setState({ userResponses: responses });
-                    console.log("past responses retrieved!");
-                    console.log(this.state.userResponses);
+                    // console.log("past responses retrieved!");
+                    // console.log(this.state.userResponses);
                     this.formatResponses();
                 }
             );
@@ -44,12 +44,14 @@ class Timeline extends React.Component {
 
     formatQuestions = () => {
         let questionsArr = [], oneQuestion, i;
-        console.log(this.props.questions);
+        // console.log("questions passed")
+        // console.log(this.props.questions);
         for (i=0; i<this.props.questions.length; i++) {
             let question = this.props.questions[i];
             oneQuestion = [question.month, question.day, question.content];
             questionsArr.push(oneQuestion);
         }
+        // console.log(questionsArr);
         this.state.questionArray = questionsArr;
     }
 
