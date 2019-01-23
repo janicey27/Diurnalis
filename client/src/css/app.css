@@ -70,6 +70,7 @@ body {
 .page {
     height: 100vh;
     width: 100vw;
+    scroll-snap-align: start;
 }
 
 .today {
@@ -100,4 +101,20 @@ body {
 .tester{
     position: absolute; 
     top: 10vh;
+}
+
+.background-q{
+    color: white;
+    top: 20vh;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    opacity: 0.3;
+}
+
+.universe{
+    scroll-snap-type: mandatory;
+    scroll-snap-type: y mandatory;
+    scroll-snap-points-y: repeat(100vh);
+    overflow: scroll;
 }

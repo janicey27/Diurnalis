@@ -14,7 +14,8 @@ export default class Universe extends React.Component {
             year: 2019,
             questions: [],
             question: '',
-            toRender: false
+            toRender: false,
+            responded: false,
         }
     }
 
@@ -54,26 +55,41 @@ export default class Universe extends React.Component {
         }
     }
 
+    updateResponded = () => {
+        this.setState({
+            responded: true,
+        })
+    }
+
     render() {
+        
+        var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
+        var explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
+
         if (this.state.toRender) {
             return (
                 <div className = "universe"> 
-                    <div className = "page explore">
+                    <div className = "page explore" id="explore">
                         <Explore 
                             day={this.state.day} 
-                            month={this.state.month} 
-                            year={this.state.year}
-                        />
-                    </div>
-                    <div className = "page today">
-                        <TodayQuestion
-                            day={this.state.day}
                             month={this.state.month} 
                             year={this.state.year}
                             question={this.state.question}
                         />
                     </div>
-                    <div className = "page timeline">
+                    <div className = "page today" id="today">
+                        {explore}
+                        <TodayQuestion
+                            day={this.state.day}
+                            month={this.state.month} 
+                            year={this.state.year}
+                            question={this.state.question}
+                            updateResponded={this.updateResponded}
+                        />
+                        {timeline}
+                    </div>
+                    <div className = "page timeline" id="timeline">
+                        {explore}
                         <Timeline questions={this.state.questions}/>
                     </div>
                 </div>

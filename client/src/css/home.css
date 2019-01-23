@@ -115,3 +115,19 @@ body {
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
 }
+
+.explore-btn{
+    position: relative;
+    top: 5vh; 
+    left: 90vw;
+    scroll-behavior: smooth;
+    z-index: 3;
+    
+}
+
+.timeline-btn{
+    position: relative;
+    bottom: 5vh; 
+    left: 90vw;
+    scroll-behavior: smooth;
+}

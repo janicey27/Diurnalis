@@ -116,10 +116,11 @@ export default class TodayQuestion extends React.Component {
         if (this.state.pastResponses.length > 0){
             if (this.state.pastResponses[0].year == this.props.year){
                 this.setState({
-                    responded: true,
                     submitted: true,
+                    responded: true,
                     value: this.state.pastResponses[0].content,
                 });
+                this.props.updateResponded();
             }
             console.log("user has responded");
         }
@@ -131,6 +132,12 @@ export default class TodayQuestion extends React.Component {
         let oldRes;
         let button;
         let form;
+
+        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
+                        <option value = "private" >Private</option> 
+                        <option value = "anonymous" >Anonymous</option>
+                        <option value = "public" >Public</option>
+                    </select>)
         
         if (responded) {
             if (submitted) {
@@ -165,7 +172,7 @@ export default class TodayQuestion extends React.Component {
         }
 
         return(
-            <div className="bigbox">
+            <div className = "today-question">
                 <div className="date">
                     <TodayDate/>
                 </div> 
@@ -173,20 +180,18 @@ export default class TodayQuestion extends React.Component {
                     {this.props.question}
                     {/*query today's question*/}
                 </div>
-                <div className="question-group">
-                    <div className="response">
-                        {form}
+                <div className="bigbox">
+                    <div className="question-group">
+                        <div className="response">
+                            {form}
+                        </div>
+                        {oldRes}
+                        <div></div>
                     </div>
-                    {oldRes}
-                    <div></div>
-                </div>
-                <div className="button-group">
-                    <select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
-                        <option value = "private" >Private</option> 
-                        <option value = "anonymous" >Anonymous</option>
-                        <option value = "public" >Public</option>
-                    </select>
-                    {button}
+                    <div className="button-group">
+                        {priv}
+                        {button}
+                    </div>
                 </div>
             </div>
         )
