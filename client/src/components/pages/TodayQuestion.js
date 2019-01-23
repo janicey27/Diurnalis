@@ -136,7 +136,6 @@ export default class TodayQuestion extends React.Component {
                 </div> 
                 <div className="question">
                     {this.props.todayQuestion}
-                    {/*query today's question*/}
                 </div>
                 <div className="bigbox">
                     <div className="question-group">

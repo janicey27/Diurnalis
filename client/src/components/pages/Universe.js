@@ -56,6 +56,7 @@ export default class Universe extends React.Component {
                             todayQuestion={this.props.todayQuestion}
                             myTodayResponses={this.state.myTodayResponses}
                             updateResponded={this.updateResponded}
+                            addMyResponse={this.addMyResponse}
                         />
                         {timeline}
                     </div>
@@ -137,11 +138,6 @@ export default class Universe extends React.Component {
             tempResponses.unshift(response);
         }
         this.setState({ myTodayResponses: tempResponses });
-    }
-
-    // adds an explore response
-    addExploreResponse = () => {
-
     }
 
 }
