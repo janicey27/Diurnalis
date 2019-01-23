@@ -13,13 +13,12 @@ class Timeline extends React.Component {
             monthLength: 0,
             questionArray: [[1, 1, "This is a question for Jan 1?"], [1, 22, "This is a question for Jan 22?"], [2, 7, "“This is a question for Feb 7?”"]],
             responseArray: [[1, 1, [2018, "“Here’s my response to Jan 1 2018.”"]], [1, 1, [2014, "“Here’s my response to Jan 1 2014!!!!!!.”"]],[1, 22, [2017, "“Here’s my response to Jan 22 2017.”"]], [2, 7, [2018, "“Here’s my response to Feb 7 2018”"]]],
-            userResponses: []
         }
     }
 
     componentDidMount() {
         this.formatQuestions();
-        this.getPastResponses();
+        this.formatResponses();
     }
 
     handleClick(inputMonth, inputLength) {
@@ -27,27 +26,13 @@ class Timeline extends React.Component {
         this.setState({monthLength: inputLength})
     }
 
-    // GET past responses
-    getPastResponses = () => {
-        fetch('/api/responses?me=true')
-            .then(res => res.json())
-            .then(
-                responses => {
-                    // console.log(responses);
-                    this.setState({ userResponses: responses });
-                    // console.log("past responses retrieved!");
-                    // console.log(this.state.userResponses);
-                    this.formatResponses();
-                }
-            );
-    }
-
     formatQuestions = () => {
-        let questionsArr = [], oneQuestion, i;
+        const questionsArr = [];
+        let i, question, oneQuestion;
         // console.log("questions passed")
         // console.log(this.props.questions);
         for (i=0; i<this.props.questions.length; i++) {
-            let question = this.props.questions[i];
+            question = this.props.questions[i];
             oneQuestion = [question.month, question.day, question.content];
             questionsArr.push(oneQuestion);
         }
@@ -56,9 +41,10 @@ class Timeline extends React.Component {
     }
 
     formatResponses = () => {
-        let responsesArr = [], oneResponse = [], i;
-        for (i=0; i<this.state.userResponses.length; i++) {
-            let response = this.state.userResponses[i];
+        const responsesArr = [];
+        let i, response, oneResponse;
+        for (i=0; i<this.props.myResponses.length; i++) {
+            response = this.props.myResponses[i];
             oneResponse = [response.month, response.day, [response.year, response.content]];
             responsesArr.push(oneResponse);
         }

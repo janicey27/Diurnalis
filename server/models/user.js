@@ -6,7 +6,6 @@ const UserModelSchema = new mongoose.Schema ({
     googleid        : String,
     name            : String,
     username        : { type: String, lowercase: true },
-    timeZone        : Number,
     defaultPrivacy  : String
 });
 

@@ -11,72 +11,135 @@ import NavBar from "./pages/NavBar";
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      userInfo: null,
-    }
-  }
-
-  componentDidMount() {
-    this.getUser();
-  }
-
-  render() {
-    return (
-      <div>
-        <NavBar
-          userInfo={this.state.userInfo}
-          logout={this.logout}
-        />
-        <Switch>
-          <Route exact path="/" render={(props) => <Root {...props} userInfo={this.state.userInfo} questions={this.state.questions}/>}/>
-          <Route exact path="/q" component={TodayQuestion}/>
-          <Route exact path="/t" component={Timeline}/>
-          <Route exact path='/u' component={Universe}/>
-        </Switch>
-      </div>
-    );
-  }
-
-  logout = () => {
-      this.setState({
-          userInfo: null
-      })
-  };
-
-  getUser = () => {    
-      fetch('/api/whoami')
-      .then(res => res.json())
-      .then(
-          userObj => {
-              if (userObj._id !== undefined) {
-                  this.setState({ 
-                      userInfo: userObj
-                  });
-              } else {
-                  this.setState({ 
-                      userInfo: null
-                  });
-              }
-          }
-      );
+        this.state = {
+            day: 0,
+            month: 0,
+            year: 0,
+            userInfo: {},
+            questions: [],
+            todayQuestion: "",
+            dataRendered: 0,
+            dataToRender: 3 // date, user, questions
+        }
     }
 
-  // get all questions
-  getAllQuestions = () => {
-      fetch('/api/questions')
-          .then(res => res.json())
-          .then(
-              questions => {
-                  console.log(questions);
-                  this.setState({ questions: questions });
-                  console.log("all questions retrieved!");
-                  console.log(this.state.questions);
-              }
-          );
-  }
+    componentDidMount() {
+        this.getDate();
+        this.getUser();
+        this.getAllQuestions();
+    }
+
+    render() {
+        if (this.state.dataRendered >= this.state.dataToRender) { // will render when all data are loaded
+            return (
+                <div>
+                    <NavBar
+                        userInfo={this.state.userInfo}
+                        logout={this.logout}
+                    />
+                    <Switch>
+                        <Route exact path="/" render={(props) =>
+                            <Root
+                                {...props}
+                                day={this.state.day}
+                                month={this.state.month}
+                                year={this.state.year}
+                                userInfo={this.state.userInfo}
+                                questions={this.state.questions}
+                                todayQuestion={this.state.todayQuestion}
+                            />}
+                        />
+                        <Route exact path="/t" render={(props) =>
+                            <Timeline 
+                                {...props}
+                                day={this.state.day}
+                                month={this.state.month}
+                                userInfo={this.state.userInfo}
+                                questions={this.state.questions}
+                            />}
+                        />
+                    </Switch>
+                </div>
+            );
+        } else {
+            return null; // TODO make this a loading screen or something
+        }
+    }
+
+    logout = () => {
+        this.setState({
+            userInfo: null
+        })
+    };
+
+    getDate = () => {
+        const today = new Date();
+        this.setState({
+            day: today.getDate(),
+            month: today.getMonth() + 1,
+            year: today.getFullYear(),
+            dataRendered: this.state.dataRendered + 1
+        });
+    };
+
+    // get user info
+    getUser = () => {    
+        fetch('/api/whoami')
+            .then(res => res.json())
+            .then(
+                userObj => {
+                    if (userObj._id !== undefined) {
+                        this.setState({ 
+                            userInfo: userObj
+                        });
+                    } else {
+                        this.setState({ 
+                            userInfo: null
+                        });
+                    }
+                    this.setState({ dataRendered: this.state.dataRendered + 1 });
+                }
+            );
+    }
+
+    // get all questions
+    getAllQuestions = () => {
+        fetch('/api/questions')
+            .then(res => res.json())
+            .then(
+                questionArr => {
+                    this.setState({ questions: questionArr });
+                    console.log("all questions retrieved!");
+                    console.log(this.state.questions);
+                }
+            ).then(() => {
+                this.getTodayQuestion();
+            });
+    }
+    
+    // get today's question
+    getTodayQuestion = () => {
+        let i;
+        for (i=0; i<this.state.questions.length; i++) {
+            if ((this.state.questions[i].day === this.state.day) && (this.state.questions[i].month === this.state.month)) {
+                this.setState({
+                    todayQuestion: this.state.questions[i].content
+                });
+                console.log("question found");
+                break;
+            }
+        }
+        if (this.state.todayQuestion === "") {
+            this.setState({
+                todayQuestion: "Are you ready to answer?"
+            });
+        }
+        console.log(this.state.todayQuestion);
+        this.setState({ dataRendered: this.state.dataRendered + 1 });
+    }
 
 }
 

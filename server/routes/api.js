@@ -15,10 +15,9 @@ const router = express.Router();
 // api GET endpoints
 
 router.get('/test', function(req, res) {
-    console.log("Hi there!")
     const io = req.app.get('socketio');
     io.emit("test");
-    res.send('reeeee');
+    res.send('This is a test.');
 });
 
 router.get('/whoami', function(req, res) {
@@ -33,7 +32,6 @@ router.get('/whoami', function(req, res) {
 // TODO fix
 router.get('/questions', function(req, res) {
     fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
-        console.log(data);
         data = JSON.parse(data);
         res.send(JSON.stringify(data));
     });
@@ -50,11 +48,8 @@ router.get('/responses', function(req, res) {
 
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
-            console.log(req.user._id);
             filters.creatorID = req.user._id;
-            console.log("ok " + JSON.stringify(filters));
             Response.find(filters, function(err, responses) {
-                console.log(responses);
                 res.send(responses);
             });
         } else {
@@ -104,9 +99,7 @@ router.post(
         const responseMonth = parseInt(req.body.month);
         const responseYear = parseInt(req.body.year);
 
-        console.log("User: " + req.user._id);
-        User.findOne({ _id: req.user._id }, function(err, currentUser) {  
-            console.log("Current User: " + currentUser._id);
+        User.findOne({ _id: req.user._id }, function(err, currentUser) {
             Response.findOne({
                 creatorID   : currentUser._id,
                 day         : responseDay,
@@ -124,12 +117,7 @@ router.post(
                         privacy         : req.body.privacy,
                         upvotes         : 0
                     });
-                    console.log(newResponse.creatorID);
                     newResponse.save(function(err, response) {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        }
                         const io = req.app.get('socketio');
                         io.emit("post", response);
                         res.send({});
@@ -144,7 +132,6 @@ router.post(
                         function(err, response) {
                             const io = req.app.get('socketio');
                             io.emit("edit", response);
-                            console.log("edited!");
                             res.send({});
                         }
                     );
