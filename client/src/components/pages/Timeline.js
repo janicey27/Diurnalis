@@ -44,13 +44,13 @@ class Timeline extends React.Component {
 
     formatQuestions = () => {
         let questionsArr = [], oneQuestion, i;
+        console.log(this.props.questions);
         for (i=0; i<this.props.questions.length; i++) {
             let question = this.props.questions[i];
             oneQuestion = [question.month, question.day, question.content];
             questionsArr.push(oneQuestion);
         }
         this.state.questionArray = questionsArr;
-        console.log("Questions: " + this.state.questionArray);
     }
 
     formatResponses = () => {

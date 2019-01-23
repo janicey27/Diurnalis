@@ -14,6 +14,7 @@ export default class Universe extends React.Component {
             year: 2019,
             questions: [],
             question: '',
+            toRender: false
         }
     }
 
@@ -27,13 +28,14 @@ export default class Universe extends React.Component {
             .then(res => res.json())
             .then(
                 questionArr => {
-                    console.log(questionArr);
                     this.setState({ questions: questionArr });
                     console.log("all questions retrieved!");
                     console.log(this.state.questions);
                 }
             ).then(() => {
                 this.getTodayQuestion();
+            }).then(() => {
+                this.setState({ toRender: true })
             });
     }
     
@@ -53,29 +55,32 @@ export default class Universe extends React.Component {
     }
 
     render() {
-        return (
-            <div className = "universe"> 
-                <div className = "page explore">
-                    <Explore 
-                        day={this.state.day} 
-                        month={this.state.month} 
-                        year={this.state.year}
-                    />
+        if (this.state.toRender) {
+            return (
+                <div className = "universe"> 
+                    <div className = "page explore">
+                        <Explore 
+                            day={this.state.day} 
+                            month={this.state.month} 
+                            year={this.state.year}
+                        />
+                    </div>
+                    <div className = "page today">
+                        <TodayQuestion
+                            day={this.state.day}
+                            month={this.state.month} 
+                            year={this.state.year}
+                            question={this.state.question}
+                        />
+                    </div>
+                    <div className = "page timeline">
+                        <Timeline questions={this.state.questions}/>
+                    </div>
                 </div>
-                <div className = "page today">
-                    <TodayQuestion
-                        day={this.state.day}
-                        month={this.state.month} 
-                        year={this.state.year}
-                        question={this.state.question}
-                    />
-                </div>
-                <div className = "page timeline">
-                    <Timeline questions={this.state.questions}/>
-                </div>
-            </div>
-        )
+            )
+        } else {
+            return null;
+        }
     }
-
 }
 
