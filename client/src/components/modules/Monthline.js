@@ -69,7 +69,7 @@ class Monthline extends React.Component {
     }
 
     entryFunction = (setDay) => {
-        console.log("click registered !");
+        // console.log("click registered !");
         // this.setState(prevState => ({
         //     showEntry: !prevState.showEntry
         //   }));
@@ -77,8 +77,6 @@ class Monthline extends React.Component {
       };
   
     render() {
-        
-        //var entryComponent = this.state.showEntry ? (<DayEntry/>) : (<DayEntry/>);
 
     return (
         <div>

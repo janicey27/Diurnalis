@@ -11,7 +11,8 @@ class Root extends React.Component {
         dayIndex: 6,
         todaysQuestion: "Sorry, the question for this day is currently unavailable.",
         todaysResponses: [],
-        hasResponses: false
+        hasResponses: false,
+        hasSelected: false
     }
 
 }
@@ -54,10 +55,7 @@ class Root extends React.Component {
     // console.log("day entry mounted!")
     // this.setState({selectedMonth: 2})
     // this.setState({dayIndex: 6});
-    this.getQuestionOfDay();
-    this.getResponsesOfDay();
-    console.log("mounted")
-    console.log(this.state.todaysQuestion)
+    // this.setState({})
   }
 
   gettem() {
@@ -72,13 +70,14 @@ class Root extends React.Component {
         // console.log(this.props.selectedDay);
         // this.updateEntry(this.props.selectedDay);
         // console.log(this.props.dayIndex)
+        this.setState({hasSelected: true});
         this.setState((prevState, props) => ({dayIndex: props.dayIndex}), this.gettem);
         this.setState({todaysResponses: []});
         
         
     }
     else if (this.props.selectedMonth !=prevProps.selectedMonth) { //switching months
-      console.log("new month");
+      this.setState({hasSelected: true});
       this.setState({todaysResponses: []});
       this.setState({dayIndex: 0})
       this.setState((prevState, props) => ({selectedMonth: props.selectedMonth}), this.gettem);
@@ -90,19 +89,24 @@ class Root extends React.Component {
   render() {
     
     var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
-
-    return (
-      <div className = "entry-container">
-        <h4>Selected date: {this.state.selectedMonth}/{this.state.dayIndex+1} </h4>
-      
-        <h2>{this.state.todaysQuestion}</h2>
-
-        <div>{responseComponent}</div>
+    if (this.state.hasSelected == false) {
+      return (
+        <div><h1>Please select a month to view your past responses.</h1></div>
+      )
+    }
+    else {
+      return (
+        <div className = "entry-container">
+          <h4>Selected date: {this.state.selectedMonth}/{this.state.dayIndex+1} </h4>
         
-        
-      </div>
-    )
-    ;
+          <h2>{this.state.todaysQuestion}</h2>
+  
+          <div>{responseComponent}</div>
+          
+          
+        </div>
+      );
+    }
   }
 }
 
