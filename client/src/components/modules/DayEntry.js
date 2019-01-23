@@ -91,7 +91,7 @@ class Root extends React.Component {
     var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
     if (this.state.hasSelected == false) {
       return (
-        <div><h1>Please select a month to view your past responses.</h1></div>
+        <div><h2>Please select a month to view your past responses.</h2></div>
       )
     }
     else {
