@@ -8,8 +8,7 @@ export default class Explore extends React.Component{
         super(props)
 
         this.state = {
-            numStars: 0,
-            todayResponses: [],
+            numStars: 0
         }
 
     }
@@ -19,35 +18,18 @@ export default class Explore extends React.Component{
           numStars: this.state.numStars + 1,
           
         }) 
-      }
-
-    componentDidMount() {
-        this.getPastResponses();
-    }
-  
-    // GET all responses for today
-    getPastResponses = () => {
-        fetch('/api/responses?day=' + this.props.day + '&month=' + this.props.month + '&year=' + this.props.year + '&privacy=public')
-            .then(res => res.json())
-            .then(
-                responses => {
-                    console.log("responses retrieved!");
-                    console.log(responses);
-                    this.setState({ todayResponses: responses });
-                }
-            );
     }
 
     render(){
         const stars = []; 
         
-        for (var i = 0; i < this.state.todayResponses.length; i++) { 
+        for (var i = 0; i < this.props.exploreResponses.length; i++) { 
             stars.push(<Star 
                 key={i}
                 top={String(Math.random()*100)+'vh'} 
                 left={String(Math.random()*100)+'vw'}
-                size={String(Math.random()*20)+'px'} // to be updated based on like data
-                content= {this.state.todayResponses[i].content}
+                size={String(Math.random()*20+5)+'px'} // to be updated based on like data
+                content= {this.props.exploreResponses[i].content}
                 //also need to pass in attributes like # of likes
                 //content, etc.
                 />)
@@ -55,6 +37,9 @@ export default class Explore extends React.Component{
 
         return(
             <div className = "sky">
+                <div className = "background-q">
+                    {this.props.question}
+                </div>
                 {stars}
             </div>
         )

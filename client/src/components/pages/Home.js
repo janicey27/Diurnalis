@@ -3,6 +3,10 @@ import "../../css/home.css";
 import "../../css/app.css"
 
 export default class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
     
     componentDidMount() {
         document.body.classList.add("home");
@@ -16,17 +20,12 @@ export default class Home extends React.Component {
         return (
             <div className="center box"> 
                 <div className="title">Journal</div>
-                <div className="subtitle typewriter">Are you ready to answer?</div> {/*Query today's question*/}
+                <div className="subtitle typewriter">{this.props.todayQuestion}</div>
                 <div className="enter">
                     <a className="login" href="/auth/google">Login</a>
                 </div>
             </div>
         )
-    }
-
-    testFunc = () => {    
-      fetch('/api/test')
-      .then(console.log("hello"))
     }
 
 }

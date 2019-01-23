@@ -9,72 +9,65 @@ export default class Universe extends React.Component {
         super(props)
 
         this.state = {
-            day: 22,
-            month: 1,
-            year: 2019,
-            questions: [],
-            question: '',
-            toRender: false
+            myResponses: [],
+            myTodayResponses: [],
+            exploreResponses: [],
+            dataRendered: 0,
+            dataToRender: 2 // past responses, explore responses
         }
     }
 
     componentDidMount() {
-        this.getAllQuestions();
+        this.getPastResponses();
+        this.getExploreResponses();
     }
 
-    // get all questions
-    getAllQuestions = () => {
-        fetch('/api/questions')
-            .then(res => res.json())
-            .then(
-                questionArr => {
-                    this.setState({ questions: questionArr });
-                    console.log("all questions retrieved!");
-                    console.log(this.state.questions);
-                }
-            ).then(() => {
-                this.getTodayQuestion();
-            }).then(() => {
-                this.setState({ toRender: true })
-            });
-    }
-    
-    // get today's question
-    getTodayQuestion = () => {
-        let i;
-        for (i=0; i<this.state.questions.length; i++) {
-            if((this.state.questions[i].day===this.state.day)&&(this.state.questions[i].month===this.state.month)){
-                this.setState({
-                    question: this.state.questions[i].content
-                })
-                console.log("question found")
-                console.log(this.state.question)
-                break;
-            }
-        }
+    updateResponded = () => {
+        this.setState({
+            responded: true,
+        })
     }
 
     render() {
-        if (this.state.toRender) {
+        
+        var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
+        var explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
+
+        if (this.state.dataRendered >= this.state.dataToRender) {
             return (
                 <div className = "universe"> 
                     <div className = "page explore">
-                        <Explore 
-                            day={this.state.day} 
-                            month={this.state.month} 
-                            year={this.state.year}
+                        <Explore
+                            day={this.props.day}
+                            month={this.props.month} 
+                            year={this.props.year}
+                            userInfo={this.props.userInfo}
+                            todayQuestion={this.props.todayQuestion}
+                            exploreResponses={this.state.exploreResponses}
                         />
                     </div>
-                    <div className = "page today">
+                    <div className = "page today" id="today">
+                        {explore}
                         <TodayQuestion
-                            day={this.state.day}
-                            month={this.state.month} 
-                            year={this.state.year}
-                            question={this.state.question}
+                            day={this.props.day}
+                            month={this.props.month} 
+                            year={this.props.year}
+                            userInfo={this.props.userInfo}
+                            todayQuestion={this.props.todayQuestion}
+                            myTodayResponses={this.state.myTodayResponses}
+                            updateResponded={this.updateResponded}
                         />
+                        {timeline}
                     </div>
                     <div className = "page timeline">
-                        <Timeline questions={this.state.questions}/>
+                        {explore}
+                        <Timeline
+                            day={this.props.day}
+                            month={this.props.month}
+                            userInfo={this.props.userInfo}
+                            questions={this.props.questions}
+                            myResponses={this.state.myResponses}
+                        />
                     </div>
                 </div>
             )
@@ -82,5 +75,74 @@ export default class Universe extends React.Component {
             return null;
         }
     }
+
+    // GET all past responses
+    getPastResponses = () => {
+        fetch('/api/responses?me=true')
+            .then(res => res.json())
+            .then(
+                responses => {
+                    this.setState({ myResponses: responses });
+                    console.log("past responses retrieved!");
+                    console.log(this.state.myResponses);
+                } 
+            ).then(() => {
+                this.getTodayResponses();
+            })
+    }
+
+    // sort out past responses for today's date
+    getTodayResponses = () => {
+        const todayResponses = [];
+        let i, response;
+        for (i=0; i<this.state.myResponses.length; i++) {
+            response = this.state.myResponses[i];
+            if ((response.day === this.props.day) && (response.month === this.props.month)) {
+                todayResponses.push(response);
+            }
+        }
+        // sort todayResponses by descending years
+        todayResponses.sort((a, b) => (b.year - a.year));
+        this.setState({
+            myTodayResponses: todayResponses,
+            dataRendered: this.state.dataRendered + 1
+        });
+        console.log("today's responses retrieved!");
+        console.log(this.state.myTodayResponses);
+    }
+
+    // GET all public/anonymous for today
+    getExploreResponses = () => {
+        fetch('/api/responses?day=' + this.props.day + '&month=' + this.props.month + '&year=' + this.props.year)
+            .then(res => res.json())
+            .then(
+                responses => {
+                    this.setState({
+                        exploreResponses: responses,
+                        dataRendered: this.state.dataRendered + 1
+                    });
+                    console.log("responses retrieved!");
+                    console.log(this.state.exploreResponses);
+                }
+            );
+    }
+
+    // adds/edits a personal response
+    addMyResponse = (response) => {
+        const tempResponses = this.state.myTodayResponses;
+        if ((tempResponses.length > 0) && (tempResponses[0].year === this.props.year)) {
+            tempResponses[0].content = response.content;
+            tempResponses[0].privacy = response.privacy;
+        } else {
+            tempResponses.unshift(response);
+        }
+        this.setState({ myTodayResponses: tempResponses });
+    }
+
+    // adds an explore response
+    addExploreResponse = () => {
+
+    }
+
 }
 
