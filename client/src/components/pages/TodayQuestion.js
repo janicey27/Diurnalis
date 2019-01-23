@@ -72,7 +72,6 @@ export default class TodayQuestion extends React.Component {
         console.log("today's responses retrieved!");
         console.log(todayResponses);
     }
-
     
 
     // POST response content and details
