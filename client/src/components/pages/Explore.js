@@ -14,7 +14,7 @@ export default class Explore extends React.Component{
     }
 
     componentDidMount() {
-        //this.initializeSocket();
+        this.initializeSocket();
     }
 
     render() {
@@ -46,7 +46,7 @@ export default class Explore extends React.Component{
     }
 
     initializeSocket = () => {
-        this.socket = io();
+        this.socket = io("http://localhost:3000");
         this.socket.on("post", (response) => {
             console.log("Hello world! heh");
             this.state.stars.push(<Star 
