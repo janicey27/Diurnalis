@@ -53,13 +53,13 @@ class Timeline extends React.Component {
 
     render(){
         return (
-            <div className='page-container justify-content-center'>
+            <div className='page-container'>
                 <div className="monthline">
                     <Monthline selectedMonth={this.state.month} monthLength={this.state.monthLength} questionArray={this.state.questionArray} responseArray={this.state.responseArray}/>
                 </div>
 
-                <div className="month-bar "> 
-                    <div className="row no-gutters">
+                <div className="month-bar"> 
+                        <div className="row no-gutters">
                         <div className="col-sm"  onClick={() => this.handleClick(1, 31)}>
                         <Month thisMonth="jan"/> 
                         </div>
