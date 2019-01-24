@@ -13,7 +13,8 @@ export default class Universe extends React.Component {
             myTodayResponses: [],
             exploreResponses: [],
             dataRendered: 0,
-            dataToRender: 2 // past responses, explore responses
+            dataToRender: 2, // past responses, explore responses
+            responded: false
         }
     }
 
@@ -65,8 +66,8 @@ export default class Universe extends React.Component {
                             userInfo={this.props.userInfo}
                             todayQuestion={this.props.todayQuestion}
                             myTodayResponses={this.state.myTodayResponses}
-                            updateResponded={this.updateResponded}
                             addMyResponse={this.addMyResponse}
+                            updateResponded={this.updateResponded}
                         />
                         {timeline}
                     </div>
@@ -88,11 +89,6 @@ export default class Universe extends React.Component {
         }
     }
 
-    updateResponded = () => {
-        this.setState({
-            responded: true,
-        })
-    }
 
     // GET all past responses
     getPastResponses = () => {
@@ -143,6 +139,12 @@ export default class Universe extends React.Component {
                     console.log(this.state.exploreResponses);
                 }
             );
+    }
+
+    updateResponded = () => {
+        this.setState({
+            responded: true,
+        })
     }
 
     // adds/edits a personal response

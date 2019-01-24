@@ -9,9 +9,12 @@ export default class Star extends React.Component{
 
     render(){
         return(
-            <div className = "starbox" onClick={this.props.handleClick}>
-                {this.props.content}
+            <div className = "page" onClick={this.props.handleClick}>
+                <div className = "starbox">
+                    {this.props.content}
+                </div>
             </div>
+            
         )
     }
 

@@ -14,6 +14,10 @@ export default class TodayQuestion extends React.Component {
             responded: false,
         }
     }
+
+    componentDidMount() {
+        this.updateResponded();
+    }
     
     handlePrivacy = (event) => {
         this.setState({
@@ -60,6 +64,7 @@ export default class TodayQuestion extends React.Component {
             submitted: true,
             responded: true,
         });
+        
     }
 
     handleEdit = (event) => {
@@ -76,9 +81,9 @@ export default class TodayQuestion extends React.Component {
                     responded: true,
                     value: this.props.myTodayResponses[0].content,
                 });
-                this.props.updateResponded();
             }
             console.log("user has responded");
+            this.props.updateResponded();
         }
     }
 
