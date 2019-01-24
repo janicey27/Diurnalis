@@ -21,11 +21,15 @@ export default class Universe extends React.Component {
         this.getPastResponses();
         this.getExploreResponses();
         //this.initialScroll();
-        this.redirect();
     }
 
     redirect = () => {
-        location.href = '#today';
+        location.href = './#something';
+        window.scrollBy({
+            top: 100,
+            left: 0,
+            behavior: 'smooth',
+        })
     }
 
     /*initialScroll = () => {
@@ -50,6 +54,7 @@ export default class Universe extends React.Component {
                             todayQuestion={this.props.todayQuestion}
                             exploreResponses={this.state.exploreResponses}
                         />
+                        {timeline}
                     </div>
                     <div className = "page today" id="today">
                         {explore}
@@ -77,6 +82,7 @@ export default class Universe extends React.Component {
                     </div>
                 </div>
             )
+            
         } else {
             return null;
         }
