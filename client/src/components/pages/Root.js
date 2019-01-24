@@ -4,16 +4,17 @@ import Universe from "./Universe";
 
 class Root extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return (this.props.userInfo !== null ?
-      <Universe questions={this.props.questions}/> :
-      <Home />
-    )
-  }
+    render() {
+        return (this.props.userInfo !== null ?
+            <Universe {...this.props} /> :
+            <Home {...this.props} />
+        )
+    }
+
 }
 
 export default Root;

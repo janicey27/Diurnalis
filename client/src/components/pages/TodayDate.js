@@ -1,18 +1,16 @@
 import React from "react";
 
 export default class TodayDate extends React.Component{
-    constructor() {
-        super();
+
+    constructor(props) {
+        super(props);
         
-        var today = new Date();
-        var day = today.getDate();
-        var month = today.getMonth();
-        var monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
-        month = monthArr[month];
-        var date = month + ' ' + day;
+        const monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
+        const month = monthArr[this.props.month - 1];
+        const todayDate = month + ' ' + this.props.day;
 
         this.state = {
-            date: date
+            date: todayDate
         };
     }
 

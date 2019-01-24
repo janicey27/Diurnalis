@@ -1,65 +1,62 @@
 import React from "react";
+import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
 import Star from "./Star";
 
 export default class Explore extends React.Component{
-    constructor(props){
-        super(props)
+    constructor(props) {
+        super(props);
 
         this.state = {
-            numStars: 0,
-            todayResponses: [],
-        }
-
+            stars: []
+        };
     }
-
-    handleClick = () => {
-        this.setState({
-          numStars: this.state.numStars + 1,
-          
-        }) 
-      }
 
     componentDidMount() {
-        this.getPastResponses();
-    }
-  
-    // GET all responses for today
-    getPastResponses = () => {
-        fetch('/api/responses?day=' + this.props.day + '&month=' + this.props.month + '&year=' + this.props.year + '&privacy=public')
-            .then(res => res.json())
-            .then(
-                responses => {
-                    console.log("responses retrieved!");
-                    console.log(responses);
-                    this.setState({ todayResponses: responses });
-                }
-            );
+        //this.initializeSocket();
     }
 
-    render(){
-        const stars = []; 
-        
-        for (var i = 0; i < this.state.todayResponses.length; i++) { 
-            stars.push(<Star 
-                key={i}
-                top={String(Math.random()*100)+'vh'} 
-                left={String(Math.random()*100)+'vw'}
-                size={String(Math.random()*20+5)+'px'} // to be updated based on like data
-                content= {this.state.todayResponses[i].content}
-                //also need to pass in attributes like # of likes
-                //content, etc.
-                />)
-        }
-
+    render() {
+        this.generateStars();
         return(
             <div className = "sky" id="sky">
                 <div className = "background-q">
                     {this.props.question}
                 </div>
-                {stars}
+                {this.state.stars}
             </div>
         )
+    }
+
+    generateStars = () => {
+        let response;
+        for (var i = 0; i < this.props.exploreResponses.length; i++) {
+            response = this.props.exploreResponses[i];
+            this.state.stars.push(<Star 
+                key={i}
+                top={String(Math.random()*96+2)+'vh'} 
+                left={String(Math.random()*96+2)+'vw'}
+                size={String(Math.random()*15+10)+'px'} // to be updated based on like data
+                content={response.content}
+                upvotes={response.upvotes}
+            />);
+            console.log(this.state.stars);
+        }
+    }
+
+    initializeSocket = () => {
+        this.socket = io();
+        this.socket.on("post", (response) => {
+            console.log("Hello world! heh");
+            this.state.stars.push(<Star 
+                key={this.state.stars.length}
+                top={String(Math.random()*96+2)+'vh'} 
+                left={String(Math.random()*96+2)+'vw'}
+                size={String(Math.random()*15+10)+'px'} // to be updated based on like data
+                content={response.content}
+                upvotes={response.upvotes}
+            />);
+        });
     }
 }

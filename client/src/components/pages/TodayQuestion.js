@@ -9,17 +9,10 @@ export default class TodayQuestion extends React.Component {
         
         this.state = {
             value: '', /* what you already submitted today*/
-            privacy: "private", /* your settings for this post*/
+            privacy: this.props.userInfo.defaultPrivacy, /* your settings for this post*/
             submitted: false,
             responded: false,
-            userResponses: [],
-            pastResponses: [],
         }
-    }
-
-    componentDidMount() { // for testing purposes
-        this.getUser();
-        this.getPastResponses();
     }
     
     handlePrivacy = (event) => {
@@ -32,47 +25,7 @@ export default class TodayQuestion extends React.Component {
         this.setState({
             value: event.target.value 
         });
-    }
-
-    // GET user
-    getUser = () => {
-        fetch('/api/whoami')
-            .then(res => res.json())
-            .then(res => console.log(res));
-    }
-  
-    // GET past responses
-    getPastResponses = () => {
-        fetch('/api/responses?me=true')
-            .then(res => res.json())
-            .then(
-                responses => {
-                    this.setState({ userResponses: responses });
-                    console.log("past responses retrieved!");
-                    console.log(this.state.userResponses);
-                    this.getTodayResponses();
-                } 
-            ).then(() => {
-                this.updateResponded();
-            })
-    }
-
-    // select responses for current date
-    getTodayResponses = () => {
-        let todayResponses = [];
-        let i;
-        for (i=0; i<this.state.userResponses.length; i++) {
-            if ((this.state.userResponses[i].day === this.props.day) && (this.state.userResponses[i].month === this.props.month)) {
-                todayResponses.push(this.state.userResponses[i]);
-            }
-        }
-        // sort todayResponses by descending years
-        todayResponses.sort((a, b) => (b.year - a.year));
-        this.setState({ pastResponses: todayResponses });
-        console.log("today's responses retrieved!");
-        console.log(todayResponses);
-    }
-    
+    }    
 
     // POST response content and details
     postResponse = () => {
@@ -89,11 +42,13 @@ export default class TodayQuestion extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
-        }).then(() => {
+        }).then(res => res.json())
+        .then(response => {
+            this.props.addMyResponse(response);
             console.log("posted!");
-            console.log(body);
+            console.log(this.props.myTodayResponses[0]);
         }).then(() => {
-            this.getPastResponses();
+            this.updateResponded();
         })
     };
 
@@ -113,12 +68,12 @@ export default class TodayQuestion extends React.Component {
     }
 
     updateResponded = () => {
-        if (this.state.pastResponses.length > 0){
-            if (this.state.pastResponses[0].year == this.props.year){
+        if (this.props.myTodayResponses.length > 0){
+            if (this.props.myTodayResponses[0].year == this.props.year){
                 this.setState({
                     submitted: true,
                     responded: true,
-                    value: this.state.pastResponses[0].content,
+                    value: this.props.myTodayResponses[0].content,
                 });
                 this.props.updateResponded();
             }
@@ -156,17 +111,17 @@ export default class TodayQuestion extends React.Component {
                     </form>;
         }
 
-        if (this.state.pastResponses.length === 0){
+        if (this.props.myTodayResponses.length === 0){
             oldRes = null;
         } else {
             // display all past responses for today's question
             if (responded){
-                oldRes = Array.from(Array(this.state.pastResponses.length-1).keys()).map(i => (
-                    <div key={this.state.pastResponses[i+1].year} className="response">{this.state.pastResponses[i+1].content}</div>
+                oldRes = Array.from(Array(this.props.myTodayResponses.length-1).keys()).map(i => (
+                    <div key={this.props.myTodayResponses[i+1].year} className="response">{this.props.myTodayResponses[i+1].content}</div>
                 ))
             } else {
-                oldRes = Array.from(Array(this.state.pastResponses.length).keys()).map(i => (
-                    <div key={this.state.pastResponses[i].year} className="response">{this.state.pastResponses[i].content}</div>
+                oldRes = Array.from(Array(this.props.myTodayResponses.length).keys()).map(i => (
+                    <div key={this.props.myTodayResponses[i].year} className="response">{this.props.myTodayResponses[i].content}</div>
                 ))
             }
         }
