@@ -14,6 +14,10 @@ export default class TodayQuestion extends React.Component {
             responded: false,
         }
     }
+
+    componentDidMount() {
+        this.updateResponded();
+    }
     
     handlePrivacy = (event) => {
         this.setState({
@@ -70,7 +74,7 @@ export default class TodayQuestion extends React.Component {
 
     updateResponded = () => {
         if (this.props.myTodayResponses.length > 0){
-            if (this.props.myTodayResponses[0].year == this.props.year){
+            if (this.props.myTodayResponses[0].year === this.props.year){
                 this.setState({
                     submitted: true,
                     responded: true,
