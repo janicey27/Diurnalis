@@ -8,55 +8,54 @@
     {
         "day": 1,
         "month": 1,
-        "content": "New year who dis? 1/1"
+        "content": "New year who dis?"
     },
 
     {
         "day": 21,
         "month": 1,
-        "content": "What is your name? 1/21"
+        "content": "What is your name?"
     },
     
     {
         "day": 22,
         "month": 1,
-        "content": "Is this question boring? 1/22"
+        "content": "Is this question boring?"
     },
 
     {
         "day": 23,
         "month": 1,
-        "content": "Did you accomplish what you wanted to today? 1/23"
+        "content": "Did you accomplish what you wanted to today?"
     },
 
     {
         "day": 24,
         "month": 1,
-        "content": "As of this moment, are you happy? 1/24"
+        "content": "As of this moment, are you happy?"
     },
 
     {
         "day": 7,
         "month": 2,
-        "content": "When's your birthday? 2/7"
+        "content": "When's your birthday?"
     },
-
 
     {
         "day": 1,
         "month": 2,
-        "content": "What's your favorite food? 2/1"
+        "content": "What's your favorite food?"
     },
 
     {
         "day": 1,
         "month": 3,
-        "content": "Who's your favorite person? 3/1"
+        "content": "Who's your favorite person?"
     },
 
     {
         "day": 1,
         "month": 4,
-        "content": "Which finger is your favorite? 4/1"
+        "content": "Which finger is your favorite?"
     }
 ]

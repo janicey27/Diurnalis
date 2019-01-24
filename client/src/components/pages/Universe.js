@@ -12,6 +12,7 @@ export default class Universe extends React.Component {
             myResponses: [],
             myTodayResponses: [],
             exploreResponses: [],
+            responded: false,
             dataRendered: 0,
             dataToRender: 2, // past responses, explore responses
             responded: false
