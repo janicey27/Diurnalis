@@ -115,6 +115,7 @@ body {
 .universe{
     background-image: url('../components/public/watercolor.png');
     /* background-size: 50px 100px; */
+    z-index: 1;
     background-size: 100vw calc(100vh * 3);
     scroll-snap-type: mandatory;
     scroll-snap-type: y mandatory;

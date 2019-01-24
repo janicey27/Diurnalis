@@ -121,7 +121,7 @@ body {
     top: 5vh; 
     left: 90vw;
     scroll-behavior: smooth;
-    z-index: 3;
+    z-index: 5;
     
 }
 
@@ -130,6 +130,7 @@ body {
     top: 25vh; 
     left: 90vw;
     scroll-behavior: smooth;
+    z-index: 5;
 }
 
 .question-container{

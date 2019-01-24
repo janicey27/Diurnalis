@@ -20,17 +20,28 @@ export default class Universe extends React.Component {
     componentDidMount() {
         this.getPastResponses();
         this.getExploreResponses();
+        //this.initialScroll();
+        this.redirect();
     }
 
+    redirect = () => {
+        location.href = '#today';
+    }
+
+    /*initialScroll = () => {
+        var today = this.refs.today;
+        today.scrollIntoView();
+    }*/
+
     render() {
-        
+
         var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
         var explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
 
         if (this.state.dataRendered >= this.state.dataToRender) {
             return (
                 <div className = "universe"> 
-                    <div className = "page explore">
+                    <div className = "page explore" id="explore">
                         <Explore
                             day={this.props.day}
                             month={this.props.month} 
@@ -54,7 +65,7 @@ export default class Universe extends React.Component {
                         />
                         {timeline}
                     </div>
-                    <div className = "page timeline">
+                    <div className = "page timeline" id="timeline">
                         {explore}
                         <Timeline
                             day={this.props.day}
