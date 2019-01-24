@@ -22,12 +22,6 @@ export default class Universe extends React.Component {
         this.getExploreResponses();
     }
 
-    updateResponded = () => {
-        this.setState({
-            responded: true,
-        })
-    }
-
     render() {
         
         var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
@@ -75,6 +69,12 @@ export default class Universe extends React.Component {
         } else {
             return null;
         }
+    }
+
+    updateResponded = () => {
+        this.setState({
+            responded: true,
+        })
     }
 
     // GET all past responses
