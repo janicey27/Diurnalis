@@ -67,7 +67,7 @@ class Timeline extends React.Component {
 
     render(){
         return (
-            <div className='page-container justify-content-center'>
+            <div className='page-container justify-content-center' id="timeline-container">
                 <div className="monthline">
                     <Monthline selectedMonth={this.state.month} monthLength={this.state.monthLength} questionArray={this.state.questionArray} responseArray={this.state.responseArray}/>
                 </div>

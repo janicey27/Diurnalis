@@ -172,13 +172,18 @@ export default class TodayQuestion extends React.Component {
         }
 
         return(
-            <div className = "today-question">
-                <div className="date">
-                    <TodayDate/>
-                </div> 
-                <div className="question">
-                    {this.props.question}
-                    {/*query today's question*/}
+            <div className = "today-question" id="today-question">
+                <div className = "question-container">
+                    <div className="date">
+                        <TodayDate/>
+                    </div> 
+                    <div className="question">
+                        {this.props.question}
+                        {/*query today's question*/}
+                    </div>
+                    <div>
+                    _________________________
+                    </div>
                 </div>
                 <div className="bigbox">
                     <div className="question-group">

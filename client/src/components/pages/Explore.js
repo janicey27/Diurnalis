@@ -54,7 +54,7 @@ export default class Explore extends React.Component{
         }
 
         return(
-            <div className = "sky">
+            <div className = "sky" id="sky">
                 <div className = "background-q">
                     {this.props.question}
                 </div>
