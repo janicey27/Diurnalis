@@ -134,8 +134,7 @@ export default class TodayQuestion extends React.Component {
                         <TodayDate month = {this.props.month} day = {this.props.day}/>
                     </div> 
                     <div className="question">
-                        {this.props.question}
-                        {/*query today's question*/}
+                        {this.props.todayQuestion}
                     </div>
                     <div>
                     _________________________
