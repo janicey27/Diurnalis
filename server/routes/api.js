@@ -11,7 +11,6 @@ const User = require('../models/user');
 // Express router
 const router = express.Router();
 
-
 // api GET endpoints
 
 router.get('/test', function(req, res) {
@@ -117,22 +116,41 @@ router.post(
                         privacy         : req.body.privacy,
                         upvotes         : 0
                     });
-                    newResponse.save(function(err, response) {
-                        const io = req.app.get('socketio');
-                        io.emit("post", response);
-                        res.send({});
+                    newResponse.save(function(err, newResponse) {
+                        switch (newResponse.privacy) {
+                            case "anonymous":
+                                newResponse.creatorUsername = "anonymous";
+                            case "public":
+                                const io = req.app.get('socketio');
+                                io.emit("post", newResponse);
+                                break;
+                            default:
+                                break;
+                        }
+                        res.send(newResponse);
                     });
                 } else {
                     Response.findOneAndUpdate(
                         { _id: response._id },
                         {
-                            content : req.body.content, // TODO for some reason response is not updating
+                            content : req.body.content,
                             privacy : req.body.privacy
                         },
                         function(err, response) {
-                            const io = req.app.get('socketio');
-                            io.emit("edit", response);
-                            res.send({});
+                            const editedResponse = response;
+                            editedResponse.content = req.body.content;
+                            editedResponse.privacy = req.body.privacy;
+                            switch (editedResponse.privacy) {
+                                case "anonymous":
+                                    editedResponse.creatorUsername = "anonymous";
+                                case "public":
+                                    const io = req.app.get('socketio');
+                                    io.emit("edit", editedResponse);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            res.send(editedResponse);
                         }
                     );
                 }
@@ -148,12 +166,14 @@ router.post(
         Response.findOneAndUpdate(
             { _id: req.body.parent._id },
             { upvotes: req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1)},
-            function(err, user) {
+            function(err, response) {
+                const editedResponse = response;
+                editedResponse.upvotes = req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1);
                 const io = req.app.get('socketio');
-                io.emit("upvote", response);
+                io.emit("upvote", editedResponse);
             }
         );
-        res.send({});
+        res.send(editedResponse);
     }
 );
 
