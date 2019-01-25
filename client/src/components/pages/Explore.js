@@ -50,7 +50,7 @@ export default class Explore extends React.Component{
     }
 
     initializeSocket = () => {
-        this.socket = io("http://localhost:3000");
+        this.socket = io();
         this.socket.on("post", (response) => {
             console.log("Hello world! heh");
             this.setState({
