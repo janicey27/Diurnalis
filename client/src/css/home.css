@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
-@import url('https://fonts.googleapis.com/css?family=Coming+Soon');
+@import url('https://fonts.googleapis.com/css?family=Nixie+One');
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Coming Soon';
+    font-family: 'Nixie One';
     font-weight: 300;
     
 }
