@@ -14,13 +14,13 @@ export default class Explore extends React.Component{
     }
 
     componentDidMount() {
-        //this.initializeSocket();
+        this.generateStars();
+        this.initializeSocket();
     }
 
     render() {
-        this.generateStars();
-        return(
-            <div className = "sky">
+        return (
+            <div className = "sky" id="sky">
                 <div className = "background-q">
                     {this.props.question}
                 </div>
@@ -30,8 +30,8 @@ export default class Explore extends React.Component{
     }
 
     generateStars = () => {
-        let response;
-        for (var i = 0; i < this.props.exploreResponses.length; i++) {
+        let response, i;
+        for (let i = 0; i < this.props.exploreResponses.length; i++) {
             response = this.props.exploreResponses[i];
             this.state.stars.push(<Star 
                 key={i}
@@ -46,7 +46,7 @@ export default class Explore extends React.Component{
     }
 
     initializeSocket = () => {
-        this.socket = io();
+        this.socket = io("http://localhost:3000");
         this.socket.on("post", (response) => {
             console.log("Hello world! heh");
             this.state.stars.push(<Star 

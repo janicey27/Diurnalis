@@ -52,14 +52,14 @@ body {
   .bigbox{
     width: 75vw;
     min-width: 300px;
-    height: 60vh;
-    padding: 25px;
+    height: 45vh;
+    padding: 10px;
     background-color: rgba(0, 0, 0, 0.3);
     filter: alpha(opacity=30);
     filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
     -moz-opacity: 0.30;
     position: relative;
-    top: calc(15vh);
+    top: calc(16vh);
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -121,13 +121,26 @@ body {
     top: 5vh; 
     left: 90vw;
     scroll-behavior: smooth;
-    z-index: 3;
+    z-index: 5;
     
 }
 
 .timeline-btn{
     position: relative;
-    bottom: 5vh; 
+    top: 90vh; 
     left: 90vw;
     scroll-behavior: smooth;
+    z-index: 5;
+}
+
+.question-container{
+    position: relative;
+    top: 13vh;
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+.question{
+    font-size: 30px;
 }
