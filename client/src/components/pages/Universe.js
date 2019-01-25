@@ -46,7 +46,9 @@ export default class Universe extends React.Component {
 
         if (this.state.dataRendered >= this.state.dataToRender) {
             return (
+                
                 <div className = "universe"> 
+                    
                     <div className = "page explore" id="explore">
                         <Explore
                             day={this.props.day}
@@ -60,6 +62,7 @@ export default class Universe extends React.Component {
                     </div>
                     <div className = "page today" id="today">
                         {explore}
+                        {timeline}
                         <TodayQuestion
                             day={this.props.day}
                             month={this.props.month} 
@@ -70,9 +73,8 @@ export default class Universe extends React.Component {
                             addMyResponse={this.addMyResponse}
                             updateResponded={this.updateResponded}
                         />
-                        {timeline}
                     </div>
-                    <div className = "page timeline" id="timeline">
+                    <div className = "page timeline-p" id="timeline">
                         {explore}
                         <Timeline
                             day={this.props.day}
