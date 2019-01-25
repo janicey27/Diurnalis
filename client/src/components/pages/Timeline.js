@@ -51,7 +51,7 @@ class Timeline extends React.Component {
         this.state.responseArray = responsesArr;
     }
 
-    render(){
+    render() {
         return (
             <div className='page-container col-centered'>
             <div className="col-centered">

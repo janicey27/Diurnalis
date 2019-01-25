@@ -19,8 +19,8 @@ export default class Explore extends React.Component{
     }
 
     render() {
-        //console.log("Message to upvote: " + this.props.exploreResponses[0].content);
-        //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
+        console.log("Message to toggle: " + this.props.exploreResponses[0].content);
+        console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
             <div className = "sky" id="sky">
                 <div className = "background-q">
@@ -38,17 +38,20 @@ export default class Explore extends React.Component{
 
     generateStars = () => {
         const starArr = [];
-        let response, i;
-        for (let i = 0; i < this.props.exploreResponses.length; i++) {
+        let i, response, upvoted;
+        for (i = 0; i < this.props.exploreResponses.length; i++) {
             response = this.props.exploreResponses[i];
+            upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             starArr.push(<Star 
                 key={i}
-                top={String(Math.random()*96+2)+'vh'} 
+                top={String(Math.random()*96+2)+'vh'}
                 left={String(Math.random()*96+2)+'vw'}
                 size={String(Math.random()*15+30)+'px'} // to be updated based on like data
                 responseID={response._id}
+                username={response.creatorUsername}
                 content={response.content}
                 upvotes={response.upvotes}
+                upvoted={upvoted}
             />);
         }
         this.setState({
@@ -70,6 +73,7 @@ export default class Explore extends React.Component{
                         left={String(Math.random()*96+2)+'vw'}
                         size={String(Math.random()*15+10)+'px'} // to be updated based on like data
                         responseID={response._id}
+                        username={response.creatorUsername}
                         content={response.content}
                         upvotes={response.upvotes}
                     />
@@ -84,7 +88,7 @@ export default class Explore extends React.Component{
             for (i=0; i<starArr.length; i++) {
                 star = starArr[i];
                 if (star.props.responseID === response._id) {
-                    newStar = React.cloneElement(
+                    const newStar = React.cloneElement(
                         star,
                         { upvotes: star.props.upvotes + 1 }
                     );
@@ -106,7 +110,7 @@ export default class Explore extends React.Component{
             for (i=0; i<starArr.length; i++) {
                 star = starArr[i];
                 if (star.props.responseID === response._id) {
-                    newStar = React.cloneElement(
+                    const newStar = React.cloneElement(
                         star,
                         { upvotes: star.props.upvotes - 1 }
                     );
@@ -121,7 +125,28 @@ export default class Explore extends React.Component{
         });
     }
 
-    upvoteResponse = (response, remove=false) => {
+    toggleUpvote = (response) => {
+        const starArr = this.state.stars;
+        let i, star, remove = false;
+        for (i=0; i<starArr.length; i++) {
+            star = starArr[i];
+            if (star.props.responseID === response._id) {
+                remove = star.props.upvoted;
+                break;
+            }
+        }
+        const newStar = React.cloneElement(
+            star,
+            {
+                upvotes: star.props.upvotes + (remove ? -1 : 1),
+                upvoted: !star.props.upvoted
+            }
+        );
+        console.log("new star in toggleUpvote: " + newStar.props.upvotes);
+        starArr[i] = newStar;
+        this.setState({
+            stars: starArr
+        });
         const body = {
             parent: response,
             remove: remove
@@ -139,6 +164,6 @@ export default class Explore extends React.Component{
     }
 
     upvoteTest = () => {
-        this.upvoteResponse(this.props.exploreResponses[0]);
+        this.toggleUpvote(this.props.exploreResponses[0]);
     }
 }
