@@ -1,23 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Indie Flower';
+    font-family: 'Shadows Into Light';
     font-weight: 300;
-    -webkit-animation-delay: 0.1s;
-    -webkit-animation-name: fontfix;
-    -webkit-animation-duration: 0.1s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
     
-}
-
-@-webkit-keyframes fontfix {
-    from { opacity: 1; }
-    to   { opacity: 1; }
 }
 
 .home {

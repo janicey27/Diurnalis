@@ -131,7 +131,7 @@ body {
 }
 
 .today{
-    background-image: url('../components/public/background2.png');
+    background-image: url('../components/public/background2_fix.png');
     background-size: 100vw 100vh;
 }
 
