@@ -26,8 +26,12 @@ export default class Explore extends React.Component{
                 <div className = "background-q">
                     {this.props.todayQuestion}
                 </div>
+                {/*
+                <div>
+                    <button onClick={this.upvoteTest}>This is a test button</button>
+                </div>
+                */}
                 {this.state.stars}
-                {/*<button onClick={this.upvoteResponse(this.props.exploreResponses[0])}>This is a test button</button>*/} { /* TESTING */ }
             </div>
         )
     }
@@ -42,6 +46,7 @@ export default class Explore extends React.Component{
                 top={String(Math.random()*96+2)+'vh'} 
                 left={String(Math.random()*96+2)+'vw'}
                 size={String(Math.random()*15+30)+'px'} // to be updated based on like data
+                responseID={response._id}
                 content={response.content}
                 upvotes={response.upvotes}
             />);
@@ -131,5 +136,9 @@ export default class Explore extends React.Component{
         .then((res) => {
             console.log("received from post: " + res.upvotes);
         });
+    }
+
+    upvoteTest = () => {
+        this.upvoteResponse(this.props.exploreResponses[0]);
     }
 }

@@ -28,9 +28,16 @@ router.get('/whoami', function(req, res) {
     }
 });
 
-// TODO fix
 router.get('/questions', function(req, res) {
     fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
+        if (err) {
+            res.send(JSON.stringify({
+                "day": 0,
+                "month": 0,
+                "content": "Is this a strange question?"
+            }));
+            return;
+        }
         data = JSON.parse(data);
         res.send(JSON.stringify(data));
     });
@@ -72,6 +79,10 @@ router.get('/responses', function(req, res) {
             });
         });
     }
+});
+
+router.get('/upvote', function(req, res) {
+
 });
 
 
@@ -164,22 +175,51 @@ router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        Response.findOneAndUpdate(
-            { _id: req.body.parent._id },
-            { upvotes: req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1)},
-            function(err, response) {
-                const editedResponse = response;
-                const io = req.app.get('socketio');
-                if (req.body.remove) {
-                    editedResponse.upvotes = req.body.parent.upvotes - 1;
-                    io.emit("downvote", editedResponse);
-                } else {
-                    editedResponse.upvotes = req.body.parent.upvotes + 1;
-                    io.emit("upvote", editedResponse);
-                }
-                res.send(editedResponse);
+        const parent = req.body.parent;
+        let i, upvoted = false;
+        for (i=0; i<parent.upvoteUsers; i++) {
+            if (parent.upvoteUsers[i] === req.user._id) {
+                upvoted = true;
+                break;
             }
-        );
+        }
+        if (upvoted && req.body.remove) {
+            const userList = parent.upvoteUsers;
+            userList.splice(i, 1);
+            Response.findOneAndUpdate(
+                { _id: parent._id },
+                {
+                    upvotes: parent.upvotes - 1,
+                    upvoteUsers: userList
+                },
+                function(err, response) {
+                    const editedResponse = response;
+                    editedResponse.upvotes = parent.upvotes - 1;
+                    editedResponse.upvoteUsers = userList;
+                    const io = req.app.get('socketio');
+                    io.emit("downvote", editedResponse);
+                    res.send(editedResponse);
+                }
+            );
+        } else if (!upvoted && !req.body.remove) {
+            Response.findOneAndUpdate(
+                { _id: parent._id },
+                {
+                    upvotes: parent.upvotes + 1,
+                    upvoteUsers: parent.upvoteUsers.concat(req.user._id)
+                },
+                function(err, response) {
+                    const editedResponse = response;
+                    const io = req.app.get('socketio');
+                    editedResponse.upvotes = parent.upvotes + 1;
+                    editedResponse.upvoteUsers = parent.upvoteUsers.concat(req.user._id);
+                    io.emit("upvote", editedResponse);
+                    res.send(editedResponse);
+                }
+            );
+        } else {
+            res.send(parent);
+        }
         console.log("is this working");
     }
 );

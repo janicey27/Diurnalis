@@ -61,8 +61,8 @@ class Timeline extends React.Component {
                 </div>
                 
                 <div className="month-bar"> 
-                <div class="row"></div>
-                   <div class="col-sm-12 col-centered">
+                <div className="row"></div>
+                   <div className="col-sm-12 col-centered">
                         <div className="row no-gutters">
                         <div className="col-sm"  onClick={() => this.handleClick(1, 32)}>
                         <Month thisMonth="jan"/> 
