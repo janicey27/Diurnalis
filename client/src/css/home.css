@@ -16,7 +16,7 @@ body {
 }
 
 .home {
-    background-image: url('../components/public/paper.jpg');
+    background-image: url('../components/public/background2_fix.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -31,7 +31,7 @@ body {
 }
 
 .subtitle{
-    font-family: 'Courier New', sans-serif;
+    font-family: 'Special Elite', sans-serif;
     font-weight: 400
 }
 
@@ -190,7 +190,7 @@ body {
     margin: 0 auto;
     font-family: 'Special Elite';
     font-weight: 300;
-    color: rgb(65, 65, 65);
+    color: rgba(0, 0, 0, 0.6);
     text-shadow: 0px 0px 5px rgb(255, 255, 255);
     
 

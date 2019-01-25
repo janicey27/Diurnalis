@@ -1,5 +1,9 @@
 import React from "react";
 import PastResponses from "./PastResponses";
+import  "../../css/timeline.css";
+import TodayDate from "../pages/TodayDate";
+
+
 
 class Root extends React.Component {
   
@@ -12,14 +16,15 @@ class Root extends React.Component {
         todaysQuestion: "Sorry, the question for this day is currently unavailable.",
         todaysResponses: [],
         hasResponses: false,
-        hasSelected: false
+        hasSelected: false,
+        thisMonth: ""
     }
 
 }
   getQuestionOfDay = () => {
     const questions = this.props.questionArray;
-    var i;
-    var gotQuestion = false;
+    let i;
+    let gotQuestion = false;
     for (i=0; i<questions.length; i++) {
       if (questions[i][0] === this.state.selectedMonth && questions[i][1] === this.state.dayIndex+1) {
         this.setState({todaysQuestion: questions[i][2]})
@@ -51,6 +56,12 @@ class Root extends React.Component {
     
   }
 
+  getMonth = () => {
+      const monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
+      let monthStr = monthArr[this.state.selectedMonth-1];
+      this.setState({thisMonth: monthStr})
+  }
+
   componentDidMount() {
     // console.log("day entry mounted!")
     // this.setState({selectedMonth: 2})
@@ -61,6 +72,7 @@ class Root extends React.Component {
   gettem() {
     this.getQuestionOfDay();
     this.getResponsesOfDay();
+    this.getMonth();
   }
 
   componentDidUpdate(prevProps) {
@@ -91,13 +103,13 @@ class Root extends React.Component {
     var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
     if (this.state.hasSelected == false) {
       return (
-        <div><h2>Please select a month to view your past responses.</h2></div>
+        <div className="selectText"><h2>Please select a month to view your past responses.</h2></div>
       )
     }
     else {
       return (
         <div>
-          <h4>Selected date: {this.state.selectedMonth}/{this.state.dayIndex+1} </h4>
+          <h4>{this.state.thisMonth} {this.state.dayIndex+1} </h4>
         
           <h2>{this.state.todaysQuestion}</h2>
   
