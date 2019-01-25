@@ -19,8 +19,8 @@ export default class Explore extends React.Component{
     }
 
     render() {
-        console.log("Message to upvote: " + this.props.exploreResponses[0].content);
-        console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
+        //console.log("Message to upvote: " + this.props.exploreResponses[0].content);
+        //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
             <div className = "sky" id="sky">
                 <div className = "background-q">

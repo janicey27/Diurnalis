@@ -3,7 +3,11 @@
 
 html {
     scroll-behavior: smooth;
+    
 }
+
+::selection
+{ background: rgb(255, 255, 255, 0.2); }
 
 body {
     font-family: 'Nixie One';
@@ -55,11 +59,12 @@ body {
   }
 
   .bigbox{
-    width: 75vw;
+    width: 60vw;
     min-width: 300px;
     height: 45vh;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
     position: relative;
     top: calc(20vh);
     left: 50%;
@@ -69,6 +74,7 @@ body {
     flex-direction: column;
     color: black;
     border-radius: 5px;
+
   }
 
 
@@ -97,7 +103,7 @@ body {
     position: relative;
     top: 20px;
     left: 30px;
-    text-align: left
+    text-align: left;
 }
 
 .question-group{
@@ -112,25 +118,30 @@ body {
 }
 
 .submit{
-    background-color: rgb(255,255,255,0.1);
+    background-color: rgb(255,255,255,0.2);
     border-color: rgb(39, 132, 219);
     border: 10px;
     border-radius: 2px;
     margin: 5px;
+    padding: 10px;
+    transition: 300ms;
 }
 
 .privacy{
-    background-color: rgb(255,255,255,0.1);
+    background-color: rgb(255,255,255,0.2);
     border: none;
-    
+    padding: 10px;
+    transition: 300ms;
 }
 
 .privacy:hover{
-    background-color: rgb(255,255,255,0.2);
+    background-color: rgb(255,255,255,0.4);
+    cursor: pointer;
 }
 
 .submit:hover{
-    background-color: rgb(255,255,255,0.2);
+    background-color: rgb(255,255,255,0.4);
+    cursor: pointer;
 }
 
 .submit:focus{
@@ -143,10 +154,16 @@ body {
     height: 30px;
     width: 30px;
     background-size: contain;
+    transition: ease-out 300ms;
 }
 
 .star:hover{
     background-image: url('../components/public/star_active.png');
+    transition: 200ms;
+    
+    /* box-shadow: 0px 0px 15px #eee; */
+    transform: scale(1.2)!important;
+    cursor: pointer;
 }
 
 .explore-btn{
@@ -175,6 +192,7 @@ body {
     font-weight: 300;
     color: rgb(65, 65, 65);
     text-shadow: 0px 0px 5px rgb(255, 255, 255);
+    
 
 }
 
@@ -183,15 +201,16 @@ body {
 }
 
 .daily-response{
-    width: 66vw;
+    width: 90%;
+    height: 500%;
     word-wrap: break-word;
-    height: 10vh;
     background-color:rgb(255, 255, 255, 0.1);
+    border-color: rgb(138, 138, 138);
     border-style: none;
-    border-color: rgb(136, 136, 136);
     border-width: 1px;
     resize: none;
     border-radius: 5px;
+    /* box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3); */
 }
 
 .daily-response:focus{
