@@ -96,7 +96,7 @@ class Root extends React.Component {
     }
     else {
       return (
-        <div className = "entry-container">
+        <div>
           <h4>Selected date: {this.state.selectedMonth}/{this.state.dayIndex+1} </h4>
         
           <h2>{this.state.todaysQuestion}</h2>

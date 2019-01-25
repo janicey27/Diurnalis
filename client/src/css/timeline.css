@@ -12,18 +12,25 @@
     float: none;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
+    /* animation-duration: 5s; */
 }
 
 .container {
     bottom: 0px;
 }
 
-
+.col-centered {
+    width: 90vw;
+    margin: 0 auto;
+}
 
 .month-bar {
     position: absolute;
     /* margin: auto; */
     bottom: 10px;
+    width: calc(100vw / 15 * 13);
+    margin: 0 auto;
     /* padding: 20px; */
     /* left: 40px; */
 }
@@ -32,9 +39,9 @@
     position: absolute;
     bottom: 150px;
     padding: 15px;
-    align-content: center;
-    align-items: center;
-    align-self: center;
+    width: calc(100vw / 15 * 13);
+    margin: 0 auto;
+    /* display: inline-block */
     /* left: 40px; */
 }
 
@@ -44,13 +51,18 @@
 .timeline {
     white-space: nowrap;
     overflow-x: hidden;
+    width: 90vw;
+    margin: 0 auto;
+    transform: translateX(-2.5%);
     /* background-color: #efefef; */
 }
 
 .timeline ol {
     font-size: 0;
-    width: 100vw;
+    /* width: 100vw; */
     padding: 50px 0;
+    height: 15px;
+    /* margin: 0 auto; */
 }
 
 .timeline ol li {
@@ -61,6 +73,7 @@
     height: 5px;
     background: #c1c1c1;
     pointer-events: none;
+    box-shadow: 0px 0px 5px #888 
 }
 
 
@@ -84,12 +97,34 @@
     pointer-events: auto
 }
 
+ol {
+    /* height: 10px;; */
+}
+
 li.active::after {
-    background:#568d4e !important
+    content: "";
+    background:#d0d0d0 !important;
+    /* box-shadow: inset 0 0 10px #000000 !important */
+    border: 5px solid #568d4e !important;
+    width: 17px !important;
+    height: 17px !important;
+    /* border-color: #000 !important; */
+    /* border-width: 1px !important; */
+    box-shadow: 0px 0px 5px #888 
+}
+
+li.active:hover:after {
+    box-shadow: 0px 0px 15px #eee;
+    animation-duration: 5s;
+    transform: scale(1.3) translateY(-40%)!important;
+    /* top: 10% !important; */
+    /* pointer-events: none !important; */
+    /* transform:  !important; */
 }
 
 li.inactive::after {
-    background:#a8a8a8 !important
+    background:#d0d0d0 !important;
+    box-shadow: 0px 0px 5px #888;
 }
 
 
@@ -100,7 +135,12 @@ li.inactive::after {
     bottom: 20px;
     width: calc(100vw * .6);
     height: calc(100vh * 0.4);
-    background-color: #f3efbe;
+    background-color: rgba(0, 0, 0, 0.2);
+    /* filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30; */
     padding: 20px;
     white-space: pre-line;
+    display: inline-block;
+    /* margin: 0 auto; */
  }
