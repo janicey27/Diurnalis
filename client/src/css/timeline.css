@@ -12,18 +12,24 @@
     float: none;
     margin-right: auto;
     margin-left: auto;
+    text-align: center;
 }
 
 .container {
     bottom: 0px;
 }
 
-
+.col-centered {
+    width: 90vw;
+    margin: 0 auto;
+}
 
 .month-bar {
     position: absolute;
     /* margin: auto; */
     bottom: 10px;
+    width: calc(100vw / 15 * 13);
+    margin: 0 auto;
     /* padding: 20px; */
     /* left: 40px; */
 }
@@ -32,9 +38,9 @@
     position: absolute;
     bottom: 150px;
     padding: 15px;
-    align-content: center;
-    align-items: center;
-    align-self: center;
+    width: calc(100vw / 15 * 13);
+    margin: 0 auto;
+    /* display: inline-block */
     /* left: 40px; */
 }
 
@@ -44,13 +50,17 @@
 .timeline {
     white-space: nowrap;
     overflow-x: hidden;
+    width: 90vw;
+    margin: 0 auto;
+    transform: translateX(-2.5%);
     /* background-color: #efefef; */
 }
 
 .timeline ol {
     font-size: 0;
-    width: 100vw;
+    /* width: 100vw; */
     padding: 50px 0;
+    /* margin: 0 auto; */
 }
 
 .timeline ol li {
@@ -100,7 +110,12 @@ li.inactive::after {
     bottom: 20px;
     width: calc(100vw * .6);
     height: calc(100vh * 0.4);
-    background-color: #f3efbe;
+    background-color: rgba(0, 0, 0, 0.2);
+    /* filter: alpha(opacity=30);
+    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
+    -moz-opacity: 0.30; */
     padding: 20px;
     white-space: pre-line;
+    display: inline-block;
+    /* margin: 0 auto; */
  }

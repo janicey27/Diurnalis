@@ -80,9 +80,9 @@ class Monthline extends React.Component {
 
     return (
         <div>
-            <section>
+            <div className = "entry-container">
                  <DayEntry dayIndex={this.state.selectedDay} selectedMonth={this.props.selectedMonth} questionArray={this.props.questionArray} responseArray={this.props.responseArray}/>
-            </section>
+            </div>
         
             <section className="timeline">
                 <ol>
