@@ -12,31 +12,42 @@ export default class Universe extends React.Component {
             myResponses: [],
             myTodayResponses: [],
             exploreResponses: [],
+            responded: false,
             dataRendered: 0,
-            dataToRender: 2 // past responses, explore responses
+            dataToRender: 2, // past responses, explore responses
+            responded: false
         }
     }
 
     componentDidMount() {
         this.getPastResponses();
         this.getExploreResponses();
+        //this.initialScroll();
     }
 
-    updateResponded = () => {
-        this.setState({
-            responded: true,
+    redirect = () => {
+        location.href = './#something';
+        window.scrollBy({
+            top: 100,
+            left: 0,
+            behavior: 'smooth',
         })
     }
 
+    /*initialScroll = () => {
+        var today = this.refs.today;
+        today.scrollIntoView();
+    }*/
+
     render() {
-        
+
         var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
         var explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
 
         if (this.state.dataRendered >= this.state.dataToRender) {
             return (
                 <div className = "universe"> 
-                    <div className = "page explore">
+                    <div className = "page explore" id="explore">
                         <Explore
                             day={this.props.day}
                             month={this.props.month} 
@@ -45,6 +56,7 @@ export default class Universe extends React.Component {
                             todayQuestion={this.props.todayQuestion}
                             exploreResponses={this.state.exploreResponses}
                         />
+                        {timeline}
                     </div>
                     <div className = "page today" id="today">
                         {explore}
@@ -55,11 +67,12 @@ export default class Universe extends React.Component {
                             userInfo={this.props.userInfo}
                             todayQuestion={this.props.todayQuestion}
                             myTodayResponses={this.state.myTodayResponses}
+                            addMyResponse={this.addMyResponse}
                             updateResponded={this.updateResponded}
                         />
                         {timeline}
                     </div>
-                    <div className = "page timeline">
+                    <div className = "page timeline" id="timeline">
                         {explore}
                         <Timeline
                             day={this.props.day}
@@ -71,10 +84,12 @@ export default class Universe extends React.Component {
                     </div>
                 </div>
             )
+            
         } else {
             return null;
         }
     }
+
 
     // GET all past responses
     getPastResponses = () => {
@@ -127,6 +142,12 @@ export default class Universe extends React.Component {
             );
     }
 
+    updateResponded = () => {
+        this.setState({
+            responded: true,
+        })
+    }
+
     // adds/edits a personal response
     addMyResponse = (response) => {
         const tempResponses = this.state.myTodayResponses;
@@ -137,11 +158,6 @@ export default class Universe extends React.Component {
             tempResponses.unshift(response);
         }
         this.setState({ myTodayResponses: tempResponses });
-    }
-
-    // adds an explore response
-    addExploreResponse = () => {
-
     }
 
 }

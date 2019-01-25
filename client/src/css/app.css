@@ -73,7 +73,8 @@ body {
     scroll-snap-align: start;
 }
 
-.today {
+
+/* .today {
     background-color: rgb(126, 126, 228);
 }
 
@@ -83,7 +84,7 @@ body {
 
 .explore {
     background-color: rgb(9, 9, 56);
-}
+} */
 
 .navbar{
     position:fixed;
@@ -113,6 +114,10 @@ body {
 }
 
 .universe{
+    background-image: url('../components/public/watercolor.png');
+    /* background-size: 50px 100px; */
+    z-index: 1;
+    background-size: 100vw calc(100vh * 3);
     scroll-snap-type: mandatory;
     scroll-snap-type: y mandatory;
     scroll-snap-points-y: repeat(100vh);

@@ -14,6 +14,10 @@ export default class TodayQuestion extends React.Component {
             responded: false,
         }
     }
+
+    componentDidMount() {
+        this.updateResponded();
+    }
     
     handlePrivacy = (event) => {
         this.setState({
@@ -44,6 +48,7 @@ export default class TodayQuestion extends React.Component {
             body: JSON.stringify(body)
         }).then(res => res.json())
         .then(response => {
+            console.log("Response: " + response.content);
             this.props.addMyResponse(response);
             console.log("posted!");
             console.log(this.props.myTodayResponses[0]);
@@ -59,6 +64,7 @@ export default class TodayQuestion extends React.Component {
             submitted: true,
             responded: true,
         });
+        
     }
 
     handleEdit = (event) => {
@@ -69,15 +75,15 @@ export default class TodayQuestion extends React.Component {
 
     updateResponded = () => {
         if (this.props.myTodayResponses.length > 0){
-            if (this.props.myTodayResponses[0].year == this.props.year){
+            if (this.props.myTodayResponses[0].year === this.props.year){
                 this.setState({
                     submitted: true,
                     responded: true,
                     value: this.props.myTodayResponses[0].content,
                 });
-                this.props.updateResponded();
             }
             console.log("user has responded");
+            this.props.updateResponded();
         }
     }
 
@@ -127,16 +133,17 @@ export default class TodayQuestion extends React.Component {
         }
 
         return(
-            <div className = "today-question">
-                <div className="date">
-                    <TodayDate
-                        day={this.props.day}
-                        month={this.props.month}
-                    />
-                </div> 
-                <div className="question">
-                    {this.props.todayQuestion}
-                    {/*query today's question*/}
+            <div className = "today-question" id="today-question">
+                <div className = "question-container">
+                    <div className="date">
+                        <TodayDate month = {this.props.month} day = {this.props.day}/>
+                    </div> 
+                    <div className="question">
+                        {this.props.todayQuestion}
+                    </div>
+                    <div>
+                    _________________________
+                    </div>
                 </div>
                 <div className="bigbox">
                     <div className="question-group">
