@@ -94,7 +94,7 @@ export default class TodayQuestion extends React.Component {
         let button;
         let form;
 
-        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
+        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy}>
                         <option value = "private" >Private</option> 
                         <option value = "anonymous" >Anonymous</option>
                         <option value = "public" >Public</option>
@@ -107,13 +107,13 @@ export default class TodayQuestion extends React.Component {
             } else {
                 button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
                 form = <form onSubmit={this.handleSubmit}>
-                        <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                        <textarea className="daily-response" id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                         </form>;
             }
         } else {
             button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
             form = <form onSubmit={this.handleSubmit}>
-                    <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                    <textarea className="daily-response" id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                     </form>;
         }
 

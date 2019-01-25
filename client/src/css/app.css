@@ -72,6 +72,7 @@ body {
     width: 100vw;
     scroll-snap-align: start;
     scroll-snap-coordinate: 0% 0%;
+    position: relative;
 }
 
 

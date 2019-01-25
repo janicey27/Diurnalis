@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon');
 
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Shadows Into Light';
+    font-family: 'Coming Soon';
     font-weight: 300;
     
 }
@@ -60,13 +61,14 @@ body {
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.1);
     position: relative;
-    top: calc(16vh);
+    top: calc(20vh);
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     display: flex;
     flex-direction: column;
     color: black;
+    border-radius: 5px;
   }
 
 
@@ -109,11 +111,42 @@ body {
     right: 10px;
 }
 
+.submit{
+    background-color: rgb(255,255,255,0.1);
+    border-color: rgb(39, 132, 219);
+    border: 10px;
+    border-radius: 2px;
+    margin: 5px;
+}
+
+.privacy{
+    background-color: rgb(255,255,255,0.1);
+    border: none;
+    
+}
+
+.privacy:hover{
+    background-color: rgb(255,255,255,0.2);
+}
+
+.submit:hover{
+    background-color: rgb(255,255,255,0.2);
+}
+
+.submit:focus{
+    border: none;
+}
+
 .star{
-    position:absolute;
-    height: 25px;
-    width: 25px;
+    position:relative;
     background-image: url('../components/public/star_inactive.png');
+    height: 30px;
+    width: 30px;
+    background-size: contain;
+}
+
+.star:hover{
+    background-image: url('../components/public/star_active.png');
 }
 
 .explore-btn{
@@ -126,21 +159,45 @@ body {
 }
 
 .timeline-btn{
-    position: relative;
+    position: absolute;
     top: 90vh; 
-    left: 85vw;
+    left: 90vw;
     scroll-behavior: smooth;
     z-index: 5;
 }
 
 .question-container{
     position: relative;
-    top: 13vh;
+    top: 17vh;
     text-align: center;
     margin: 0 auto;
+    font-family: 'Special Elite';
+    font-weight: 300;
+    color: rgb(65, 65, 65);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255);
 
 }
 
 .question{
     font-size: 30px;
+}
+
+.daily-response{
+    width: 66vw;
+    word-wrap: break-word;
+    height: 10vh;
+    background-color:rgb(255, 255, 255, 0.1);
+    border-style: none;
+    border-color: rgb(136, 136, 136);
+    border-width: 1px;
+    resize: none;
+    border-radius: 5px;
+}
+
+.daily-response:focus{
+    border: none;
+}
+
+.daily-response:hover{
+    border-color: black;
 }

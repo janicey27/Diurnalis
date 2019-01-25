@@ -38,7 +38,7 @@ export default class Explore extends React.Component{
                 key={i}
                 top={String(Math.random()*96+2)+'vh'} 
                 left={String(Math.random()*96+2)+'vw'}
-                size={String(Math.random()*15+10)+'px'} // to be updated based on like data
+                size={String(Math.random()*15+30)+'px'} // to be updated based on like data
                 content={response.content}
                 upvotes={response.upvotes}
             />);
