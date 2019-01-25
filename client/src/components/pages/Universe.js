@@ -92,7 +92,6 @@ export default class Universe extends React.Component {
         }
     }
 
-
     // GET all past responses
     getPastResponses = () => {
         fetch('/api/responses?me=true')

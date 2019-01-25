@@ -114,7 +114,8 @@ router.post(
                         year            : responseYear,
                         content         : req.body.content,
                         privacy         : req.body.privacy,
-                        upvotes         : 0
+                        upvotes         : 0,
+                        upvoteUsers     : [],
                     });
                     newResponse.save(function(err, newResponse) {
                         switch (newResponse.privacy) {
@@ -168,12 +169,18 @@ router.post(
             { upvotes: req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1)},
             function(err, response) {
                 const editedResponse = response;
-                editedResponse.upvotes = req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1);
                 const io = req.app.get('socketio');
-                io.emit("upvote", editedResponse);
+                if (req.body.remove) {
+                    editedResponse.upvotes = req.body.parent.upvotes - 1;
+                    io.emit("downvote", editedResponse);
+                } else {
+                    editedResponse.upvotes = req.body.parent.upvotes + 1;
+                    io.emit("upvote", editedResponse);
+                }
+                res.send(editedResponse);
             }
         );
-        res.send(editedResponse);
+        console.log("is this working");
     }
 );
 

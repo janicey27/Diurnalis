@@ -32,15 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // test routes
-app.get(["/q"], (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"))
-})
-
 app.get(["/t"], (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"))
-})
-
-app.get(["/u"], (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"))
 })
 

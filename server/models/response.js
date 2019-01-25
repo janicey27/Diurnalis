@@ -10,7 +10,8 @@ const ResponseModelSchema = new mongoose.Schema ({
     year            : Number,
     content         : String,
     privacy         : String,
-    upvotes         : Number
+    upvotes         : Number,
+    upvoteUsers     : [String]
 });
 
 // compile model from schema
