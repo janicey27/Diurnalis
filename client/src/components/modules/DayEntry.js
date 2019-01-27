@@ -2,6 +2,8 @@ import React from "react";
 import PastResponses from "./PastResponses";
 import  "../../css/timeline.css";
 import TodayDate from "../pages/TodayDate";
+import AnimateOnChange from 'react-animate-on-change'
+
 
 
 
@@ -109,6 +111,8 @@ class Root extends React.Component {
     else {
       return (
         <div>
+          
+
           <h4>{this.state.thisMonth} {this.state.dayIndex+1} </h4>
         
           <h2>{this.state.todaysQuestion}</h2>

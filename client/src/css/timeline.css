@@ -27,8 +27,7 @@
 
 .month-bar {
     position: absolute;
-    /* margin: auto; */
-    bottom: 10px;
+    bottom: 1px;
     width: calc(100vw / 15 * 13);
     margin: 0 auto;
     transform: translate(1vw,0)
@@ -38,7 +37,7 @@
 
 .monthline {
     position: absolute;
-    bottom: 150px;
+    bottom: 15vh;
     /* padding: 15px; */
     width: calc(100vw / 15 * 13);
     margin: 0 auto;
@@ -106,7 +105,7 @@ li.active::after {
     border: 5px solid #568d4e !important;
     width: 18px !important;
     height: 18px !important;
-    box-shadow: 0px 0px 10px rgba(193, 193, 193, 0.5);
+    box-shadow: 0px 0px 14px rgba(193, 193, 193, 0.7);
     left: calc(100% - 3px) !important;
     /* transform: translateX(-400px); */
     transition: transform ease-out 400ms;
@@ -143,9 +142,7 @@ li.inactive::after {
     display: inline-block;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
-    /* transform: translate(1vw,0); */
     
-    /* margin: 0 auto; */
  }
 
  .selectText {
@@ -163,3 +160,52 @@ li.inactive::after {
   transform: translate(-50%, -50%);
   color: #720b54;
  } */
+
+
+
+ /* react transitions */
+
+
+.fade-enter {
+    animation:  keyframes-fade-enter 0.4s ease-out
+
+  }
+  
+  @keyframes keyframes-fade-enter {
+    0% {
+        opacity: 0.01;
+
+    }
+    100% {
+        opacity: 1;
+        /* transition: opacity 500ms ease-in; */
+
+    }
+  }
+  
+  .fade-leave {
+    opacity: 1;
+  }
+  
+  .fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
+
+  .text-enter {
+    animation:  keyframes-text-enter 0.4s ease-out
+
+  }
+  
+  @keyframes keyframes-text-enter {
+    0% {
+        /* opacity: 0.01 !important; */
+        color: rgb(0,0,0,0.01);
+
+    }
+    100% {
+        /* opacity: 0.01 !important; */
+        /* transition: opacity 500ms ease-in; */
+        color: rgb(0,0,0)
+    }
+  }

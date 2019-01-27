@@ -50,7 +50,8 @@ class App extends React.Component {
                         <Route exact path="/" render={(props) =>
                             <Root
                                 {...props}
-                                day={this.state.day}
+                                // day={this.state.day}
+                                day={25} //HACK FIX
                                 month={this.state.month}
                                 year={this.state.year}
                                 userInfo={this.state.userInfo}

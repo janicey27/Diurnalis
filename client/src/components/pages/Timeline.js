@@ -2,6 +2,8 @@ import React from 'react';
 import "../../css/timeline.css";
 import Month from "../modules/Month.js"
 import Monthline from "../modules/Monthline"
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 class Timeline extends React.Component {
 
@@ -52,12 +54,16 @@ class Timeline extends React.Component {
     }
 
     render() {
+        
+        
+        
         return (
             <div className='page-container col-centered'>
             <div className="col-centered">
             
                 <div className="monthline">
                     <Monthline selectedMonth={this.state.month} monthLength={this.state.monthLength} questionArray={this.state.questionArray} responseArray={this.state.responseArray}/>
+                
                 </div>
                 
                 <div className="month-bar"> 

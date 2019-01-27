@@ -12,6 +12,18 @@
     },
 
     {
+        "day": 2,
+        "month": 1,
+        "content": "What's the meaning of life?"
+    },
+
+    {
+        "day": 3,
+        "month": 1,
+        "content": "Is this the real life?"
+    },
+
+    {
         "day": 21,
         "month": 1,
         "content": "What is your name?"
@@ -39,6 +51,18 @@
         "day": 25,
         "month": 1,
         "content": "How do you feel about pinkies?"
+    },
+
+    {
+        "day": 26,
+        "month": 1,
+        "content": "What's the best color?"
+    },
+
+    {
+        "day": 27,
+        "month": 1,
+        "content": "Which tree do you fear the most?"
     },
 
     {

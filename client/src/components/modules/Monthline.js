@@ -2,6 +2,7 @@ import React from "react";
 import "../../css/timeline.css";
 import Day from "./Day"
 import DayEntry from "./DayEntry"
+import AnimateOnChange from 'react-animate-on-change'
 
 class Monthline extends React.Component {
   
@@ -16,7 +17,8 @@ class Monthline extends React.Component {
             dayEntries: [],
             showEntry: false,
             selectedDay: -1,
-            responseArray: []
+            responseArray: [],
+            monthUpdate: false,
         }
 
     
@@ -57,6 +59,7 @@ class Monthline extends React.Component {
             
         }
         this.setState({dayEntries: activityArray});
+        
     }
     
 
@@ -64,8 +67,8 @@ class Monthline extends React.Component {
         if (this.props.selectedMonth != prevProps.selectedMonth) {
             // this.setStates(this.props.selectedMonth, this.props.monthLength, this.props.responseArray);
             this.setDayEntries();
+            this.setState({monthUpdate: true});
         }
-
     }
 
     entryFunction = (setDay) => {
@@ -74,6 +77,7 @@ class Monthline extends React.Component {
         //     showEntry: !prevState.showEntry
         //   }));
         this.setState({selectedDay: setDay});
+        this.setState({monthUpdate: false});
       };
   
     render() {
@@ -81,22 +85,29 @@ class Monthline extends React.Component {
     return (
         <div>
             <div className = "entry-container">
-                 <DayEntry dayIndex={this.state.selectedDay} selectedMonth={this.props.selectedMonth} questionArray={this.props.questionArray} responseArray={this.props.responseArray}/>
+                 <AnimateOnChange
+                baseClassName="hi"
+                animationClassName="text-enter"
+                animate={true}>
+                    <DayEntry dayIndex={this.state.selectedDay} selectedMonth={this.props.selectedMonth} questionArray={this.props.questionArray} responseArray={this.props.responseArray}/>
+                 </AnimateOnChange>
             </div>
         
             <section className="timeline">
                 <ol>
-                    
-                    {Array.from(Array(this.props.monthLength).keys()).map(y => (
-                        <Day
-                            key={y}
-                            dayIndex = {y}
-                            activity={this.state.dayEntries[y]}
-                            entryFunction={this.entryFunction}
-                        />
-                    ))} 
-
-                    
+                    <AnimateOnChange
+                    baseClassName="hii"
+                    animationClassName="fade-enter"
+                    animate={this.state.monthUpdate}>
+                        {Array.from(Array(this.props.monthLength).keys()).map(y => (
+                            <Day
+                                key={y}
+                                dayIndex = {y}
+                                activity={this.state.dayEntries[y]}
+                                entryFunction={this.entryFunction}
+                            />
+                        ))} 
+                    </AnimateOnChange>
                 </ol>
             </section>
 
