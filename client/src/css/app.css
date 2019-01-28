@@ -109,6 +109,13 @@ body {
     background-size: 20px 20px;
 }
 
+.heart1:visited{
+    background-image: url('../components/public/pink_heart.png');
+    height: 20px;
+    width: 20px ;
+    background-size: 20px 20px;
+}
+
 .heart2{
     background-image: url('../components/public/pink_heart.png');
     height: 20px;

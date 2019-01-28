@@ -25,15 +25,15 @@ export default class Explore extends React.Component{
 
     changeHelper = () => {
         this.setState({
-            helper: !this.state.helper,
+            helper: false,
         });
     }
 
     render() {
         let helper = this.state.helper ? (
-            <div className = "helper">
+            <span className = "helper">
                 Click on a star to explore other people's responses!
-            </div>
+            </span>
         ) : (<div className = "helper"></div>)
         
         //console.log("Message to toggle: " + this.props.exploreResponses[0].content);
