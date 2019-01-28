@@ -3,6 +3,8 @@ import "../../css/app.css";
 import Timeline from "./Timeline";
 import TodayQuestion from "./TodayQuestion";
 import Explore from "./Explore";
+import AnimateOnChange from 'react-animate-on-change'
+
 
 export default class Universe extends React.Component {
     constructor(props){
@@ -63,16 +65,20 @@ export default class Universe extends React.Component {
                     <div className = "page today" id="today">
                         {explore}
                         {timeline}
-                        <TodayQuestion
-                            day={this.props.day}
-                            month={this.props.month} 
-                            year={this.props.year}
-                            userInfo={this.props.userInfo}
-                            todayQuestion={this.props.todayQuestion}
-                            myTodayResponses={this.state.myTodayResponses}
-                            addMyResponse={this.addMyResponse}
-                            updateResponded={this.updateResponded}
-                        />
+                        <AnimateOnChange
+                        animationClassName="fade-enter"
+                        animate={true}>
+                            <TodayQuestion
+                                day={this.props.day}
+                                month={this.props.month} 
+                                year={this.props.year}
+                                userInfo={this.props.userInfo}
+                                todayQuestion={this.props.todayQuestion}
+                                myTodayResponses={this.state.myTodayResponses}
+                                addMyResponse={this.addMyResponse}
+                                updateResponded={this.updateResponded}
+                            />
+                        </AnimateOnChange>
                     </div>
                     <div className = "page timeline-p" id="timeline">
                         {explore}

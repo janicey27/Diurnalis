@@ -95,9 +95,9 @@ export default class TodayQuestion extends React.Component {
         let form;
 
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy}>
-                        <option value = "private" >Private</option> 
-                        <option value = "anonymous" >Anonymous</option>
                         <option value = "public" >Public</option>
+                        <option value = "anonymous" >Anonymous</option>
+                        <option value = "private" >Private</option> 
                     </select>)
         
         if (responded) {

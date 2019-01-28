@@ -128,17 +128,27 @@ body {
     transition: 300ms;
 }
 
+
+
 .privacy{
     background-color: rgb(255,255,255,0.3);
     border: none;
     padding: 10px;
     height: 45px;
-    transition: 300ms;
+    transition: background-color 300ms;
+    outline: none;
+}
+
+.privacy:hover{
+    background-color: rgb(255,255,255,0.5);
+    
+    cursor: pointer;
 }
 
 .privacy:hover{
     background-color: rgb(255,255,255,0.5);
     cursor: pointer;
+    outline: none;
 }
 
 .submit:hover{
@@ -147,7 +157,8 @@ body {
 }
 
 .submit:focus{
-    border: none;
+    outline: none;
+    transition: none;
 }
 
 .star{
@@ -213,13 +224,16 @@ body {
     resize: none;
     border-radius: 5px;
     padding: 10px 15px;
+    transition: ease-out 400ms;
+    /* transition: 0.1s; */
     /* box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3); */
 }
 
 .daily-response:focus{
     outline: none;
-    transition: 0.1s ease-out 0.05s;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7);
+    transition: 0.1s;
+    transition-timing-function: ease-in;
+    box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.7);
 }
 
 .daily-response:hover{
