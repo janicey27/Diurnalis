@@ -9,7 +9,7 @@ export default class TodayQuestion extends React.Component {
         
         this.state = {
             value: '', /* what you already submitted today*/
-            privacy: this.props.userInfo.defaultPrivacy, /* your settings for this post*/
+            privacy: "public", /* your settings for this post*/
             submitted: false,
             responded: false,
         }
@@ -94,7 +94,7 @@ export default class TodayQuestion extends React.Component {
         let button;
         let form;
 
-        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy}>
+        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
                         <option value = "public" >Public</option>
                         <option value = "anonymous" >Anonymous</option>
                         <option value = "private" >Private</option> 

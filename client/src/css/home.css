@@ -120,6 +120,7 @@ h4 {
     top: 20px;
     left: 30px;
     text-align: left;
+    width: 52vw;
 }
 
 .question-group{
@@ -204,6 +205,7 @@ h4 {
     left: 90vw;
     scroll-behavior: smooth;
     z-index: 5;
+    text-shadow: 1px 1px 2px black;
     
 }
 
@@ -213,6 +215,7 @@ h4 {
     left: 90vw;
     scroll-behavior: smooth;
     z-index: 5;
+    text-shadow: 1px 1px 2px black;
 }
 
 .question-container{

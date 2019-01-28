@@ -32,6 +32,12 @@ body {
     cursor: default;
 }
 
+.helper{
+    font-size: 20px;
+    font-family: Arvo;
+    font-weight: 100;
+}
+
 #root {
     height: 100%;
     width: 100%
@@ -97,6 +103,7 @@ body {
     width: 100vw;
     scroll-snap-align: start;
     scroll-snap-coordinate: 0% 0%;
+    scroll-snap-stop: always;
     position: relative;
 }
 
@@ -117,6 +124,8 @@ body {
     position:fixed;
     background-color: transparent;
     color: rgb(238, 212, 243);
+    z-index: 10;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .nav-item{
@@ -124,6 +133,7 @@ body {
     right: 0;
     float: right;
     color: rgb(177, 201, 245);
+    
 }
 
 .tester{
@@ -158,4 +168,51 @@ body {
 .timeline-p{
     background-image: url('../components/public/background3.png');
     background-size: 100vw 100vh;
+}
+
+.heart{
+    bottom: 5px;
+    right: 5px;
+}
+
+/* react transitions */
+
+.fade-enter {
+   animation: keyframes-fade-enter 0.4s ease-out
+}
+ 
+@keyframes keyframes-fade-enter {
+   0% {
+       opacity: 0.01;
+   }
+   100% {
+       opacity: 1;
+       /* transition: opacity 500ms ease-in; */
+   }
+}
+ 
+.fade-leave {
+   opacity: 1;
+}
+ 
+.fade-leave.fade-leave-active {
+   opacity: 0.01;
+   transition: opacity 300ms ease-in;
+}
+
+.text-enter {
+   animation:  keyframes-text-enter 0.4s ease-out
+}
+ 
+@keyframes keyframes-text-enter {
+   0% {
+       /* opacity: 0.01 !important; */
+       color: rgb(0,0,0,0.01);
+
+   }
+   100% {
+       /* opacity: 0.01 !important; */
+       /* transition: opacity 500ms ease-in; */
+       color: rgb(5,5,5,0.6);
+   }
 }
