@@ -141,9 +141,7 @@ export default class TodayQuestion extends React.Component {
                     <div className="question">
                         {this.props.todayQuestion}
                     </div>
-                    <div>
-                    _________________________
-                    </div>
+                    
                 </div>
                 <div className="bigbox">
                     <div className="question-group">

@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Give+You+Glory');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
+
+
 
 html {
     height: 100%;
@@ -22,7 +27,7 @@ body {
     text-align: center;
     font-size: 50px;
     opacity: 0.15;
-    font-family: Give You Glory;
+    font-family: 'Berkshire Swash', cursive;
     text-shadow: 0 0 5px;
     cursor: default;
 }
