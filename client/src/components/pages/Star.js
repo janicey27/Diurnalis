@@ -13,15 +13,16 @@ export default class Star extends React.Component{
     }
 
     handleClick1 = (event) => {
-        this.setState(prevState => ({
+        this.setState({
             showEntry: true
-          }));
+          });
+        
     }
 
     handleClick2 = (event) => {
         this.setState({
             showEntry: false
-        })
+          });
     }
 
     render(){
