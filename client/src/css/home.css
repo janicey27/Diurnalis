@@ -130,7 +130,6 @@ h4 {
     width: 52vw;
     height: 70%;
     overflow-y: auto;
-    /* overflow: scroll; */
 }
 
 .question-group{
