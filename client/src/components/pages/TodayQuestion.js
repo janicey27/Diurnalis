@@ -9,7 +9,7 @@ export default class TodayQuestion extends React.Component {
         
         this.state = {
             value: '', /* what you already submitted today*/
-            privacy: this.props.userInfo.defaultPrivacy, /* your settings for this post*/
+            privacy: "public", /* your settings for this post*/
             submitted: false,
             responded: false,
         }

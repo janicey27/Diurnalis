@@ -15,11 +15,13 @@ passport.use(new GoogleStrategy({
     if (err) return done(err);
 
     if (!user) {
+      let username = profile.name.givenName + profile.name.familyName;
+      username = findValidUsername(username, 1);
       const user = new User({
         name: profile.name.givenName,
-        username: profile.name.givenName + profile.name.familyName, // TODO remove, set username upon first login
+        username: username, // TODO set username upon first login
         googleid: profile.id,
-        defaultPrivacy: "private" // TODO remove, set upon first login
+        defaultPrivacy: "private" // TODO set upon first login
       });
 
       user.save(function(err) {
@@ -32,6 +34,17 @@ passport.use(new GoogleStrategy({
     }
   });
 }));
+
+findValidUsername = (username, i) => {
+  const testUsername = username + i;
+  User.findOne({ username: testUsername }, function(err, user) {
+    if (err) return "no_username";
+    if (!user) {
+      return testUsername;
+    }
+    return findValidUsername(username, i+1);
+  });
+}
 
 passport.serializeUser(function(user, done) {
   done(null, user);

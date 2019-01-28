@@ -54,9 +54,6 @@ class Timeline extends React.Component {
     }
 
     render() {
-        
-        
-        
         return (
             <div className='page-container col-centered'>
             <div className="col-centered">

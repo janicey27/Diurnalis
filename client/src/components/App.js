@@ -23,12 +23,6 @@ class App extends React.Component {
             todayQuestion: "",
             dataRendered: 0,
             dataToRender: 3, // date, user, questions
-
-            // TEMPORARY
-            myResponses: [],
-            myTodayResponses: [],
-            exploreResponses: [],
-            //
         }
     }
 
@@ -50,8 +44,7 @@ class App extends React.Component {
                         <Route exact path="/" render={(props) =>
                             <Root
                                 {...props}
-                                // day={this.state.day}
-                                day={25} //HACK FIX
+                                day={this.state.day}
                                 month={this.state.month}
                                 year={this.state.year}
                                 userInfo={this.state.userInfo}
@@ -150,72 +143,6 @@ class App extends React.Component {
         console.log(this.state.todayQuestion);
         this.setState({ dataRendered: this.state.dataRendered + 1 });
     }
-
-  
-    // CONTENT BELOW IS TEMOPORARY FOR TESTING PURPOSES
-    
-    // GET all past responses
-    getPastResponses = () => {
-        fetch('/api/responses?me=true')
-            .then(res => res.json())
-            .then(
-                responses => {
-                    this.setState({ myResponses: responses });
-                    console.log("past responses retrieved!");
-                    console.log(this.state.myResponses);
-                } 
-            ).then(() => {
-                this.getTodayResponses();
-            })
-    }
-
-    // sort out past responses for today's date
-    getTodayResponses = () => {
-        const todayResponses = [];
-        let i, response;
-        for (i=0; i<this.state.myResponses.length; i++) {
-            response = this.state.myResponses[i];
-            if ((response.day === this.props.day) && (response.month === this.props.month)) {
-                todayResponses.push(response);
-            }
-        }
-        // sort todayResponses by descending years
-        todayResponses.sort((a, b) => (b.year - a.year));
-        this.setState({
-            myTodayResponses: todayResponses
-        });
-        console.log("today's responses retrieved!");
-        console.log(this.state.myTodayResponses);
-    }
-
-    // GET all public/anonymous for today
-    getExploreResponses = () => {
-        fetch('/api/responses?day=' + this.props.day + '&month=' + this.props.month + '&year=' + this.props.year)
-            .then(res => res.json())
-            .then(
-                responses => {
-                    this.setState({
-                        exploreResponses: responses,
-                    });
-                    console.log("responses retrieved!");
-                    console.log(this.state.exploreResponses);
-                }
-            );
-    }
-
-    // adds/edits a personal response
-    addMyResponse = (response) => {
-        const tempResponses = this.state.myTodayResponses;
-        if ((tempResponses.length > 0) && (tempResponses[0].year === this.props.year)) {
-            tempResponses[0].content = response.content;
-            tempResponses[0].privacy = response.privacy;
-        } else {
-            tempResponses.unshift(response);
-        }
-        this.setState({ myTodayResponses: tempResponses });
-    }
-
-    // END TEMPORARY
 
 }
 
