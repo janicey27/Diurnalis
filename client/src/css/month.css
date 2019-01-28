@@ -3,12 +3,22 @@ div.label {
     z-index: 5;
     top: 50%; 
     left: 50%; 
+    cursor: pointer; 
 
     transform: translate(-55%, -50%);
 }
 
+div.label::selection {
+    background: none;
+}
+
 div.image {
     height: calc(100vw / 15);
+    cursor: pointer;
+}
+
+div.image::hover {
+   border-color: #fff;
 }
 
 div.jan {
