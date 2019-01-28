@@ -16,13 +16,17 @@ export default class Home extends React.Component {
         document.body.classList.remove("home");
     }
 
+    login = () => {
+        location.href="/auth/google";
+    }
+
     render() {
         return (
             <div className="center box"> 
-                <div className="title">Journal</div>
-                <div className="subtitle typewriter">{this.props.todayQuestion}</div>
+                <div className="title">Q&A for me</div>
+                <div className="subtitle typewriter">A universe of sharing and reflecting on daily thoughts</div>
                 <div className="enter">
-                    <a className="login" href="/auth/google">Login</a>
+                    <button className="login" onClick={this.login}>Login</button>
                 </div>
             </div>
         )

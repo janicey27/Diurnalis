@@ -73,9 +73,9 @@ body {
 
 
 .starbox {
-    width: 30vw;
+    width: 40vw;
     min-width: 300px;
-    height: 20vh;
+    height: 30vh;
     padding: 25px;
     margin: 25px;
     background-color: rgba(45, 33, 66, 0.4);
@@ -87,6 +87,7 @@ body {
     color: white;
     text-shadow: 0 0 5px white;
     border-radius: 10px;
+    overflow: scroll;
 }
 
 
@@ -281,4 +282,31 @@ body {
        /* transition: opacity 500ms ease-in; */
        color: rgb(5,5,5,0.6);
    }
+}
+
+.appear-appear{
+    opacity: 0.01
+}
+
+.appear-appear.appear-appear-active{
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+.helperhint-leave{
+    opacity: 1;
+}
+
+.helperhint-leave.helperhint-leave-active{
+    opacity: 0.01;
+    transition: opacity 1s ease-in;
+}
+
+.helperhint-appear{
+    opacity: 0.01
+}
+
+.helperhint-appear.helperhint-appear-active{
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
 }

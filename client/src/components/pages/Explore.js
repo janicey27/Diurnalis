@@ -3,6 +3,8 @@ import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
 import Star from "./Star";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 export default class Explore extends React.Component{
     constructor(props) {
@@ -31,9 +33,16 @@ export default class Explore extends React.Component{
 
     render() {
         let helper = this.state.helper ? (
-            <div className = "helper">
+            <ReactCSSTransitionGroup
+                    transitionName="helperhint"
+                    transitionLeaveTimeout={500}
+                    transitionEnterTimeout={500}
+                    transitionLeave={true}>
+                <div className = "helper">
                 Click on a star to explore others' responses to today's question!
-            </div>
+                </div>
+            </ReactCSSTransitionGroup>
+            
         ) : (<div className = "helper"><div className = "helper"></div></div>)
         
         //console.log("Message to toggle: " + this.props.exploreResponses[0].content);

@@ -1,6 +1,7 @@
 import React from "react";
 import "../../css/home.css";
 import "../../css/app.css";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class StarContent extends React.Component{
     constructor(props){
@@ -32,23 +33,31 @@ export default class StarContent extends React.Component{
 
         return(
             <div className = "page" onClick={event => this.starClick(event)}>
-                <div className = "starbox" id = "starbox">
-                    <div className = "top-bar">
-                        <div className = "user-icon"> 
-                            {this.props.username}
-                        </div>
-                        <div className = "heart-icon">
-                            {//<div className = "heart1" onClick={this.props.toggleUpvovte}></div>
-                            }
-                            {heart}
-                            <div className = "count">{this.props.upvotes}</div>
-                        </div>
-                    </div>
-                    <div className = "star-content">
-                        {this.props.content}
-                    </div>
+                <ReactCSSTransitionGroup
+                    transitionName="appear"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnter={false}
+                    transitionLeave={false}>
                     
-                </div>
+                    <div className = "starbox" id = "starbox">
+                        <div className = "top-bar">
+                            <div className = "user-icon"> 
+                                {this.props.username}
+                            </div>
+                            <div className = "heart-icon">
+                                {//<div className = "heart1" onClick={this.props.toggleUpvovte}></div>
+                                }
+                                {heart}
+                                <div className = "count">{this.props.upvotes}</div>
+                            </div>
+                        </div>
+                        <div className = "star-content">
+                            {this.props.content}
+                        </div>
+                        
+                    </div>
+                </ReactCSSTransitionGroup>
                 
             </div>
         )
