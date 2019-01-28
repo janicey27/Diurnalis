@@ -1,4 +1,5 @@
 import React from 'react';
+import io from "socket.io-client";
 import "../../css/timeline.css";
 import Month from "../modules/Month.js"
 import Monthline from "../modules/Monthline"
@@ -51,6 +52,16 @@ class Timeline extends React.Component {
             responsesArr.push(oneResponse);
         }
         this.state.responseArray = responsesArr;
+    }
+    
+    initializeSocket = () => {
+        this.socket.on("post", (response) => {
+            if (response.creatorID = this.props.userInfo._id) {
+                this.setState({
+                    responseArray: responseArray.concat([[response.month, response.day, [response.year, response.content]]])
+                })
+            }
+        });
     }
 
     render() {

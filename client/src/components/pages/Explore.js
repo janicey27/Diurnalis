@@ -84,7 +84,7 @@ export default class Explore extends React.Component{
                 content={response.content}
                 upvotes={response.upvotes}
                 upvoted={upvoted}
-                toggleUpvote={this.toggleUpvote.bind(this, response._id)}
+                toggleUpvote={() => this.toggleUpvote(response._id)}
                 toggleRenderState={this.toggleRenderState}
             />);
         }
@@ -166,6 +166,7 @@ export default class Explore extends React.Component{
     }
 
     toggleUpvote = (responseID) => {
+        console.log("Toggle upvote for: " + responseID);
         const starArr = this.state.stars;
         let i, star, remove = false;
         for (i=0; i<starArr.length; i++) {
