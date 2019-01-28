@@ -56,10 +56,16 @@ class Timeline extends React.Component {
     
     initializeSocket = () => {
         this.socket.on("post", (response) => {
-            if (response.creatorID = this.props.userInfo._id) {
+            if (response.creatorID === this.props.userInfo._id) {
                 this.setState({
                     responseArray: responseArray.concat([[response.month, response.day, [response.year, response.content]]])
                 })
+            }
+        });
+
+        this.socket.on("edit", (response) => {
+            if (response.creatorID === this.props.userInfo._id) {
+
             }
         });
     }
