@@ -51,7 +51,6 @@ export default class StarContent extends React.Component{
                 </div>
                 
             </div>
-            
         )
     }
 

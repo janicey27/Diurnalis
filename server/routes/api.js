@@ -50,8 +50,6 @@ router.get('/responses', function(req, res) {
     if (req.query.month) filters.month = parseInt(req.query.month);
     if (req.query.year) filters.year = parseInt(req.query.year);
 
-    const count = req.count; // TODO some sort of random pull? so we don't get too many
-
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
             filters.creatorID = req.user._id;
@@ -71,7 +69,10 @@ router.get('/responses', function(req, res) {
             Response.find(filters, function(err, anonResponses) {
                 let i;
                 for (i=0; i<anonResponses.length; i++) {
-                    anonResponses[i].username = "anonymous"; // uncertain if this works
+                    anonResponses[i] = React.cloneElement(
+                        anonResponses[i],
+                        { username: "anonymous" }
+                    ); // uncertain if this works
                     // console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
@@ -81,23 +82,22 @@ router.get('/responses', function(req, res) {
     }
 });
 
-router.get('/upvote', function(req, res) {
-
-});
-
 
 // api POST endpoints
 
 router.post('/user', function(req, res) {
-    const updatedUser = {};
-
-    if (req.body.name) updatedUser.name = req.body.name;
-    if (req.body.username) updatedUser.username = req.body.username;
-    if (req.body.timeZone) updatedUser.timeZone = parseInt(req.body.timeZone);
-    if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
-
-    User.findOneAndUpdate({ _id: req.user._id }, updatedUser, function(err, user) {
-        res.send({});
+    User.findOne({ username: req.body.username }, function(err, user) {
+        if (!user || (user._id === req.user._id)) {
+            const updatedUser = {};
+            if (req.body.name) updatedUser.name = req.body.name;
+            if (req.body.username) updatedUser.username = req.body.username;
+            if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
+            User.findOneAndUpdate({ _id: req.user._id }, updatedUser, function(err, user) {
+                res.send(true);
+            });
+        } else {
+            res.send(false);
+        }
     });
 });
 
