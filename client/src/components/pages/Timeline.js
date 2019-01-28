@@ -22,6 +22,7 @@ class Timeline extends React.Component {
     componentDidMount() {
         this.formatQuestions();
         this.formatResponses();
+        this.initializeSocket();
     }
 
     handleClick(inputMonth, inputLength) {
@@ -56,7 +57,7 @@ class Timeline extends React.Component {
     
     initializeSocket = () => {
         this.socket = io("http://localhost:3000");
-        
+
         this.socket.on("post", (response) => {
             if (response.creatorID === this.props.userInfo._id) {
                 this.setState({
@@ -66,12 +67,15 @@ class Timeline extends React.Component {
         });
 
         this.socket.on("edit", (response) => {
+            const tempArray = this.state.responseArray;
             if (response.creatorID === this.props.userInfo._id) {
-                let i, oneResponse;
-                for (i=0; i<responseArray.length; i++) {
-                    oneResponse = responseArray[i];
-                    if ([oneResponse[0], oneResponse[1], oneResponse[2][0]] === [response.month, response.day, response.year]) {
-                        oneResponse[2][1] = response.content;
+                let i;
+                for (i=0; i<tempArray.length; i++) {
+                    if ((tempArray[i][0] === response.month) && (tempArray[i][1] === response.day) && (tempArray[i][2][0] === response.year)) {
+                        tempArray[i][2][1] = response.content;
+                        this.setState({
+                            responseArray: tempArray
+                        });
                         break;
                     }
                 }
