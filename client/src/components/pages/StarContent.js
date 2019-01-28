@@ -8,10 +8,14 @@ export default class Star extends React.Component{
     }
 
     render(){
+        let heart = <img className = "heart"></img>
         return(
             <div className = "page" onClick={this.props.handleClick}>
                 <div className = "starbox">
                     {this.props.content}
+                    <div className = "heart-box">
+                        {heart}
+                    </div>
                 </div>
             </div>
             
@@ -19,3 +23,6 @@ export default class Star extends React.Component{
     }
 
 }
+
+//call toggleUpvote
+// prop upvoted -- if star has already been upvoted

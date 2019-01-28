@@ -32,6 +32,12 @@ body {
     cursor: default;
 }
 
+.helper{
+    font-size: 20px;
+    font-family: Arvo;
+    font-weight: 100;
+}
+
 #root {
     height: 100%;
     width: 100%
@@ -117,6 +123,8 @@ body {
     position:fixed;
     background-color: transparent;
     color: rgb(238, 212, 243);
+    z-index: 10;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .nav-item{
@@ -124,6 +132,7 @@ body {
     right: 0;
     float: right;
     color: rgb(177, 201, 245);
+    
 }
 
 .tester{
@@ -158,4 +167,9 @@ body {
 .timeline-p{
     background-image: url('../components/public/background3.png');
     background-size: 100vw 100vh;
+}
+
+.heart{
+    bottom: 5px;
+    right: 5px;
 }

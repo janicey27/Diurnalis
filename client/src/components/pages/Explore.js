@@ -9,7 +9,8 @@ export default class Explore extends React.Component{
         super(props);
 
         this.state = {
-            stars: []
+            stars: [],
+            helper: true
         };
     }
 
@@ -18,13 +19,26 @@ export default class Explore extends React.Component{
         this.initializeSocket();
     }
 
+    changeHelper = () => {
+        this.setState({
+            helper: false,
+        });
+    }
+
     render() {
+        let helper = this.state.helper ? (
+            <div className = "helper">
+                Click on a star to explore other people's responses!
+            </div>
+        ) : (null)
+        
         console.log("Message to toggle: " + this.props.exploreResponses[0].content);
         console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
             <div className = "sky" id="sky">
                 <div className = "background-q">
                     {this.props.todayQuestion}
+                    {helper}
                 </div>
                 {/*
                 <div>

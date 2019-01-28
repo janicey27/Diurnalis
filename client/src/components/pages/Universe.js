@@ -17,7 +17,8 @@ export default class Universe extends React.Component {
             responded: false,
             dataRendered: 0,
             dataToRender: 2, // past responses, explore responses
-            responded: false
+            responded: false,
+            helper: true,
         }
     }
 
@@ -36,6 +37,12 @@ export default class Universe extends React.Component {
         })
     }
 
+    exploreHelper() {
+        this.setState({
+            helper: false
+        })
+    }
+
     /*initialScroll = () => {
         var today = this.refs.today;
         today.scrollIntoView();
@@ -43,15 +50,18 @@ export default class Universe extends React.Component {
 
     render() {
 
-        var timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
-        var explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
+        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
+        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
+
+        
 
         if (this.state.dataRendered >= this.state.dataToRender) {
             return (
                 
                 <div className = "universe"> 
                     
-                    <div className = "page explore" id="explore">
+                    <div className = "page explore" id="explore" >
+                        
                         <Explore
                             day={this.props.day}
                             month={this.props.month} 
@@ -59,6 +69,8 @@ export default class Universe extends React.Component {
                             userInfo={this.props.userInfo}
                             todayQuestion={this.props.todayQuestion}
                             exploreResponses={this.state.exploreResponses}
+                            helper={this.state.helper}
+                            exploreHelper={this.exploreHelper}
                         />
                         {timeline}
                     </div>
