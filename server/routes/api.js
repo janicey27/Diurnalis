@@ -175,7 +175,7 @@ router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        const parent = req.body.parent;
+        const parent = Response.findOne({ _id: req.body.parent }, function(err, res) { return res; });
         let i, upvoted = false;
         for (i=0; i<parent.upvoteUsers; i++) {
             if (parent.upvoteUsers[i] === req.user._id) {
