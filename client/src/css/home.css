@@ -11,7 +11,7 @@ html {
 }
 
 ::selection
-{ background: rgb(255, 255, 255, 0.2); }
+{ background: rgb(255, 255, 255, 0.3); }
 
 body {
     font-family: 'Arvo', serif;
@@ -200,22 +200,43 @@ h4 {
 }
 
 .explore-btn{
-    position: relative;
-    top: 5vh; 
-    left: 90vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 10px;
+    /* padding: 10px; */
     scroll-behavior: smooth;
     z-index: 5;
-    text-shadow: 1px 1px 2px black;
-    
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
+    color:  rgb(255,255,255,0.4);
+    transition: 80ms;
+}
+
+.explore-btn:hover{
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+    color:  rgb(255,255,255,0.7);
+    text-decoration: none;
+    transition: 100ms;
 }
 
 .timeline-btn{
     position: absolute;
-    top: 90vh; 
-    left: 90vw;
+    left: 50%;
+    bottom: 10px;
+    transform: translate(-50%);
+    /* padding: 10px; */
     scroll-behavior: smooth;
     z-index: 5;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
+    color:  rgb(255,255,255,0.4);
+}
+
+
+.timeline-btn:hover{
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+    color:  rgb(255,255,255,0.7);
+    text-decoration: none;
+    transition: 100ms;
 }
 
 .question-container{
@@ -249,6 +270,10 @@ h4 {
     transition: ease-out 400ms;
     /* transition: 0.1s; */
     /* box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3); */
+}
+
+.daily-response::selection{
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .daily-response:focus{

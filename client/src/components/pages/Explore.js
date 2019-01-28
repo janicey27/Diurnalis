@@ -32,7 +32,7 @@ export default class Explore extends React.Component{
     render() {
         let helper = this.state.helper ? (
             <div className = "helper">
-                Click on a star to explore other people's responses!
+                Click on a star to explore others' responses to today's question!
             </div>
         ) : (null)
         

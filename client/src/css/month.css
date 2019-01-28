@@ -23,6 +23,7 @@ div.label::selection {
 div.image {
     height: calc(100vw / 15);
     cursor: pointer;
+    transition: 200ms ease-out;
 }
 
 div.image:hover {
@@ -37,7 +38,7 @@ div.image:hover {
 
 div.jan {
     content: url("../components/public/month_splat.png");
-    transition: 200ms ease-out;
+    
     
     
 }

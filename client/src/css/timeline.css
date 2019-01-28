@@ -156,7 +156,7 @@ li.inactive::after {
     width: calc(100vw * .4);
     height: calc(100vh * 0.4);
     background-color: rgba(255, 255, 255, 0.4);
-    padding: 20px;
+    padding: 30px;
     white-space: pre-line;
     display: inline-block;
     border-radius: 5px;
