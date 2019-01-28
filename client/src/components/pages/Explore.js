@@ -117,6 +117,30 @@ export default class Explore extends React.Component{
             }
         });
 
+        this.socket.on("edit", (response) => {
+            console.log("edit received via socket");
+            let i, star;
+            for (i=0; i<this.state.starArr.length; i++) {
+                star = this.state.starArr[i];
+                if (star.props.responseID === response._id) {
+                    const newStar = React.cloneElement(
+                        star,
+                        {
+                            username: response.creatorUsername,
+                            content: response.content
+                        }
+                    );
+                    console.log("edited star: " + newStar.props.upvotes);
+                    this.state.starArr[i] = newStar;
+                    if (this.renderState) {
+                        this.rerender();
+                    }
+                    console.log("received from socket: " + this.state.stars[i].props.content);
+                    break;
+                }
+            }
+        });
+
         this.socket.on("upvote", (response) => {
             console.log("upvote received via socket");
             let i, star;
@@ -130,7 +154,7 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes+1,20)+25)+'px'
                         }
                     );
-                    console.log("new star: " + newStar.props.upvotes);
+                    console.log("upvoted star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
@@ -154,7 +178,7 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes-1,20)+25)+'px'
                         }
                     );
-                    console.log("new star: " + newStar.props.upvotes);
+                    console.log("downvoted star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
@@ -188,9 +212,8 @@ export default class Explore extends React.Component{
         this.setState({
             stars: starArr
         });
-        response = Response.findOne({ _id: responseID }, function(err, response) { return response; });
         const body = {
-            parent: response,
+            parent: responseID,
             remove: remove
         };
         fetch('/api/upvote', {
