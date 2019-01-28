@@ -2,21 +2,54 @@ import React from "react";
 import "../../css/home.css";
 import "../../css/app.css";
 
-export default class Star extends React.Component{
+export default class StarContent extends React.Component{
     constructor(props){
         super(props);
+        
+        this.state = {
+            thisvote: false,
+        }
+    }
+    
+    starClick = (event) => {
+        let box = document.getElementById("heartbutton");
+        if (event.target !== box){
+            this.props.handleClick();
+        }
+    }
+
+    handleUpvote = () => {
+        this.setState(prevState=> ({
+            thisvote: !prevState.thisvote
+        }));
+        
+        this.props.toggleUpvote();
     }
 
     render(){
-        let heart = <img className = "heart"></img>
+        let heart = this.state.thisvote ? (<div className = "heart2" id = "heartbutton" onClick={this.handleUpvote}></div>) : 
+            (<div className = "heart1" id = "heartbutton" onClick={this.handleUpvote}></div>)
+
         return(
-            <div className = "page">
-                <div className = "starbox">
-                    {this.props.content}
-                    <div className = "heart-box">
-                        {heart}
+            <div className = "page" onClick={event => this.starClick(event)}>
+                <div className = "starbox" id = "starbox">
+                    <div className = "top-bar">
+                        <div className = "user-icon"> 
+                            Username
+                        </div>
+                        <div className = "heart-icon">
+                            {//<div className = "heart1" onClick={this.props.toggleUpvovte}></div>
+                            }
+                            {heart}
+                            <div className = "count">###</div>
+                        </div>
                     </div>
+                    <div className = "star-content">
+                        {this.props.content}
+                    </div>
+                    
                 </div>
+                
             </div>
         )
     }

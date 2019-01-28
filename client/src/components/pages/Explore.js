@@ -25,7 +25,7 @@ export default class Explore extends React.Component{
 
     changeHelper = () => {
         this.setState({
-            helper: !this.state.helper,
+            helper: false,
         });
     }
 
@@ -39,7 +39,7 @@ export default class Explore extends React.Component{
         //console.log("Message to toggle: " + this.props.exploreResponses[0].content);
         //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
-            <div className = "sky" id="sky">
+            <div className = "sky" id="sky" onClick={this.changeHelper}>
                 <div className = "background-q">
                     {this.props.todayQuestion}
                     {helper}
