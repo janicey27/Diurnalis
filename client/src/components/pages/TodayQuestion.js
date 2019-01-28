@@ -9,7 +9,7 @@ export default class TodayQuestion extends React.Component {
         
         this.state = {
             value: '', /* what you already submitted today*/
-            privacy: this.props.userInfo.defaultPrivacy, /* your settings for this post*/
+            privacy: "public", /* your settings for this post*/
             submitted: false,
             responded: false,
         }
@@ -94,26 +94,26 @@ export default class TodayQuestion extends React.Component {
         let button;
         let form;
 
-        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" id="daily-response" onChange={this.handlePrivacy}>
-                        <option value = "private" >Private</option> 
-                        <option value = "anonymous" >Anonymous</option>
+        let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
                         <option value = "public" >Public</option>
+                        <option value = "anonymous" >Anonymous</option>
+                        <option value = "private" >Private</option> 
                     </select>)
         
         if (responded) {
             if (submitted) {
-                button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit</button>;
+                button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
                 form = <div>{this.state.value}</div>;
             } else {
                 button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
                 form = <form onSubmit={this.handleSubmit}>
-                        <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                        <textarea className="daily-response" id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                         </form>;
             }
         } else {
             button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
             form = <form onSubmit={this.handleSubmit}>
-                    <input id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
+                    <textarea className="daily-response" id="daily-response" type="text" placeholder="Your Response" value={this.state.value} onChange={this.handleChange}/>
                     </form>;
         }
 
@@ -141,9 +141,7 @@ export default class TodayQuestion extends React.Component {
                     <div className="question">
                         {this.props.todayQuestion}
                     </div>
-                    <div>
-                    _________________________
-                    </div>
+                    
                 </div>
                 <div className="bigbox">
                     <div className="question-group">

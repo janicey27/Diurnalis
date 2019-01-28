@@ -2,6 +2,8 @@ import React from 'react';
 import "../../css/timeline.css";
 import Month from "../modules/Month.js"
 import Monthline from "../modules/Monthline"
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 class Timeline extends React.Component {
 
@@ -51,53 +53,62 @@ class Timeline extends React.Component {
         this.state.responseArray = responsesArr;
     }
 
-    render(){
+    render() {
         return (
-            <div className='page-container'>
+            <div className='page-container col-centered'>
+            <div className="col-centered">
+            
                 <div className="monthline">
                     <Monthline selectedMonth={this.state.month} monthLength={this.state.monthLength} questionArray={this.state.questionArray} responseArray={this.state.responseArray}/>
+                
                 </div>
-
+                
                 <div className="month-bar"> 
+                <div className="row"></div>
+                   <div className="col-sm-12 col-centered">
                         <div className="row no-gutters">
-                        <div className="col-sm"  onClick={() => this.handleClick(1, 31)}>
+                        <div className="col-sm"  onClick={() => this.handleClick(1, 32)}>
                         <Month thisMonth="jan"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(2, 29)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(2, 30)}>
                         <Month  thisMonth="feb"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(3, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(3, 32)}>
                         <Month  thisMonth="mar"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(4, 30)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(4, 31)}>
                         <Month  thisMonth="apr"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(5, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(5, 32)}>
                         <Month  thisMonth="may"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(6, 30)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(6, 31)}>
                         <Month  thisMonth="jun"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(7, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(7, 32)}>
                         <Month  thisMonth="jul"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(8, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(8, 32)}>
                         <Month  thisMonth="aug"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(9, 30)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(9, 31)}>
                         <Month  thisMonth="sep"/> 
                         </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(10, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(10, 32)}>
                         <Month  thisMonth="oct"/>
                          </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(11, 30)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(11, 31)}>
                         <Month  thisMonth="nov"/> 
                          </div>
-                        <div className="col-sm"  onClick={(e) => this.handleClick(12, 31)}>
+                        <div className="col-sm"  onClick={(e) => this.handleClick(12, 32)}>
                         <Month  thisMonth="dec"/> 
                         </div>
                     </div>
                 </div>
+                </div>
+                
+            
+            </div>
             </div>
         )
     }

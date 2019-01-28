@@ -1,23 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Give+You+Glory');
+@import url('https://fonts.googleapis.com/css?family=Special+Elite');
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
+
+
+
 html {
     height: 100%;
+    width: 100%;
 }
 
 body {
     margin: 0;
     height: 100%;
+    width: 100%;
     /* background-image: url('../components/public/paper.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
     
 }
 
+.background-q{
+    color: white;
+    top: 45vh;
+    position: relative;
+    text-align: center;
+    font-size: 50px;
+    opacity: 0.15;
+    font-family: 'Berkshire Swash', cursive;
+    text-shadow: 0 0 5px;
+    cursor: default;
+}
+
+.helper{
+    font-size: 20px;
+    font-family: Arvo;
+    font-weight: 100;
+}
+
 #root {
     height: 100%;
+    width: 100%
 }
 
 .center {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     text-align: center;
@@ -29,35 +57,38 @@ body {
 }
 
 .box {
-    width: 500px;
-    border: 25px solid black;
+    width: 60vw;
+    height: 40vh;
+    /* border: 25px solid black; */
     padding: 25px;
-    margin: 25px;
-    background-color: black;
-    filter: alpha(opacity=30);
+    background-color: rgba(255, 255, 255, 0.8);
+    /* filter: alpha(opacity=30);
     filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
-    -moz-opacity: 0.30;
+    -moz-opacity: 0.30; */
     opacity: 0.3;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
+    
 
 }
 
+
+
 .starbox {
-    width: 75vw;
+    width: 30vw;
     min-width: 300px;
-    height: 60vh;
-    border: 25px solid black;
+    height: 20vh;
     padding: 25px;
     margin: 25px;
-    background-color: rgb(255, 239, 239);
-    filter: alpha(opacity=30);
-    filter: progid: DXImageTransform.Microsoft.Alpha(opacity=30);
-    -moz-opacity: 0.30;
-    opacity: 0.3;
+    background-color: rgba(45, 33, 66, 0.4);
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     text-align: center;
+    color: white;
+    text-shadow: 0 0 5px white;
+    border-radius: 10px;
 
 
 }
@@ -71,6 +102,9 @@ body {
     height: 100vh;
     width: 100vw;
     scroll-snap-align: start;
+    scroll-snap-coordinate: 0% 0%;
+    scroll-snap-stop: always;
+    position: relative;
 }
 
 
@@ -90,6 +124,8 @@ body {
     position:fixed;
     background-color: transparent;
     color: rgb(238, 212, 243);
+    z-index: 10;
+    text-shadow: 2px 2px 2px #000000;
 }
 
 .nav-item{
@@ -97,6 +133,7 @@ body {
     right: 0;
     float: right;
     color: rgb(177, 201, 245);
+    
 }
 
 .tester{
@@ -104,22 +141,78 @@ body {
     top: 10vh;
 }
 
-.background-q{
-    color: white;
-    top: 20vh;
-    position: relative;
-    text-align: center;
-    font-size: 30px;
-    opacity: 0.3;
-}
-
 .universe{
-    background-image: url('../components/public/watercolor.png');
     /* background-size: 50px 100px; */
     z-index: 1;
     background-size: 100vw calc(100vh * 3);
-    scroll-snap-type: mandatory;
     scroll-snap-type: y mandatory;
     scroll-snap-points-y: repeat(100vh);
     overflow: scroll;
+    height: 100vh;
+}
+
+.universe::-webkit-scrollbar{
+    display:none;
+}
+
+.explore{
+    background-image: url('../components/public/background1.png');
+    background-size: 100vw 100vh;
+}
+
+.today{
+    background-image: url('../components/public/background2_fix.png');
+    background-size: 100vw 100vh;
+}
+
+.timeline-p{
+    background-image: url('../components/public/background3.png');
+    background-size: 100vw 100vh;
+}
+
+.heart{
+    bottom: 5px;
+    right: 5px;
+}
+
+/* react transitions */
+
+.fade-enter {
+   animation: keyframes-fade-enter 0.4s ease-out
+}
+ 
+@keyframes keyframes-fade-enter {
+   0% {
+       opacity: 0.01;
+   }
+   100% {
+       opacity: 1;
+       /* transition: opacity 500ms ease-in; */
+   }
+}
+ 
+.fade-leave {
+   opacity: 1;
+}
+ 
+.fade-leave.fade-leave-active {
+   opacity: 0.01;
+   transition: opacity 300ms ease-in;
+}
+
+.text-enter {
+   animation:  keyframes-text-enter 0.4s ease-out
+}
+ 
+@keyframes keyframes-text-enter {
+   0% {
+       /* opacity: 0.01 !important; */
+       color: rgb(0,0,0,0.01);
+
+   }
+   100% {
+       /* opacity: 0.01 !important; */
+       /* transition: opacity 500ms ease-in; */
+       color: rgb(5,5,5,0.6);
+   }
 }

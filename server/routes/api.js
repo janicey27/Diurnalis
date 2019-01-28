@@ -28,9 +28,16 @@ router.get('/whoami', function(req, res) {
     }
 });
 
-// TODO fix
 router.get('/questions', function(req, res) {
     fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
+        if (err) {
+            res.send(JSON.stringify({
+                "day": 0,
+                "month": 0,
+                "content": "Is this a strange question?"
+            }));
+            return;
+        }
         data = JSON.parse(data);
         res.send(JSON.stringify(data));
     });
@@ -42,8 +49,6 @@ router.get('/responses', function(req, res) {
     if (req.query.day) filters.day = parseInt(req.query.day);
     if (req.query.month) filters.month = parseInt(req.query.month);
     if (req.query.year) filters.year = parseInt(req.query.year);
-
-    const count = req.count; // TODO some sort of random pull? so we don't get too many
 
     if (req.query.me === 'true') {
         if (req.isAuthenticated()) {
@@ -64,7 +69,10 @@ router.get('/responses', function(req, res) {
             Response.find(filters, function(err, anonResponses) {
                 let i;
                 for (i=0; i<anonResponses.length; i++) {
-                    anonResponses[i].username = "anonymous"; // uncertain if this works
+                    anonResponses[i] = React.cloneElement(
+                        anonResponses[i],
+                        { username: "anonymous" }
+                    ); // uncertain if this works
                     // console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
@@ -78,15 +86,18 @@ router.get('/responses', function(req, res) {
 // api POST endpoints
 
 router.post('/user', function(req, res) {
-    const updatedUser = {};
-
-    if (req.body.name) updatedUser.name = req.body.name;
-    if (req.body.username) updatedUser.username = req.body.username;
-    if (req.body.timeZone) updatedUser.timeZone = parseInt(req.body.timeZone);
-    if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
-
-    User.findOneAndUpdate({ _id: req.user._id }, updatedUser, function(err, user) {
-        res.send({});
+    User.findOne({ username: req.body.username }, function(err, user) {
+        if (!user || (user._id === req.user._id)) {
+            const updatedUser = {};
+            if (req.body.name) updatedUser.name = req.body.name;
+            if (req.body.username) updatedUser.username = req.body.username;
+            if (req.body.privacy) updatedUser.defaultPrivacy = req.body.privacy;
+            User.findOneAndUpdate({ _id: req.user._id }, updatedUser, function(err, user) {
+                res.send(true);
+            });
+        } else {
+            res.send(false);
+        }
     });
 });
 
@@ -114,7 +125,8 @@ router.post(
                         year            : responseYear,
                         content         : req.body.content,
                         privacy         : req.body.privacy,
-                        upvotes         : 0
+                        upvotes         : 0,
+                        upvoteUsers     : [],
                     });
                     newResponse.save(function(err, newResponse) {
                         switch (newResponse.privacy) {
@@ -163,17 +175,52 @@ router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        Response.findOneAndUpdate(
-            { _id: req.body.parent._id },
-            { upvotes: req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1)},
-            function(err, response) {
-                const editedResponse = response;
-                editedResponse.upvotes = req.body.parent.upvotes + ((req.body.remove === 'true') ? -1 : 1);
-                const io = req.app.get('socketio');
-                io.emit("upvote", editedResponse);
+        const parent = req.body.parent;
+        let i, upvoted = false;
+        for (i=0; i<parent.upvoteUsers; i++) {
+            if (parent.upvoteUsers[i] === req.user._id) {
+                upvoted = true;
+                break;
             }
-        );
-        res.send(editedResponse);
+        }
+        if (upvoted && req.body.remove) {
+            const userList = parent.upvoteUsers;
+            userList.splice(i, 1);
+            Response.findOneAndUpdate(
+                { _id: parent._id },
+                {
+                    upvotes: parent.upvotes - 1,
+                    upvoteUsers: userList
+                },
+                function(err, response) {
+                    const editedResponse = response;
+                    editedResponse.upvotes = parent.upvotes - 1;
+                    editedResponse.upvoteUsers = userList;
+                    const io = req.app.get('socketio');
+                    io.emit("downvote", editedResponse);
+                    res.send(editedResponse);
+                }
+            );
+        } else if (!upvoted && !req.body.remove) {
+            Response.findOneAndUpdate(
+                { _id: parent._id },
+                {
+                    upvotes: parent.upvotes + 1,
+                    upvoteUsers: parent.upvoteUsers.concat(req.user._id)
+                },
+                function(err, response) {
+                    const editedResponse = response;
+                    const io = req.app.get('socketio');
+                    editedResponse.upvotes = parent.upvotes + 1;
+                    editedResponse.upvoteUsers = parent.upvoteUsers.concat(req.user._id);
+                    io.emit("upvote", editedResponse);
+                    res.send(editedResponse);
+                }
+            );
+        } else {
+            res.send(parent);
+        }
+        console.log("is this working");
     }
 );
 

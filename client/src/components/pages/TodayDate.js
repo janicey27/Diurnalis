@@ -10,14 +10,36 @@ export default class TodayDate extends React.Component{
         const todayDate = month + ' ' + this.props.day;
 
         this.state = {
+            
             date: todayDate
         };
     }
 
+    // componentDidUpdate(prevProps) {
+    //     // 
+    //     if (this.props.day != prevProps.day) { //switching days
+    //         // console.log("component did Update");
+    //         // console.log(this.props.selectedDay);
+    //         // this.updateEntry(this.props.selectedDay);
+    //         // console.log(this.props.dayIndex)
+    //         this.setState((prevState, props) => ({day: props.day}));
+    //         console.log("okkkk");
+        
+    //     }
+    //     else if (this.props.month !=prevProps.month) { //switching months
+ 
+    //         this.setState((prevState, props) => ({month: monthArr[this.props.month - 1]}));
+    //         console.log("okk");
+      
+    //       }
+    // }
+
     render() {
         return (
             <div>
-                {this.state.date}
+                <h4>
+                    {this.state.date}
+                </h4>
             </div>
         );
     }
