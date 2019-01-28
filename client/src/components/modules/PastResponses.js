@@ -17,7 +17,7 @@ class Root extends React.Component {
         
         <div>
             {Array.from(Array(this.props.responses.length).keys()).map(y => (
-               <div>  {this.props.responses[y][0]}:  {this.props.responses[y][1]} </div>
+               <div>  <b>{this.props.responses[y][0]}</b> |    {this.props.responses[y][1]} </div>
             ))} 
 
         </div>
