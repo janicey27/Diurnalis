@@ -36,6 +36,8 @@ body {
     font-size: 20px;
     font-family: Arvo;
     font-weight: 100;
+    position: relative;
+    transition: ease-out 300ms;
 }
 
 #root {
@@ -88,10 +90,15 @@ body {
 }
 
 
+.startbox:active:after{
+    transition: transform ease-out 400ms;
+}
+
+
 .user-icon{
     float: left;
     color: rgb(156, 156, 156);
-    text-shadow: 0px 0px 1px white;
+    text-shadow: 0px 0px 0px rgb(228, 228, 228);
 }
 
 .heart1{
@@ -133,6 +140,9 @@ body {
 
 .count{
     display: inline-block;
+    color: rgb(156, 156, 156);
+    text-shadow: 0px 0px 0px rgb(228, 228, 228);
+    margin: 0px 10px;
 }
 
 .heart-icon{
@@ -230,10 +240,6 @@ body {
     background-size: 100vw 100vh;
 }
 
-.heart{
-    bottom: 5px;
-    right: 5px;
-}
 
 /* react transitions */
 

@@ -186,7 +186,7 @@ h4 {
 }
 
 .star{
-    position:relative;
+    position:absolute;
     background-image: url('../components/public/star_inactive.png');
     height: 30px;
     width: 30px;
