@@ -7,7 +7,7 @@ export default class StarContent extends React.Component{
         super(props);
         
         this.state = {
-            thisvote: false,
+            thisvote: this.props.upvoted,
         }
     }
     
@@ -35,13 +35,13 @@ export default class StarContent extends React.Component{
                 <div className = "starbox" id = "starbox">
                     <div className = "top-bar">
                         <div className = "user-icon"> 
-                            Username
+                            {this.props.username}
                         </div>
                         <div className = "heart-icon">
                             {//<div className = "heart1" onClick={this.props.toggleUpvovte}></div>
                             }
                             {heart}
-                            <div className = "count">###</div>
+                            <div className = "count">{this.props.upvotes}</div>
                         </div>
                     </div>
                     <div className = "star-content">

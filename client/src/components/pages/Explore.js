@@ -34,7 +34,7 @@ export default class Explore extends React.Component{
             <div className = "helper">
                 Click on a star to explore others' responses to today's question!
             </div>
-        ) : (null)
+        ) : (<div className = "helper"><div className = "helper"></div></div>)
         
         //console.log("Message to toggle: " + this.props.exploreResponses[0].content);
         //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
