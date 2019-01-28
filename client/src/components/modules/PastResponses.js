@@ -1,4 +1,6 @@
 import React from "react";
+import  "../../css/timeline.css";
+
 
 class Root extends React.Component {
 

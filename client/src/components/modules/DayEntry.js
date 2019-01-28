@@ -112,14 +112,14 @@ class Root extends React.Component {
     }
     else {
       return (
-        <div>
+        <div className="text-container">
           
 
           <h4>{this.state.thisMonth} {this.state.dayIndex+1} </h4>
         
           <h2>{questionComponent}</h2>
   
-          <div>{responseComponent}</div>
+          <div className="responses-cont">{responseComponent}</div>
           
           
         </div>
