@@ -84,7 +84,7 @@ h4 {
   .bigbox{
     width: 60vw;
     min-width: 300px;
-    height: 45vh;
+    height: 50vh;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
@@ -124,7 +124,12 @@ h4 {
 }
 
 .today-response{
-    height:70%
+    height:40%;
+    text-align: center;
+} 
+
+.todaytip{
+    position: relative;
 }
 
 .response{
@@ -141,7 +146,7 @@ h4 {
 .question-group{
     position: relative;
     height: 80%;
-    top: 30px;
+    top: 1px;
     overflow-y: auto;
 }
 
@@ -305,7 +310,7 @@ h4 {
 }
 
 .daily-response{
-    width: 90%;
+    width: 97%;
     height: 80%;
     word-wrap: break-word;
     background-color:rgb(255, 255, 255, 0.2);
@@ -336,10 +341,20 @@ h4 {
 }
 
 form {
-    height: 23vh;
+    height: 13vh;
     width: 52vw;
 }
 
 form:focus{
     border: none;
+}
+
+.old-responses{
+    overflow:auto;
+    height: 20vh;
+    text-align: center;
+    position: relative;
+    top: 15px;
+    color: rgb(97, 97, 97);
+    
 }
