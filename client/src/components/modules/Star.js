@@ -2,6 +2,8 @@ import React from "react";
 import "../../css/home.css";
 import "../../css/app.css";
 import StarContent from "./StarContent"
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 export default class Star extends React.Component{
     constructor(props){
@@ -17,7 +19,17 @@ export default class Star extends React.Component{
 
     render(){
         // create StarContent panel, to be shown when star is clicked
-        const starEntry = this.state.showEntry ? (<StarContent username={this.props.username} content={this.props.content} handleClick={this.handleClick2} toggleUpvote={this.toggleUpvote} upvoted={this.upvoted} upvotes={this.upvotes} />) : (null);
+        const starEntry = this.state.showEntry ? (
+            <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear={true}
+            transitionLeave={true}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionAppearTimeout={200}>
+        <StarContent username={this.props.username} content={this.props.content} handleClick={this.handleClick2} toggleUpvote={this.toggleUpvote} upvoted={this.upvoted} upvotes={this.upvotes} />
+        </ReactCSSTransitionGroup>
+        ) : (null);
 
         return(
             <div className="star-container">

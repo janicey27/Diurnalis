@@ -37,10 +37,7 @@ export default class StarContent extends React.Component{
         const username = (!this.props.username ? "anonymous" : this.props.username);
         return (
             <div className = "page" onClick={event => this.starClick(event)} style={{zIndex: 9}}>
-                <ReactCSSTransitionGroup
-                    transitionName="appear"
-                    transitionAppear={true}
-                    transitionAppearTimeout={500}>
+                
                     
                     <div className = "starbox" id = "starbox">
                         <div className = "top-bar">
@@ -56,7 +53,6 @@ export default class StarContent extends React.Component{
                             {this.props.content}
                         </div>
                     </div>
-                </ReactCSSTransitionGroup>
             </div>
         )
     }

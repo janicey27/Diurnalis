@@ -5,6 +5,9 @@ import TodayQuestion from "./TodayQuestion";
 import Explore from "./Explore";
 import NavBar from "../modules/NavBar";
 import AnimateOnChange from 'react-animate-on-change';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+
 
 export default class Universe extends React.Component {
     constructor(props){
@@ -57,7 +60,16 @@ export default class Universe extends React.Component {
                         todayQuestion={this.props.todayQuestion}
                         exploreResponses={this.props.exploreResponses}
                     />
-                    {timeline}
+                    <ReactCSSTransitionGroup
+                        transitionName="fade"
+            transitionAppear={true}
+            transitionLeave={true}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionAppearTimeout={200}>
+            {timeline}
+            </ReactCSSTransitionGroup>
+            
                 </div>
                 <div className = "page today" id="today" ref={this.todayRef}>
                     {explore}
