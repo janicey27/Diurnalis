@@ -35,8 +35,8 @@ export default class Star extends React.Component{
                 <div className="star"
                     style={{top: this.props.top, left: this.props.left,
                         height: this.props.size, width: this.props.size}}
-                    onClick={this.handleClick1}> 
-                </div>
+                    onClick={this.handleClick1}
+                />
                 {starEntry}
             </div>
         )
