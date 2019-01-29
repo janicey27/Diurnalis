@@ -13,7 +13,6 @@ passport.use(new GoogleStrategy({
     googleid: profile.id
   }, function(err, user) {
     if (err) return done(err);
-
     if (!user) {
       let username = profile.name.givenName + ((profile.name.familyName.length > 0) ? profile.name.familyName[0] : "");
       username = findValidUsername(username, 1);

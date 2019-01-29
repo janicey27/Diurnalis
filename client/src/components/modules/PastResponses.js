@@ -3,21 +3,22 @@ import  "../../css/timeline.css";
 
 class Root extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return (
-        
-        <div>
-            {Array.from(Array(this.props.responses.length).keys()).map(y => (
-               <div key={y}> <b>{this.props.responses[y][0]}</b> &nbsp; | &nbsp; {this.props.responses[y][1]} </div>
-            ))} 
+    render() {
+        const responseArr = this.props.responses;
+        responseArr.sort((a, b) => (b[0] - a[0]));
+        return (
+            <div>
+                {Array.from(Array(responseArr.length).keys()).map(y => (
+                  <div key={y}> <b>{responseArr[y][0]}</b> &nbsp; | &nbsp; {responseArr[y][1]} </div>
+                ))}
+            </div>
+        )
+    }
 
-        </div>
-    )
-  }
 }
 
 export default Root;
