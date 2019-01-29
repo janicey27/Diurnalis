@@ -62,6 +62,7 @@ export default class Universe extends React.Component {
                         todayQuestion={this.props.todayQuestion}
                         exploreResponses={this.props.exploreResponses}
                         socket={this.socket}
+                        ref={(page) => {this.explorePage = page}}
                     />
                     {timeline}
                 </div>
@@ -78,7 +79,7 @@ export default class Universe extends React.Component {
                             userInfo={this.props.userInfo}
                             todayQuestion={this.props.todayQuestion}
                             myTodayResponses={this.props.myTodayResponses}
-                            addMyResponse={this.props.addMyResponse}
+                            addMyResponse={this.addMyResponse}
                             updateResponded={this.updateResponded}
                         />
                     </AnimateOnChange>
@@ -97,6 +98,13 @@ export default class Universe extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    addMyResponse = (response) => {
+        if (response.privacy === "private") {
+            this.explorePage.removeResponse(response._id);
+        }
+        this.props.addMyResponse(response);
     }
 
     updateResponded = () => {

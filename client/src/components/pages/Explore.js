@@ -92,6 +92,20 @@ export default class Explore extends React.Component{
         }
     }
 
+    removeResponse = (responseID) => {
+        let i, star;
+        for (i=0; i<this.state.starArr.length; i++) {
+            star = this.state.starArr[i];
+            if (star.props.responseID === responseID) {
+                this.state.starArr.splice(i, 1);
+                if (this.renderState) {
+                    this.rerender();
+                }
+                break;
+            }
+        }
+    }
+
     // initialize socket listeners
     initializeSocket = () => {
         // client-side handling post sent through socket
@@ -155,22 +169,6 @@ export default class Explore extends React.Component{
             );
             if (this.renderState) {
                 this.rerender();
-            }
-        });
-
-        // client-side handling a change to private setting
-        this.props.socket.on("private", (res) => {
-            console.log("Private!");
-            let i, star;
-            for (i=0; i<this.state.starArr.length; i++) {
-                star = this.state.starArr[i];
-                if (star.props.responseID === res.responseID) {
-                    this.state.starArr.splice(i, 1);
-                    if (this.renderState) {
-                        this.rerender();
-                    }
-                    break;
-                }
             }
         });
 
