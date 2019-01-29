@@ -16,6 +16,7 @@ html {
 body {
     font-family: 'Arvo', serif;
     color: rgb(5,5,5,0.6);
+    font-size: 1.2vw;
     /* font-weight: 300; */
     
 }
@@ -23,13 +24,13 @@ body {
 h2 {
     font-family: 'Berkshire Swash', cursive;
     color: rgb(5,5,5,0.6);
-    font-size: calc(100vh * 100vw / 5);
+    font-size: 3vw;
 }
 
 h4 {
     font-family: 'Berkshire Swash', cursive;
     color: rgb(5,5,5,0.6);
-    font-size: calc(100vh * 100vw / 8);
+    font-size: 2.5vw;
 }
 
 .home {
@@ -145,9 +146,9 @@ h4 {
 
 .question-group{
     position: relative;
-    height: 80%;
+    height: 83%;
     top: 1px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .button-group{
@@ -306,7 +307,7 @@ h4 {
 }
 
 .question{
-    font-size: 40px;
+    font-size: 4vw;
 }
 
 .daily-response{
@@ -350,7 +351,8 @@ form:focus{
 }
 
 .old-responses{
-    overflow:auto;
+    overflow-y:auto;
+    overflow-x: hidden;
     height: 20vh;
     text-align: center;
     position: relative;
