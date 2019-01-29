@@ -44,7 +44,9 @@ h4 {
 .title{
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
-    font-size: 9.9vw;
+    font-size: 9.5vw;
+    height: 14vw;
+    /* padding:10px; */
     color: rgba(0, 0, 0);
     text-shadow: 0px 0px 5px rgb(255, 255, 255);
     /* margin: 4vh 0 0 0 ; */
@@ -175,7 +177,7 @@ h4 {
 }
 
 .login{
-    background-color: rgba(185, 185, 185, 0.3);
+    background-color: rgba(133, 133, 133, 0.219);
     border-color: rgb(39, 132, 219);
     border: 10px;
     border-radius: 5px;

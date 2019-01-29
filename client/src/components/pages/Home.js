@@ -24,7 +24,8 @@ export default class Home extends React.Component {
         return (
             <div className="center box"> 
                 <div className="title">Diurnalis</div>
-                <div className="subtitle typewriter">A universe of sharing and reflecting on daily thoughts</div>
+                <div className="subtitle">/di.urˈnaː.lis/ <i>noun.</i> a journal, a diary. </div>
+                <div className="subtitle typewriter">a universe of sharing and reflecting on daily thoughts.</div>
                 <div className="enter">
                     <button className="login" onClick={this.login}>Sign in with Google</button>
                 </div>
