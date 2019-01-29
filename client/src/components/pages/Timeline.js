@@ -3,7 +3,6 @@ import io from "socket.io-client";
 import "../../css/timeline.css";
 import Month from "../modules/Month.js"
 import Monthline from "../modules/Monthline"
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 class Timeline extends React.Component {
