@@ -19,12 +19,14 @@ export default class TodayQuestion extends React.Component {
         this.updateResponded();
     }
     
+    // sets state variable for response privacy
     handlePrivacy = (event) => {
         this.setState({
             privacy: event.target.value
         })
     }
 
+    // manages state variable for response content
     handleChange = (event) => {
         this.setState({
             value: event.target.value 
@@ -54,6 +56,7 @@ export default class TodayQuestion extends React.Component {
         })
     };
 
+    // control response submitting
     handleSubmit = (event) => {
         event.preventDefault();
         this.postResponse();
@@ -64,12 +67,14 @@ export default class TodayQuestion extends React.Component {
         
     }
 
+    // enter edit mode
     handleEdit = (event) => {
         this.setState({
             submitted: false,
         });
     }
 
+    // check to see if question has been answered already by current user
     updateResponded = () => {
         if (this.props.myTodayResponses.length > 0){
             if (this.props.myTodayResponses[0].year === this.props.year){
@@ -91,12 +96,14 @@ export default class TodayQuestion extends React.Component {
         let form;
         let reminder;
 
+        // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
                         <option value = "public" >Public</option>
                         <option value = "anonymous" >Anonymous</option>
                         <option value = "private" >Private</option> 
                     </select>)
         
+        // create submit/edit button
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;

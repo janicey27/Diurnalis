@@ -13,6 +13,7 @@ export default class StarContent extends React.Component{
         }
     }
     
+    // handles the event of a click anywhere outside of the upvote button
     starClick = (event) => {
         let box = document.getElementById("heartbutton");
         if (event.target !== box){
@@ -20,6 +21,7 @@ export default class StarContent extends React.Component{
         }
     }
 
+    // handles an upvote button click
     handleUpvote = () => {
         this.setState(prevState=> ({
             thisvote: !prevState.thisvote,
@@ -29,6 +31,7 @@ export default class StarContent extends React.Component{
     }
 
     render(){
+        // create upvote button
         let heart = this.state.thisvote ? (<div className = "heart2" id = "heartbutton" onClick={this.handleUpvote}></div>) : 
             (<div className = "heart1" id = "heartbutton" onClick={this.handleUpvote}></div>)
 
@@ -57,12 +60,8 @@ export default class StarContent extends React.Component{
                         
                     </div>
                 </ReactCSSTransitionGroup>
-                
             </div>
         )
     }
 
 }
-
-//call toggleUpvote
-// prop upvoted -- if star has already been upvoted

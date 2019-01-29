@@ -13,7 +13,7 @@ export default class Explore extends React.Component{
         this.state = {
             stars: [],
             starArr: [],
-            helper: true // a "tutorial" of sorts
+            helper: true // guides user around
         };
 
         this.renderState = true; // determines whether the explore page is currently in a state to allow new stars to appear
@@ -32,6 +32,7 @@ export default class Explore extends React.Component{
     }
 
     render() {
+        // generates help text
         let helper = this.state.helper ? (
             <ReactCSSTransitionGroup
                     transitionName="helperhint"
@@ -80,7 +81,7 @@ export default class Explore extends React.Component{
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(<Star
                 key={i}
-                top={String(Math.random()*80)+'vh'}
+                top={String(Math.random()*88+2)+'vh'}
                 left={String(Math.random()*96+1)+'vw'}
                 size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
                 responseID={response._id}
@@ -104,7 +105,7 @@ export default class Explore extends React.Component{
             this.state.starArr.push(
                 <Star 
                     key={this.state.stars.length}
-                    top={String(Math.random()*80)+'vh'} 
+                    top={String(Math.random()*88+2)+'vh'} 
                     left={String(Math.random()*96+1)+'vw'}
                     size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
                     responseID={response._id}

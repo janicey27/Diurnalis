@@ -23,6 +23,11 @@ class App extends React.Component {
             todayQuestion: "",
             dataRendered: 0,
             dataToRender: 2, // date, user, questions
+
+            /* TESTING */
+            myResponses: [],
+            myTodayResponses: [],
+            exploreResponses: []
         }
     }
 
