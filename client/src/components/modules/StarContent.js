@@ -47,7 +47,7 @@ export default class StarContent extends React.Component{
                     <div className = "starbox" id = "starbox">
                         <div className = "top-bar">
                             <div className = "user-icon"> 
-                                {this.props.username}
+                                written by <b>{this.props.username}</b>
                             </div>
                             <div className = "heart-icon">
                                 {heart}

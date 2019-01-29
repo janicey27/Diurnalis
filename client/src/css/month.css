@@ -5,7 +5,7 @@ div.label {
     text-transform: capitalize;
     font-family: 'Berkshire Swash', cursive;
     /* font-weight: bold; */
-    font-size: 24px;
+    font-size: 2vw;
     position: absolute;
     z-index: 5;
     top: 50%; 
