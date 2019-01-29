@@ -106,7 +106,10 @@ export default class TodayQuestion extends React.Component {
                         <option value="private">Private</option>
                     </select>)
         
-        let tooltip = ((this.props.myTodayResponses.length > 1) || (this.props.myTodayResponses[0].year !== this.props.year))? (<b>On this day in years past, you said: </b>) : (null)
+        let tooltip = ((this.props.myTodayResponses.length === 0) ||
+                ((this.props.myTodayResponses.length === 1) && (this.props.myTodayResponses[0].year === this.props.year)))
+            ? (null)
+            : (<b>On this day in years past, you said: </b>);
         
         // create submit/edit button
         if (responded) {
