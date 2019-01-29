@@ -137,11 +137,11 @@ export default class TodayQuestion extends React.Component {
             // display all past responses for today's question
             if (responded){
                 oldRes = Array.from(Array(this.props.myTodayResponses.length-1).keys()).map(i => (
-                    <div key={this.props.myTodayResponses[i+1].year} className="response"><b>{this.props.myTodayResponses[i+1].year}</b> | &nbsp; {this.props.myTodayResponses[i+1].content}</div>
+                    <div key={this.props.myTodayResponses[i+1].year} className="response"><b>{this.props.myTodayResponses[i+1].year}</b>  &nbsp;| &nbsp; {this.props.myTodayResponses[i+1].content}</div>
                 ))
             } else {
                 oldRes = Array.from(Array(this.props.myTodayResponses.length).keys()).map(i => (
-                <div key={this.props.myTodayResponses[i].year} className="response"><b>{this.props.myTodayResponses[i].year}</b> | &nbsp; {this.props.myTodayResponses[i].content}</div>
+                <div key={this.props.myTodayResponses[i].year} className="response"><b>{this.props.myTodayResponses[i].year}</b>  &nbsp;| &nbsp; {this.props.myTodayResponses[i].content}</div>
                 ))
             }
         }
