@@ -196,6 +196,9 @@ h4 {
     transition: 300ms ease-out;
 }
 
+.login:focus{
+    outline: none;
+}
 
 .privacy{
     background-color: rgb(255,255,255,0.3);
