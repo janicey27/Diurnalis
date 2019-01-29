@@ -87,7 +87,7 @@ body {
     color: white;
     text-shadow: 0 0 5px white;
     border-radius: 10px;
-    overflow: scroll;
+    /* overflow: auto; */
 }
 
 
@@ -220,7 +220,7 @@ body {
     background-size: 100vw calc(100vh * 3);
     scroll-snap-type: y mandatory;
     scroll-snap-points-y: repeat(100vh);
-    overflow: scroll;
+    overflow: auto;
     height: 100vh;
 }
 
@@ -287,12 +287,13 @@ body {
 }
 
 .appear-appear{
-    opacity: 0.01
+    opacity: 0.01;
+    transition: 0.3s;
 }
 
 .appear-appear.appear-appear-active{
     opacity: 1;
-    transition: opacity 0.3s ease-in;
+    transition: opacity 0.4s ease-out;
 }
 
 .helperhint-leave{
