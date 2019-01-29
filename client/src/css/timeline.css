@@ -181,6 +181,6 @@ li.inactive::after {
 
  }
 
-.responses-cont::-webkit-scrollbar-track {
+/* .responses-cont::-webkit-scrollbar-track {
     background: rgba(164, 23, 23, 0.592); 
-  }
+  } */
