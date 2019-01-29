@@ -14,7 +14,10 @@ body {
     /* background-image: url('../components/public/paper.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
-    
+}
+
+a {
+
 }
 
 .background-q{
@@ -190,12 +193,32 @@ body {
     right: 20px;
 }
 
-.nav-item{
+.nav-item {
     /* top: 5px;  */
     /* right: 0; */
     /* float: right; */
     color: rgb(255,255,255,0.6);
-    
+}
+
+.nav-item:visited {
+    /* top: 5px;  */
+    /* right: 0; */
+    /* float: right; */
+    color: rgb(255,255,255,0.6);
+}
+
+.nav-item:hover {
+    /* top: 5px;  */
+    /* right: 0; */
+    /* float: right; */
+    color: rgb(255,255,255,0.8);
+}
+
+.nav-item:active {
+    /* top: 5px;  */
+    /* right: 0; */
+    /* float: right; */
+    color: rgb(220,220,220,0.8);
 }
 
 .tester{

@@ -246,15 +246,20 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.4);
+    color:  rgb(255,255,255,0.5);
     transition: 80ms;
 }
 
 .explore-btn:hover{
+    cursor: pointer;
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
     color:  rgb(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
+}
+
+.explore-btn:active{
+    color:  rgb(220,220,220,0.7);
 }
 
 .timeline-btn{
@@ -266,15 +271,19 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.4);
+    color:  rgb(255,255,255,0.5);
 }
 
-
 .timeline-btn:hover{
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
     color:  rgb(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
+}
+
+.timeline-btn:active{
+    color:  rgb(220,220,220,0.7);
 }
 
 .question-container{

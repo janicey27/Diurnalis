@@ -24,10 +24,22 @@ export default class Universe extends React.Component {
         this.todayRef.current.scrollIntoView();
     }
 
+    timelineScroll = () => {
+        document.querySelector('#timeline').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
+
+    exploreScroll = () => {
+        document.querySelector('#explore').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    }
+
     render() {
         // create nav buttons
-        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">View your past entries <i className="fas fa-arrow-down"></i>        </a>):(null)
-        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore public responses <i className="fas fa-arrow-up"></i>        </a>):(null)
+        let timeline = this.state.responded ? (<div className="timeline-btn" onClick={this.timelineScroll}>View your past entries <i className="fas fa-arrow-down"></i></div>):(null)
+        let explore = this.state.responded ? (<div className="explore-btn" onClick={this.exploreScroll}>Explore public responses <i className="fas fa-arrow-up"></i></div>):(null)
         let reminder = this.state.responded? (<div className="reminder">
         Come back tomorrow to answer the next question and unlock the next piece of your timeline! </div>) : (null)
 
