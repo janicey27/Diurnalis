@@ -103,12 +103,12 @@ export default class TodayQuestion extends React.Component {
                     </select>)
         
         let tooltip = ((this.props.myTodayResponses.length > 1) || (this.props.myTodayResponses[0].year !== this.props.year))? (<b>On this day in years past, you said: </b>) : (null)
-        let todaytip = this.state.responded ? (<b className = "todaytip">Today, you responded: </b>):(null)
+        
         // create submit/edit button
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
-                form = <div>{this.state.value}</div>;
+                form = <div><b>{this.props.myTodayResponses[0].year}</b> | &nbsp; {this.state.value}</div>;
                 
                 
             } else {
@@ -155,7 +155,6 @@ export default class TodayQuestion extends React.Component {
                 <div className="bigbox">
                     <div className="question-group">
                         <div className="response today-response">
-                            {todaytip}
                             {form} {/* display new response form */}
                         </div>
                         
