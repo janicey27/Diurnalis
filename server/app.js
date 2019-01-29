@@ -5,6 +5,7 @@ const session = require('express-session');
 const express = require('express');
 const path = require('path');
 const socketio = require('socket.io');
+const favicon = require('serve-favicon');
 require('dotenv').config();
 
 // local dependencies
@@ -14,7 +15,7 @@ const api = require('./routes/api');
 
 // initialize express app
 const app = express();
-const publicPath = path.resolve(__dirname, '..', 'client/dist');
+const publicPath = path.resolve(__dirname, '..', 'client', 'dist');
 
 // set POST request body parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,6 +31,9 @@ app.use(session({
 // hook up passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// favicon
+app.use(favicon(path.join(__dirname, '..', 'client', 'src', 'components', 'public', 'favicon.ico')));
 
 // authentication routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));

@@ -9,19 +9,19 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            day: 29,
+            day: 1,
             month: 1,
             year: 2019,
             userInfo: {},
             questions: [],
             todayQuestion: "",
             dataRendered: 0,
-            dataToRender: 2, // date, user, questions
+            dataToRender: 2 // date, user, questions
         }
     }
 
     componentDidMount() {
-        //this.getDate();
+        this.getDate();
         this.getUser();
         this.getAllQuestions();
     }
@@ -43,7 +43,7 @@ class App extends React.Component {
                 />
             );
         } else {
-            return null; // TODO make this a loading screen or something
+            return null;
         }
     }
 

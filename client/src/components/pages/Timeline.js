@@ -91,7 +91,12 @@ class Timeline extends React.Component {
             <div className='page-container col-centered'>
             
                 <div className="monthline">
-                    <Monthline selectedMonth={this.state.month} monthLength={this.state.monthLength} questionArray={this.state.questionArray} responseArray={this.state.responseArray}/>
+                    <Monthline
+                        selectedMonth={this.state.month}
+                        monthLength={this.state.monthLength}
+                        questionArray={this.state.questionArray}
+                        responseArray={this.state.responseArray}
+                    />
                 </div>
                 
                 <div className="month-bar"> 

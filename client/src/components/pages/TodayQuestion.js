@@ -109,13 +109,13 @@ export default class TodayQuestion extends React.Component {
         let tooltip = ((this.props.myTodayResponses.length === 0) ||
                 ((this.props.myTodayResponses.length === 1) && (this.props.myTodayResponses[0].year === this.props.year)))
             ? (null)
-            : (<b>On this day in years past, you said: </b>);
+            : (<b>On this day in years past, here's is what you wrote: </b>);
         
         // create submit/edit button
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
-                form = <div><b>{this.props.year}</b> | &nbsp; {this.state.value}</div>;
+                form = <div><b>{this.props.year}</b> &nbsp; | &nbsp; {this.state.value}</div>;
                 
                 
             } else {
@@ -137,11 +137,11 @@ export default class TodayQuestion extends React.Component {
             // display all past responses for today's question
             if (responded){
                 oldRes = Array.from(Array(this.props.myTodayResponses.length-1).keys()).map(i => (
-                    <div key={this.props.myTodayResponses[i+1].year} className="response"><b>{this.props.myTodayResponses[i+1].year}</b> | &nbsp; {this.props.myTodayResponses[i+1].content}</div>
+                    <div key={this.props.myTodayResponses[i+1].year} className="response"><b>{this.props.myTodayResponses[i+1].year}</b>  &nbsp;| &nbsp; {this.props.myTodayResponses[i+1].content}</div>
                 ))
             } else {
                 oldRes = Array.from(Array(this.props.myTodayResponses.length).keys()).map(i => (
-                <div key={this.props.myTodayResponses[i].year} className="response"><b>{this.props.myTodayResponses[i].year}</b> | &nbsp; {this.props.myTodayResponses[i].content}</div>
+                <div key={this.props.myTodayResponses[i].year} className="response"><b>{this.props.myTodayResponses[i].year}</b>  &nbsp;| &nbsp; {this.props.myTodayResponses[i].content}</div>
                 ))
             }
         }

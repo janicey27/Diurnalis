@@ -31,6 +31,11 @@ div.image:hover {
     transition: 100ms ease-out;
 }
 
+/* div.active {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6));
+
+} */
+
 /* div.jan:hover {
     filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
     transition: 100ms ease-out;

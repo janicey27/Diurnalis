@@ -24,13 +24,14 @@ body {
 h2 {
     font-family: 'Berkshire Swash', cursive;
     color: rgb(5,5,5,0.6);
-    font-size: 3vw;
+    font-size: 2.7vw;
 }
 
 h4 {
     font-family: 'Berkshire Swash', cursive;
     color: rgb(5,5,5,0.6);
-    font-size: 2.5vw;
+    font-size: 2.3vw;
+    margin: 0;
 }
 
 .home {
@@ -43,10 +44,13 @@ h4 {
 .title{
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
-    font-size: 70px;
+    font-size: 9vw;
+    height: 14vw;
+    /* padding:10px; */
     color: rgba(0, 0, 0);
     text-shadow: 0px 0px 5px rgb(255, 255, 255);
-    margin: 4vh 0 0 0 ;
+    /* margin: 4vh 0 0 0 ; */
+    /* position: absolute; */
 
 }
 
@@ -55,9 +59,7 @@ h4 {
     color: rgba(0, 0, 0);
 }
 
-.enter{
-    margin: 5px;
-}
+
 
 .typewriter {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -165,21 +167,40 @@ h4 {
     margin: 5px;
     padding: 10px;
     transition: 300ms;
-    color: rgb(5,5,5,0.6);
+    color: rgba(29, 26, 26, 0.6);
+}
+
+.enter{
+    /* position: absolute;
+    bottom: 25px; */
+    /* text-align: center; */
+    transform: translate(0,30px);
 }
 
 .login{
-    background-color: rgb(174, 206, 255);
+    background-color: rgba(133, 133, 133, 0.219);
+    border-color: rgb(39, 132, 219);
     border: 10px;
     border-radius: 5px;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
-    cursor: pointer;
+    transition: 300ms ease-in;
+    color: rgba(5, 5, 5, 0.871);
+    box-shadow: 0px 0px 5px rgb(255,255,255,0.8);
+    /* position: absolute; */
+    /* margin: 0 auto; */
+    /* left: 50%; */
 }
 
 .login:hover{
-    background-color: rgb(215, 231, 255);
+    background-color: rgb(255,255,255,1);
+    box-shadow: 0px 0px 15px rgb(255,255,255,1);
     cursor: pointer;
+    transition: 300ms ease-out;
+}
+
+.login:focus{
+    outline: none;
 }
 
 .privacy{
@@ -195,7 +216,7 @@ h4 {
 
 .privacy:hover{
     background-color: rgb(255,255,255,0.5);
-    
+    /* box-shadow */
     cursor: pointer;
 }
 
@@ -301,13 +322,13 @@ h4 {
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
-    text-shadow: 0px 0px 5px rgb(255, 255, 255);
+    text-shadow: 0px 0px 1px rgb(255, 255, 255);
     
 
 }
 
 .question{
-    font-size: 4vw;
+    font-size: 3.5vw;
 }
 
 .daily-response{

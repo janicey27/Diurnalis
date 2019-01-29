@@ -133,7 +133,7 @@ export default class Explore extends React.Component{
 
         // client-side handling of edit sent through socket
         this.props.socket.on("edit", (response) => {
-            let i, star;
+            let i, star, found=false;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
                 if (star.props.responseID === response._id) {
@@ -145,30 +145,33 @@ export default class Explore extends React.Component{
                         }
                     );
                     this.state.starArr[i] = newStar;
+                    found = true;
                     if (this.renderState) {
                         this.rerender();
                     }
                     break;
                 }
             }
-            const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
-            this.state.starArr.push(
-                <Star 
-                    key={this.state.stars.length}
-                    top={String(Math.random()*88+2)+'vh'} 
-                    left={String(Math.random()*96+1)+'vw'}
-                    size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
-                    responseID={response._id}
-                    username={response.creatorUsername}
-                    content={response.content}
-                    upvotes={response.upvotes}
-                    upvoted={upvoted}
-                    toggleUpvote={this.toggleUpvote}
-                    toggleRenderState={(newState) => this.toggleRenderState(newState)}
-                />
-            );
-            if (this.renderState) {
-                this.rerender();
+            if (!found) {
+                const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+                this.state.starArr.push(
+                    <Star 
+                        key={this.state.stars.length}
+                        top={String(Math.random()*88+2)+'vh'} 
+                        left={String(Math.random()*96+1)+'vw'}
+                        size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
+                        responseID={response._id}
+                        username={response.creatorUsername}
+                        content={response.content}
+                        upvotes={response.upvotes}
+                        upvoted={upvoted}
+                        toggleUpvote={this.toggleUpvote}
+                        toggleRenderState={(newState) => this.toggleRenderState(newState)}
+                    />
+                );
+                if (this.renderState) {
+                    this.rerender();
+                }
             }
         });
 

@@ -8,8 +8,6 @@ import NavBar from "../modules/NavBar";
 import AnimateOnChange from 'react-animate-on-change';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
-
 export default class Universe extends React.Component {
     constructor(props){
         super(props)

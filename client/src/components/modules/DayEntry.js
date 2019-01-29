@@ -27,6 +27,7 @@ class Root extends React.Component {
       if (questions[i][0] === this.state.selectedMonth && questions[i][1] === this.state.dayIndex+1) {
         this.setState({todaysQuestion: questions[i][2]})
         gotQuestion = true;
+        break;
       }
     }
     if (gotQuestion == false) {
@@ -39,15 +40,15 @@ class Root extends React.Component {
     const responses = this.props.responseArray;
     var i;
     var hasResponse = false;
+    const joined = [];
     for (i=0; i<responses.length; i++) {
       if (responses[i][0] === this.state.selectedMonth && responses[i][1] === this.state.dayIndex+1) {
-        var joined = this.state.todaysResponses
         joined.push(responses[i][2])
-        this.setState({todaysResponses: joined})
         hasResponse = true;
         this.setState({hasResponses: true})
       }
     }
+    this.setState({todaysResponses: joined})
     if (hasResponse == false) {
       this.setState({hasResponses: false})
     }
