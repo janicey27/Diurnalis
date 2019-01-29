@@ -27,7 +27,7 @@ export default class Star extends React.Component{
     }
 
     render(){
-        var starEntry = this.state.showEntry ? (<StarContent content={this.props.content} handleClick={this.handleClick2} toggleUpvote={this.props.toggleUpvote} upvoted={this.props.upvoted} upvotes={this.props.upvotes} />) : (null);
+        var starEntry = this.state.showEntry ? (<StarContent username={this.props.username} content={this.props.content} handleClick={this.handleClick2} toggleUpvote={this.props.toggleUpvote} upvoted={this.props.upvoted} upvotes={this.props.upvotes} />) : (null);
 
         return(
             <div>

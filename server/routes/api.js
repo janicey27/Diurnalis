@@ -175,52 +175,55 @@ router.post(
     '/upvote',
     connect.ensureLoggedIn(),
     function(req, res) {
-        const parent = Response.findOne({ _id: req.body.parent }, function(err, res) { return res; });
-        let i, upvoted = false;
-        for (i=0; i<parent.upvoteUsers; i++) {
-            if (parent.upvoteUsers[i] === req.user._id) {
-                upvoted = true;
-                break;
+        Response.findOne({
+            _id: req.body.parent
+        }, function(err, parent) {
+            let i, upvoted = false;
+            for (i=0; i<parent.upvoteUsers.length; i++) {
+                if (parent.upvoteUsers[i] === req.user._id) {
+                    upvoted = true;
+                    break;
+                }
             }
-        }
-        if (upvoted && req.body.remove) {
-            const userList = parent.upvoteUsers;
-            userList.splice(i, 1);
-            Response.findOneAndUpdate(
-                { _id: parent._id },
-                {
-                    upvotes: parent.upvotes - 1,
-                    upvoteUsers: userList
-                },
-                function(err, response) {
-                    const editedResponse = response;
-                    editedResponse.upvotes = parent.upvotes - 1;
-                    editedResponse.upvoteUsers = userList;
-                    const io = req.app.get('socketio');
-                    io.emit("downvote", editedResponse);
-                    res.send(editedResponse);
-                }
-            );
-        } else if (!upvoted && !req.body.remove) {
-            Response.findOneAndUpdate(
-                { _id: parent._id },
-                {
-                    upvotes: parent.upvotes + 1,
-                    upvoteUsers: parent.upvoteUsers.concat(req.user._id)
-                },
-                function(err, response) {
-                    const editedResponse = response;
-                    const io = req.app.get('socketio');
-                    editedResponse.upvotes = parent.upvotes + 1;
-                    editedResponse.upvoteUsers = parent.upvoteUsers.concat(req.user._id);
-                    io.emit("upvote", editedResponse);
-                    res.send(editedResponse);
-                }
-            );
-        } else {
-            res.send(parent);
-        }
-        console.log("is this working");
+            if (upvoted && req.body.remove) {
+                const userList = parent.upvoteUsers;
+                userList.splice(i, 1);
+                Response.findOneAndUpdate(
+                    { _id: parent._id },
+                    {
+                        upvotes: userList.length,
+                        upvoteUsers: userList
+                    },
+                    function(err, response) {
+                        const editedResponse = response;
+                        editedResponse.upvotes = userList.length;
+                        editedResponse.upvoteUsers = userList;
+                        const io = req.app.get('socketio');
+                        io.emit("downvote", editedResponse);
+                        res.send(editedResponse);
+                    }
+                );
+            } else if (!upvoted && !req.body.remove) {
+                Response.findOneAndUpdate(
+                    { _id: parent._id },
+                    {
+                        upvotes: parent.upvoteUsers.length + 1,
+                        upvoteUsers: parent.upvoteUsers.concat(req.user._id)
+                    },
+                    function(err, response) {
+                        const editedResponse = response;
+                        const io = req.app.get('socketio');
+                        editedResponse.upvotes = parent.upvoteUsers.length + 1;
+                        editedResponse.upvoteUsers = parent.upvoteUsers.concat(req.user._id);
+                        io.emit("upvote", editedResponse);
+                        res.send(editedResponse);
+                    }
+                );
+            } else {
+                res.send(parent);
+            }
+            console.log("is this working");
+        });
     }
 );
 

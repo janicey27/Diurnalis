@@ -82,6 +82,8 @@ export default class Explore extends React.Component{
         let i, response, upvoted;
         for (i = 0; i < this.props.exploreResponses.length; i++) {
             response = this.props.exploreResponses[i];
+            console.log("upvote users");
+            console.log(response.upvoteUsers);
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(<Star
                 key={i}
@@ -94,7 +96,7 @@ export default class Explore extends React.Component{
                 upvotes={response.upvotes}
                 upvoted={upvoted}
                 toggleUpvote={() => this.toggleUpvote(response._id)}
-                toggleRenderState={this.toggleRenderState}
+                toggleRenderState={(newState) => this.toggleRenderState(newState)}
             />);
         }
         console.log(this.state.starArr);
@@ -117,8 +119,8 @@ export default class Explore extends React.Component{
                     content={response.content}
                     upvotes={response.upvotes}
                     upvoted={upvoted}
-                    toggleUpvote={this.toggleUpvote.bind(this, response._id)}
-                    toggleRenderState={this.toggleRenderState}
+                    toggleUpvote={() => this.toggleUpvote(response._id)}
+                    toggleRenderState={(newState) => this.toggleRenderState(newState)}
                 />
             );
             if (this.renderState) {
@@ -168,7 +170,7 @@ export default class Explore extends React.Component{
                     if (this.renderState) {
                         this.rerender();
                     }
-                    console.log("received from socket: " + this.state.stars[i].props.upvotes);
+                    console.log("received from socket: " + this.state.starArr[i].props.upvotes);
                     break;
                 }
             }
@@ -192,6 +194,7 @@ export default class Explore extends React.Component{
                     if (this.renderState) {
                         this.rerender();
                     }
+                    console.log("received from socket: " + this.state.starArr[i].props.upvotes);
                     break;
                 }
             }
@@ -200,15 +203,22 @@ export default class Explore extends React.Component{
 
     toggleUpvote = (responseID) => {
         console.log("Toggle upvote for: " + responseID);
-        const starArr = this.state.stars;
+        const starArr = this.state.starArr;
         let i, star, remove = false;
         for (i=0; i<starArr.length; i++) {
             star = starArr[i];
             if (star.props.responseID === responseID) {
                 remove = star.props.upvoted;
+                const newStar = React.cloneElement(
+                    star,
+                    { upvoted: !remove }
+                );
+                this.state.starArr[i] = newStar;
                 break;
             }
         }
+        console.log("toggle: " + remove);
+        /*
         const newStar = React.cloneElement(
             star,
             {
@@ -221,6 +231,8 @@ export default class Explore extends React.Component{
         this.setState({
             stars: starArr
         });
+        */
+        console.log("Hi!!");
         const body = {
             parent: responseID,
             remove: remove

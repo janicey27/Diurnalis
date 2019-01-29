@@ -9,6 +9,7 @@ export default class StarContent extends React.Component{
         
         this.state = {
             thisvote: this.props.upvoted,
+            upvotes: this.props.upvotes
         }
     }
     
@@ -21,9 +22,9 @@ export default class StarContent extends React.Component{
 
     handleUpvote = () => {
         this.setState(prevState=> ({
-            thisvote: !prevState.thisvote
+            thisvote: !prevState.thisvote,
+            upvotes: prevState.upvotes + (prevState.thisvote ? (prevState.upvotes > 0 ? -1 : 0) : 1)
         }));
-        
         this.props.toggleUpvote();
     }
 
@@ -31,7 +32,7 @@ export default class StarContent extends React.Component{
         let heart = this.state.thisvote ? (<div className = "heart2" id = "heartbutton" onClick={this.handleUpvote}></div>) : 
             (<div className = "heart1" id = "heartbutton" onClick={this.handleUpvote}></div>)
 
-        return(
+        return (
             <div className = "page" onClick={event => this.starClick(event)}>
                 <ReactCSSTransitionGroup
                     transitionName="appear"
@@ -46,10 +47,8 @@ export default class StarContent extends React.Component{
                                 {this.props.username}
                             </div>
                             <div className = "heart-icon">
-                                {//<div className = "heart1" onClick={this.props.toggleUpvovte}></div>
-                                }
                                 {heart}
-                                <div className = "count">{this.props.upvotes}</div>
+                                <div className = "count">{this.state.upvotes}</div>
                             </div>
                         </div>
                         <div className = "star-content">

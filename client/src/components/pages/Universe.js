@@ -35,8 +35,8 @@ export default class Universe extends React.Component {
 
     render() {
 
-        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">View your past entries <i class="fas fa-arrow-down"></i>        </a>):(null)
-        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore public responses <i class="fas fa-arrow-up"></i>        </a>):(null)
+        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">View your past entries <i className="fas fa-arrow-down"></i>        </a>):(null)
+        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore public responses <i className="fas fa-arrow-up"></i>        </a>):(null)
         let reminder = this.state.responded? (<div className="reminder">
         Come back tomorrow to answer the next question and unlock the next piece of your timeline! </div>) : (null)
 
