@@ -74,7 +74,7 @@ a {
     width: 40vw;
     min-width: 300px;
     height: 20vh;
-    padding: 25px;
+    padding: 15px;
     margin: 25px;
     background-color:rgba(148, 148, 148, 0.4); 
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.6);
@@ -100,19 +100,32 @@ a {
     transition: transform ease-out 400ms;
 }
 
-
-.user-icon{
-    float: left;
-    color: rgb(156, 156, 156);
-    text-shadow: 0px 0px 0px rgb(228, 228, 228);
+.top-bar {
+    /* height: 10px; */
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
 }
 
+.user-icon{
+    left: 2px;
+    color: rgb(240, 240, 240,.4);
+    text-shadow: 0px 0px 0px rgb(228, 228, 228);
+    position: absolute;
+    bottom: 4px;
+}
+.heart-icon{
+    position: absolute;
+    right: 12%;
+    bottom: 0.1px;
+}
 .heart1{
     background-image: url('../components/public/heart.png');
     height: 20px;
     width: 20px ;
     background-size: 20px 20px;
     display: inline-block;
+    
 }
 
 .heart1:hover{
@@ -147,10 +160,15 @@ a {
 }
 
 .count{
-    display: inline-block;
-    color: rgb(156, 156, 156);
+    /* display: inline-block; */
+    color: rgb(234, 234, 234,.4);
     text-shadow: 0px 0px 0px rgb(228, 228, 228);
-    margin: 0px 10px;
+    /* margin: 0px 10px; */
+    position: absolute;
+    /* transform: translate(0,3px); */
+    right: 8%;
+    bottom: 4px;
+    /* transition: 2s; */
 }
 
 .heart-icon{
