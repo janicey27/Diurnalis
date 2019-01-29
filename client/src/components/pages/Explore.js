@@ -45,7 +45,7 @@ export default class Explore extends React.Component{
                 Click on a star to explore others' responses to today's question!
                 </div>
             </ReactCSSTransitionGroup>
-        ) : (<div className = "helper"><div className = "helper"></div></div>)
+        ) : null;
         
         return (
             <div className = "sky" id="sky" onClick={this.changeHelper}>
@@ -83,7 +83,7 @@ export default class Explore extends React.Component{
                 key={i}
                 top={String(Math.random()*88+2)+'vh'}
                 left={String(Math.random()*96+1)+'vw'}
-                size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
+                size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
                 responseID={response._id}
                 username={response.creatorUsername}
                 content={response.content}
@@ -107,7 +107,7 @@ export default class Explore extends React.Component{
                     key={this.state.stars.length}
                     top={String(Math.random()*88+2)+'vh'} 
                     left={String(Math.random()*96+1)+'vw'}
-                    size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
+                    size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
                     responseID={response._id}
                     username={response.creatorUsername}
                     content={response.content}
@@ -154,7 +154,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: star.props.upvotes + 1,
-                            size: String(Math.min(star.props.upvotes+1,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes+1)*3,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;
@@ -176,7 +176,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: ((star.props.upvotes > 0) ? (star.props.upvotes - 1) : 0),
-                            size: String(Math.min(star.props.upvotes-1,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes-1)*3,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;

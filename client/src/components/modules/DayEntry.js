@@ -93,9 +93,9 @@ class Root extends React.Component {
 
   render() {
     // create components
-    var questionComponent = this.state.hasResponses ? (this.state.todaysQuestion) : ("This question is hidden.");
+    const questionComponent = this.state.hasResponses ? (this.state.todaysQuestion) : ("This question is hidden.");
     const today = this.state.dayIndex+1;
-    var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("Log in on " + this.state.thisMonth + " " + today + " to reveal this question and enter your response!");
+    const responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("Log in on " + this.state.thisMonth + " " + today + " to reveal this question and enter your response!");
     if (this.state.hasSelected == false) {
       return (
         <div className="selectText"><h2>Please select a month to view your past responses.</h2></div>
