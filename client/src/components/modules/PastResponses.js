@@ -7,12 +7,6 @@ class Root extends React.Component {
     super(props);
   }
 
-
-  componentDidMount() {
-      console.log(this.props.responses)
-      console.log(this.props.responses.length)
-  }
-
   render() {
     return (
         

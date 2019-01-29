@@ -156,7 +156,7 @@ li.inactive::after {
     display: inline-block;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
-    overflow: auto;
+    /* overflow: auto; */
     
  }
 

@@ -1,10 +1,14 @@
 import React from "react";
+import io from "socket.io-client";
 import "../../css/app.css";
 import Timeline from "./Timeline";
 import TodayQuestion from "./TodayQuestion";
 import Explore from "./Explore";
 import NavBar from "../modules/NavBar";
 import AnimateOnChange from 'react-animate-on-change';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+
 
 export default class Universe extends React.Component {
     constructor(props){
@@ -14,7 +18,11 @@ export default class Universe extends React.Component {
             responded: false
         }
 
+        // create reference for starting screen
         this.todayRef = React.createRef();
+
+        // initialize socket
+        this.socket = io();
     }
 
     componentDidMount() {
@@ -56,8 +64,19 @@ export default class Universe extends React.Component {
                         userInfo={this.props.userInfo}
                         todayQuestion={this.props.todayQuestion}
                         exploreResponses={this.props.exploreResponses}
+                        socket={this.socket}
+                        ref={(page) => {this.explorePage = page}}
                     />
-                    {timeline}
+                    <ReactCSSTransitionGroup
+                        transitionName="fade"
+            transitionAppear={true}
+            transitionLeave={true}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionAppearTimeout={200}>
+            {timeline}
+            </ReactCSSTransitionGroup>
+            
                 </div>
                 <div className = "page today" id="today" ref={this.todayRef}>
                     {explore}
@@ -72,7 +91,7 @@ export default class Universe extends React.Component {
                             userInfo={this.props.userInfo}
                             todayQuestion={this.props.todayQuestion}
                             myTodayResponses={this.props.myTodayResponses}
-                            addMyResponse={this.props.addMyResponse}
+                            addMyResponse={this.addMyResponse}
                             updateResponded={this.updateResponded}
                         />
                     </AnimateOnChange>
@@ -86,10 +105,18 @@ export default class Universe extends React.Component {
                         userInfo={this.props.userInfo}
                         questions={this.props.questions}
                         myResponses={this.props.myResponses}
+                        socket={this.socket}
                     />
                 </div>
             </div>
         )
+    }
+
+    addMyResponse = (response) => {
+        if (response.privacy === "private") {
+            this.explorePage.removeResponse(response._id);
+        }
+        this.props.addMyResponse(response);
     }
 
     updateResponded = () => {

@@ -1,5 +1,4 @@
 import React from "react";
-import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
 import Star from "../modules/Star";
@@ -67,7 +66,7 @@ export default class Explore extends React.Component{
     // rerender by setting "stars" equal to the changing "starArr"
     rerender = () => {
         this.setState({
-            stars: this.state.starArr
+            stars: this.state.starArr.slice(0)
         });
     }
 
@@ -93,12 +92,24 @@ export default class Explore extends React.Component{
         }
     }
 
-    initializeSocket = () => {
-        // initialize socket
-        this.socket = io();
+    removeResponse = (responseID) => {
+        let i, star;
+        for (i=0; i<this.state.starArr.length; i++) {
+            star = this.state.starArr[i];
+            if (star.props.responseID === responseID) {
+                this.state.starArr.splice(i, 1);
+                if (this.renderState) {
+                    this.rerender();
+                }
+                break;
+            }
+        }
+    }
 
+    // initialize socket listeners
+    initializeSocket = () => {
         // client-side handling post sent through socket
-        this.socket.on("post", (response) => {
+        this.props.socket.on("post", (response) => {
             const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(
                 <Star 
@@ -120,8 +131,8 @@ export default class Explore extends React.Component{
             }
         });
 
-        // client-side handling edit sent through socket
-        this.socket.on("edit", (response) => {
+        // client-side handling of edit sent through socket
+        this.props.socket.on("edit", (response) => {
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -135,17 +146,34 @@ export default class Explore extends React.Component{
                     );
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
-                        this.setState({
-                            stars: this.state.starArr
-                        })
+                        this.rerender();
                     }
                     break;
                 }
             }
+            const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+            this.state.starArr.push(
+                <Star 
+                    key={this.state.stars.length}
+                    top={String(Math.random()*88+2)+'vh'} 
+                    left={String(Math.random()*96+1)+'vw'}
+                    size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
+                    responseID={response._id}
+                    username={response.creatorUsername}
+                    content={response.content}
+                    upvotes={response.upvotes}
+                    upvoted={upvoted}
+                    toggleUpvote={this.toggleUpvote}
+                    toggleRenderState={(newState) => this.toggleRenderState(newState)}
+                />
+            );
+            if (this.renderState) {
+                this.rerender();
+            }
         });
 
-        // client-side handling upvote sent through socket
-        this.socket.on("upvote", (response) => {
+        // client-side handling of upvote sent through socket
+        this.props.socket.on("upvote", (response) => {
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -167,7 +195,7 @@ export default class Explore extends React.Component{
         });
 
         // client-side handling downvote sent through socket
-        this.socket.on("downvote", (response) => {
+        this.props.socket.on("downvote", (response) => {
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
