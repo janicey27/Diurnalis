@@ -151,7 +151,7 @@ export default class TodayQuestion extends React.Component {
                 </div>
                 <div className="bigbox">
                     <div className="question-group">
-                        <div className="response">
+                        <div className="response today-response">
                             {form}
                         </div>
                         {oldRes}
