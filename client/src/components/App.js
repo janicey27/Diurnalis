@@ -9,7 +9,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            day: 1,
+            day: 29,
             month: 1,
             year: 2019,
             userInfo: {},
@@ -21,7 +21,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.getDate();
+        //this.getDate();
         this.getUser();
         this.getAllQuestions();
     }
