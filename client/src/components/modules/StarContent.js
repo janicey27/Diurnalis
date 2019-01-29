@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 export default class StarContent extends React.Component{
     constructor(props){
         super(props);
-        
+
         this.state = {
             thisvote: this.props.upvoted,
             upvotes: this.props.upvotes
@@ -51,8 +51,8 @@ export default class StarContent extends React.Component{
                             </div>
                             <div className = "heart-icon">
                                 {heart}
-                                <div className = "count">{this.state.upvotes}</div>
                             </div>
+                                <div className = "count">{this.state.upvotes}</div>
                         </div>
                         <div className = "star-content">
                             {this.props.content}

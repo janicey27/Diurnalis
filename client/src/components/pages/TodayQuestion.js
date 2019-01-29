@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/home.css";
 import "../../css/app.css";
-import TodayDate from "./TodayDate";
+import TodayDate from "../modules/TodayDate";
 
 export default class TodayQuestion extends React.Component {
     constructor(props) {
@@ -94,7 +94,6 @@ export default class TodayQuestion extends React.Component {
         let oldRes;
         let button;
         let form;
-        let reminder;
 
         // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
@@ -142,19 +141,19 @@ export default class TodayQuestion extends React.Component {
             <div className = "today-question" id="today-question">
                 <div className = "question-container">
                     <div className="date">
-                        <TodayDate month = {this.props.month} day = {this.props.day}/>
+                        <TodayDate month = {this.props.month} day = {this.props.day}/> {/* display date */}
                     </div> 
                     <div className="question">
-                        {this.props.todayQuestion}
+                        {this.props.todayQuestion} {/* display question */}
                     </div>
                     
                 </div>
                 <div className="bigbox">
                     <div className="question-group">
                         <div className="response today-response">
-                            {form}
+                            {form} {/* display new response form */}
                         </div>
-                        {oldRes}
+                        {oldRes} {/* display old responses */}
                         <div></div>
                     </div>
                     <div className="button-group">
@@ -162,7 +161,6 @@ export default class TodayQuestion extends React.Component {
                         {button}
                     </div>
                 </div>
-                {reminder}
                 
             </div>
         )
