@@ -135,10 +135,6 @@ h4 {
     /* overflow: scroll; */
 }
 
-.reminder{
-    color: rgb(255,255,255,0.5)
-}
-
 .question-group{
     position: relative;
     height: 80%;
@@ -217,6 +213,7 @@ h4 {
     display: flex;
     flex-direction: column;
     top: 22vh;
+    color: rgb(255,255,255,0.65)
 }
 
 .star{

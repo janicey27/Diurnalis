@@ -94,7 +94,6 @@ export default class TodayQuestion extends React.Component {
         let oldRes;
         let button;
         let form;
-        let reminder;
 
         // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
@@ -162,7 +161,6 @@ export default class TodayQuestion extends React.Component {
                         {button}
                     </div>
                 </div>
-                {reminder}
                 
             </div>
         )

@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 export default class StarContent extends React.Component{
     constructor(props){
         super(props);
-        
+
         this.state = {
             thisvote: this.props.upvoted,
             upvotes: this.props.upvotes
