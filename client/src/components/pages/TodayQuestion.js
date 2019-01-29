@@ -112,7 +112,7 @@ export default class TodayQuestion extends React.Component {
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
-                form = <div><b>{this.props.year}</b> | &nbsp; {this.state.value}</div>;
+                form = <div><b>{this.props.year}</b> &nbsp; | &nbsp; {this.state.value}</div>;
                 
                 
             } else {
