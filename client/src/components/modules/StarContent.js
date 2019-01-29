@@ -37,22 +37,20 @@ export default class StarContent extends React.Component{
         const username = (!this.props.username ? "anonymous" : this.props.username);
         return (
             <div className = "page" onClick={event => this.starClick(event)} style={{zIndex: 9}}>
-                
-                    
-                    <div className = "starbox" id = "starbox">
-                        <div className = "top-bar">
-                            <div className = "user-icon"> 
-                                written by <b>{username}</b>
-                            </div>
-                            <div className = "heart-icon">
-                                {heart}
-                            </div>
-                                <div className = "count">{this.state.upvotes}</div>
+                <div className = "starbox" id = "starbox">
+                    <div className = "top-bar">
+                        <div className = "user-icon"> 
+                            written by <b>{username}</b>
                         </div>
-                        <div className = "star-content">
-                            {this.props.content}
+                        <div className = "heart-icon">
+                            {heart}
                         </div>
+                            <div className = "count">{this.state.upvotes}</div>
                     </div>
+                    <div className = "star-content">
+                        {this.props.content}
+                    </div>
+                </div>
             </div>
         )
     }

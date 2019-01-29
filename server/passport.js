@@ -17,11 +17,12 @@ passport.use(new GoogleStrategy({
     if (!user) {
       let username = profile.name.givenName + ((profile.name.familyName.length > 0) ? profile.name.familyName[0] : "");
       username = findValidUsername(username, 1);
+      console.log(username);
       const user = new User({
         name: profile.name.givenName,
-        username: username, // TODO set username upon first login
+        username: username,
         googleid: profile.id,
-        defaultPrivacy: "private" // TODO set upon first login
+        defaultPrivacy: "private"
       });
 
       user.save(function(err) {
@@ -36,12 +37,15 @@ passport.use(new GoogleStrategy({
 }));
 
 findValidUsername = (username, i) => {
+  console.log("Testing: " + i);
   const testUsername = username + i;
+  console.log("Test username: " + testUsername);
   User.findOne({ username: testUsername }, function(err, user) {
     if (err) return "no_username";
     if (!user) {
       return testUsername;
     }
+    console.log("Shouldn't reach here?");
     return findValidUsername(username, i+1);
   });
 }
