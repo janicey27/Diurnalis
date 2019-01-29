@@ -32,6 +32,8 @@ export default class Explore extends React.Component{
     }
 
     render() {
+        console.log("Rerendering!");
+        console.log(this.state.stars);
         // generates help text
         let helper = this.state.helper ? (
             <ReactCSSTransitionGroup
@@ -58,10 +60,9 @@ export default class Explore extends React.Component{
 
     // change render state
     toggleRenderState = (newState) => {
-        if (newState) {
+        this.renderState = newState;
+        if (this.renderState) {
             this.rerender();
-        } else {
-            this.renderState = false;
         }
     }
 
@@ -70,7 +71,6 @@ export default class Explore extends React.Component{
         this.setState({
             stars: this.state.starArr
         });
-        this.renderState = true;
     }
 
     // create array of Star elements from exploreResponses
@@ -101,7 +101,7 @@ export default class Explore extends React.Component{
 
         // client-side handling post sent through socket
         this.socket.on("post", (response) => {
-            upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+            const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(
                 <Star 
                     key={this.state.stars.length}

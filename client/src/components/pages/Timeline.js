@@ -61,9 +61,9 @@ class Timeline extends React.Component {
         // listen for post and add to response array
         this.socket.on("post", (response) => {
             if (response.creatorID === this.props.userInfo._id) {
-                this.setState({
-                    responseArray: responseArray.concat([[response.month, response.day, [response.year, response.content]]])
-                })
+                this.setState(prevState => ({
+                    responseArray: prevState.responseArray.concat([[response.month, response.day, [response.year, response.content]]])
+                }));
             }
         });
 
