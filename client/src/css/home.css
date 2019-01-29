@@ -123,9 +123,14 @@ h4 {
     
 }
 
-/* .today-response{
-    height:70%
-} */
+.today-response{
+    height:40%;
+    text-align: center;
+} 
+
+.todaytip{
+    position: relative;
+}
 
 .response{
     position: relative;
@@ -349,7 +354,7 @@ form:focus{
     height: 15vh;
     text-align: center;
     position: relative;
-    /* top: 10px; */
+    top: 10px;
     color: rgb(97, 97, 97);
     
 }

@@ -102,7 +102,8 @@ export default class TodayQuestion extends React.Component {
                         <option value = "private" >Private</option> 
                     </select>)
         
-        let tooltip = this.props.myTodayResponses.length === 0 ? (null) : <b>On this day in years past, you said: </b>
+        let tooltip = ((this.props.myTodayResponses.length > 1) || (this.props.myTodayResponses[0].year !== this.props.year))? (<b>On this day in years past, you said: </b>) : (null)
+        let todaytip = this.state.responded ? (<b className = "todaytip">Today, you responded: </b>):(null)
         // create submit/edit button
         if (responded) {
             if (submitted) {
@@ -154,6 +155,7 @@ export default class TodayQuestion extends React.Component {
                 <div className="bigbox">
                     <div className="question-group">
                         <div className="response today-response">
+                            {todaytip}
                             {form} {/* display new response form */}
                         </div>
                         
