@@ -123,9 +123,9 @@ h4 {
     
 }
 
-.today-response{
+/* .today-response{
     height:70%
-}
+} */
 
 .response{
     position: relative;
@@ -305,7 +305,7 @@ h4 {
 }
 
 .daily-response{
-    width: 90%;
+    width: 97%;
     height: 80%;
     word-wrap: break-word;
     background-color:rgb(255, 255, 255, 0.2);
@@ -336,10 +336,20 @@ h4 {
 }
 
 form {
-    height: 23vh;
+    height: 13vh;
     width: 52vw;
 }
 
 form:focus{
     border: none;
+}
+
+.old-responses{
+    overflow:auto;
+    height: 15vh;
+    text-align: center;
+    position: relative;
+    /* top: 10px; */
+    color: rgb(97, 97, 97);
+    
 }

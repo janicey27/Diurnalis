@@ -9,7 +9,7 @@ class NavBar extends Component {
     render() {
         return (
             <nav className="navbar">
-                <div className="navbar-brand">Journal</div>
+                <div className="navbar-brand">Diurnalis</div>
                 <div className="navbar-nav">
                         { this.props.userInfo === null ? (
                             <a className="nav-item nav-link" href="/auth/google">Login</a>
