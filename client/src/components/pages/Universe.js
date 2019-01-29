@@ -3,7 +3,8 @@ import "../../css/app.css";
 import Timeline from "./Timeline";
 import TodayQuestion from "./TodayQuestion";
 import Explore from "./Explore";
-import AnimateOnChange from 'react-animate-on-change'
+import NavBar from "../modules/NavBar";
+import AnimateOnChange from 'react-animate-on-change';
 
 export default class Universe extends React.Component {
     constructor(props){
@@ -46,6 +47,7 @@ export default class Universe extends React.Component {
         // create the three website components
         return (
             <div className = "universe">
+                <NavBar logout={this.props.logout} />
                 <div className = "page explore" id="explore">
                     <Explore
                         day={this.props.day}

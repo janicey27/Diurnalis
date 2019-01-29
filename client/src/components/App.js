@@ -1,8 +1,7 @@
 import React from "react";
 import "../css/app.css";
 import Route from "react-router-dom/es/Route";
-import Root from "./pages/Root"
-import NavBar from "./modules/NavBar";
+import Root from "./pages/Root";
 
 class App extends React.Component {
 
@@ -30,23 +29,18 @@ class App extends React.Component {
     render() {
         if (this.state.dataRendered >= this.state.dataToRender) { // will render when all data are loaded
             return (
-                <div>
-                    <NavBar
+                <Route exact path="/" render={(props) =>
+                    <Root
+                        {...props}
+                        day={this.state.day}
+                        month={this.state.month}
+                        year={this.state.year}
                         userInfo={this.state.userInfo}
+                        questions={this.state.questions}
+                        todayQuestion={this.state.todayQuestion}
                         logout={this.logout}
-                    />
-                    <Route exact path="/" render={(props) =>
-                            <Root
-                                {...props}
-                                day={this.state.day}
-                                month={this.state.month}
-                                year={this.state.year}
-                                userInfo={this.state.userInfo}
-                                questions={this.state.questions}
-                                todayQuestion={this.state.todayQuestion}
-                            />}
-                    />
-                </div>
+                    />}
+                />
             );
         } else {
             return null; // TODO make this a loading screen or something
