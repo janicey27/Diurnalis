@@ -2,7 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
-import Star from "./Star";
+import Star from "../modules/Star";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
