@@ -142,7 +142,7 @@ h4 {
     position: relative;
     height: 80%;
     top: 30px;
-    overflow: scroll;
+    overflow-y: hidden;
 }
 
 .button-group{

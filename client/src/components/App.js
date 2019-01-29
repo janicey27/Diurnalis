@@ -15,9 +15,9 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            day: 2,
+            day: 3,
             month: 1,
-            year: 2021,
+            year: 2018,
             userInfo: {},
             questions: [],
             todayQuestion: "",
