@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 // set up sessions
 app.use(session({
-  secret: 'session-secret',
+  secret: process.env.SESSION_SECRET,
   resave: 'false',
   saveUninitialized: 'true'
 }));
