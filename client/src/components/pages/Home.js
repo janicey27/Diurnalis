@@ -23,7 +23,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="center box"> 
-                <div className="title">Q&A for me</div>
+                <div className="title">Diurnalis</div>
                 <div className="subtitle typewriter">A universe of sharing and reflecting on daily thoughts</div>
                 <div className="enter">
                     <button className="login" onClick={this.login}>Login</button>

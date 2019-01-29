@@ -32,8 +32,6 @@ export default class Explore extends React.Component{
     }
 
     render() {
-        console.log("Rerendering!");
-        console.log(this.state.stars);
         // generates help text
         let helper = this.state.helper ? (
             <ReactCSSTransitionGroup
@@ -137,7 +135,9 @@ export default class Explore extends React.Component{
                     );
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
-                        this.rerender();
+                        this.setState({
+                            stars: this.state.starArr
+                        })
                     }
                     break;
                 }

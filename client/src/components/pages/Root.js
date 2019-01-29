@@ -23,7 +23,7 @@ class Root extends React.Component {
 
     render() {
         return (this.props.userInfo !== null
-            ? ((this.state.dataRendered >= this.state.dataToRender) ? <Universe {...this.props} myResponses={this.state.myResponses} myTodayResponses={this.state.myTodayResponses} exploreResponses={this.state.exploreResponses} addMyResponse={this.addMyResponse} /> : null)
+            ? ((this.state.dataRendered >= this.state.dataToRender) ? <Universe {...this.props} myResponses={this.state.myResponses} myTodayResponses={this.state.myTodayResponses} exploreResponses={this.state.exploreResponses} addMyResponse={this.addMyResponse} logout={this.props.logout} /> : null)
             : <Home {...this.props} />
         )
     }

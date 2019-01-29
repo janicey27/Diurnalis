@@ -241,11 +241,15 @@ div::-webkit-scrollbar-track {
     /* height: 20px; */
 }
 
+.navbar-brand {
+    color: rgba(150, 150, 190, 0.8);
+}
+
 .nav-item {
     /* top: 5px;  */
     /* right: 0; */
     /* float: right; */
-    color: rgba(70, 70, 70, 0.6);
+    color: rgba(150, 150, 190, 0.7);
     /* background-image: url("../components/public/logout.png");
     background-size: 100px 100px;
     padding: 10px; */
@@ -253,25 +257,18 @@ div::-webkit-scrollbar-track {
     /* backgound-repeat: none; */
 }
 
-.nav-item:visited {
-    /* top: 5px;  */
-    /* right: 0; */
-    /* float: right; */
-    color: rgb(255,255,255,0.6);
-}
-
 .nav-item:hover {
     /* top: 5px;  */
     /* right: 0; */
     /* float: right; */
-    color: rgb(255,255,255,0.8);
+    color: rgb(255,255,255,0.7);
 }
 
 .nav-item:active {
     /* top: 5px;  */
     /* right: 0; */
     /* float: right; */
-    color: rgb(220,220,220,0.8);
+    color: rgb(220,220,220,0.7);
 }
 
 .tester{

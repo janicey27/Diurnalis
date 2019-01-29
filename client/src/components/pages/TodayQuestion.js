@@ -82,6 +82,7 @@ export default class TodayQuestion extends React.Component {
                     submitted: true,
                     responded: true,
                     value: this.props.myTodayResponses[0].content,
+                    privacy: this.props.myTodayResponses[0].privacy
                 });
             }
             this.props.updateResponded();
@@ -97,9 +98,9 @@ export default class TodayQuestion extends React.Component {
 
         // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
-                        <option value = "public" >Public</option>
-                        <option value = "anonymous" >Anonymous</option>
-                        <option value = "private" >Private</option> 
+                        <option value="public" selected={(this.state.privacy === "public") ? "selected" : null}>Public</option>
+                        <option value="anonymous" selected={(this.state.privacy === "anonymous") ? "selected" : null}>Anonymous</option>
+                        <option value="private" selected={(this.state.privacy === "private") ? "selected" : null}>Private</option>
                     </select>)
         
         // create submit/edit button
