@@ -1,4 +1,5 @@
 import React from "react";
+import io from "socket.io-client";
 import "../../css/app.css";
 import Timeline from "./Timeline";
 import TodayQuestion from "./TodayQuestion";
@@ -14,7 +15,11 @@ export default class Universe extends React.Component {
             responded: false
         }
 
+        // create reference for starting screen
         this.todayRef = React.createRef();
+
+        // initialize socket
+        this.socket = io("http://localhost:3000");
     }
 
     componentDidMount() {
@@ -56,6 +61,7 @@ export default class Universe extends React.Component {
                         userInfo={this.props.userInfo}
                         todayQuestion={this.props.todayQuestion}
                         exploreResponses={this.props.exploreResponses}
+                        socket={this.socket}
                     />
                     {timeline}
                 </div>
@@ -86,6 +92,7 @@ export default class Universe extends React.Component {
                         userInfo={this.props.userInfo}
                         questions={this.props.questions}
                         myResponses={this.props.myResponses}
+                        socket={this.socket}
                     />
                 </div>
             </div>

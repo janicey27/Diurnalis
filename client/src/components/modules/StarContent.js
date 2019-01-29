@@ -40,7 +40,9 @@ export default class StarContent extends React.Component{
                 <ReactCSSTransitionGroup
                     transitionName="appear"
                     transitionAppear={true}
-                    transitionAppearTimeout={500}>
+                    transitionAppearTimeout={500}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
                     
                     <div className = "starbox" id = "starbox">
                         <div className = "top-bar">

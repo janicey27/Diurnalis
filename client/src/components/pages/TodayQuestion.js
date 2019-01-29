@@ -50,6 +50,9 @@ export default class TodayQuestion extends React.Component {
             body: JSON.stringify(body)
         }).then(res => res.json())
         .then(response => {
+            if (this.state.privacy === "private") {
+                //
+            }
             this.props.addMyResponse(response);
         }).then(() => {
             this.updateResponded();
@@ -98,9 +101,9 @@ export default class TodayQuestion extends React.Component {
 
         // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
-                        <option value="public" selected={(this.state.privacy === "public") ? "selected" : null}>Public</option>
-                        <option value="anonymous" selected={(this.state.privacy === "anonymous") ? "selected" : null}>Anonymous</option>
-                        <option value="private" selected={(this.state.privacy === "private") ? "selected" : null}>Private</option>
+                        <option value="public">Public</option>
+                        <option value="anonymous">Anonymous</option>
+                        <option value="private">Private</option>
                     </select>)
         
         let tooltip = ((this.props.myTodayResponses.length > 1) || (this.props.myTodayResponses[0].year !== this.props.year))? (<b>On this day in years past, you said: </b>) : (null)
@@ -109,7 +112,7 @@ export default class TodayQuestion extends React.Component {
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
-                form = <div><b>{this.props.myTodayResponses[0].year}</b> | &nbsp; {this.state.value}</div>;
+                form = <div><b>{this.props.year}</b> | &nbsp; {this.state.value}</div>;
                 
                 
             } else {
@@ -140,8 +143,6 @@ export default class TodayQuestion extends React.Component {
             }
         }
 
-
-
         return(
             <div className = "today-question" id="today-question">
                 <div className = "question-container">
@@ -165,8 +166,7 @@ export default class TodayQuestion extends React.Component {
                         {priv}
                         {button}
                     </div>
-                </div>
-                
+                </div>  
             </div>
         )
     }
