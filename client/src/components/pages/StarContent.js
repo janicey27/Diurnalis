@@ -15,7 +15,9 @@ export default class StarContent extends React.Component{
     
     starClick = (event) => {
         let box = document.getElementById("heartbutton");
+        console.log("click!");
         if (event.target !== box){
+            console.log("great click!");
             this.props.handleClick();
         }
     }
@@ -33,7 +35,7 @@ export default class StarContent extends React.Component{
             (<div className = "heart1" id = "heartbutton" onClick={this.handleUpvote}></div>)
 
         return (
-            <div className = "page" onClick={event => this.starClick(event)}>
+            <div className = "page starbox-container" onClick={event => this.starClick(event)} style={{zIndex: 9}}>
                 <ReactCSSTransitionGroup
                     transitionName="appear"
                     transitionAppear={true}

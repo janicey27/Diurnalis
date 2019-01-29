@@ -28,6 +28,7 @@ router.get('/whoami', function(req, res) {
     }
 });
 
+// GET a JSON of all questions for all days
 router.get('/questions', function(req, res) {
     fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
         if (err) {
@@ -43,6 +44,9 @@ router.get('/questions', function(req, res) {
     });
 });
 
+// GET all public and anonymous responses that match certain filters
+//      filters: day, month, year
+// or GET all responses by the current user
 router.get('/responses', function(req, res) {
     const filters = {};
 
@@ -67,13 +71,12 @@ router.get('/responses', function(req, res) {
             responses = responses.concat(publicResponses);
             filters.privacy = "anonymous";
             Response.find(filters, function(err, anonResponses) {
-                let i;
+                let i, response;
                 for (i=0; i<anonResponses.length; i++) {
-                    anonResponses[i] = React.cloneElement(
-                        anonResponses[i],
-                        { username: "anonymous" }
-                    ); // uncertain if this works
-                    // console.log(anonResponses[i]);
+                    response = anonResponses[i];
+                    response.username = "anonymous";
+                    anonResponses[i] = response;
+                    //console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
                 res.send(responses);
@@ -85,6 +88,7 @@ router.get('/responses', function(req, res) {
 
 // api POST endpoints
 
+// POST modify user info
 router.post('/user', function(req, res) {
     User.findOne({ username: req.body.username }, function(err, user) {
         if (!user || (user._id === req.user._id)) {
@@ -101,6 +105,7 @@ router.post('/user', function(req, res) {
     });
 });
 
+// POST new or edit response
 router.post(
     '/response',
     connect.ensureLoggedIn(),
@@ -116,7 +121,7 @@ router.post(
                 month       : responseMonth,
                 year        : responseYear
             }, function(err, response) {
-                if (!response) {
+                if (!response) { // new response
                     const newResponse = new Response({
                         creatorID       : currentUser._id,
                         creatorUsername : currentUser.username,

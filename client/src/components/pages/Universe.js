@@ -56,7 +56,6 @@ export default class Universe extends React.Component {
                 <div className = "page today" id="today" ref={this.todayRef}>
                     {explore}
                     {timeline}
-
                     <AnimateOnChange
                         animationClassName="fade-enter"
                         animate={true}>

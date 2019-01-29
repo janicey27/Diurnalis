@@ -42,27 +42,20 @@ export default class Explore extends React.Component{
                 Click on a star to explore others' responses to today's question!
                 </div>
             </ReactCSSTransitionGroup>
-            
         ) : (<div className = "helper"><div className = "helper"></div></div>)
         
-        //console.log("Message to toggle: " + this.props.exploreResponses[0].content);
-        //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
             <div className = "sky" id="sky" onClick={this.changeHelper}>
                 <div className = "background-q">
                     {this.props.todayQuestion}
                     {helper}
                 </div>
-                {/*
-                <div>
-                    <button onClick={this.upvoteTest}>This is a test button</button>
-                </div>
-                */}
                 {this.state.stars}
             </div>
         )
     }
 
+    // change render state
     toggleRenderState = (newState) => {
         if (newState) {
             this.rerender();
@@ -71,6 +64,7 @@ export default class Explore extends React.Component{
         }
     }
 
+    // rerender by setting "stars" equal to the changing "starArr"
     rerender = () => {
         this.setState({
             stars: this.state.starArr
@@ -78,6 +72,7 @@ export default class Explore extends React.Component{
         this.renderState = true;
     }
 
+    // create array of Star elements from exploreResponses
     generateStars = () => {
         let i, response, upvoted;
         for (i = 0; i < this.props.exploreResponses.length; i++) {
@@ -85,6 +80,7 @@ export default class Explore extends React.Component{
             console.log("upvote users");
             console.log(response.upvoteUsers);
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+            console.log(upvoted);
             this.state.starArr.push(<Star
                 key={i}
                 top={String(Math.random()*80)+'vh'}
@@ -95,7 +91,7 @@ export default class Explore extends React.Component{
                 content={response.content}
                 upvotes={response.upvotes}
                 upvoted={upvoted}
-                toggleUpvote={() => this.toggleUpvote(response._id)}
+                toggleUpvote={this.toggleUpvote}
                 toggleRenderState={(newState) => this.toggleRenderState(newState)}
             />);
         }
@@ -103,8 +99,10 @@ export default class Explore extends React.Component{
     }
 
     initializeSocket = () => {
+        // initialize socket
         this.socket = io("http://localhost:3000");
 
+        // client-side handling post sent through socket
         this.socket.on("post", (response) => {
             console.log("new post received via socket");
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
@@ -119,7 +117,7 @@ export default class Explore extends React.Component{
                     content={response.content}
                     upvotes={response.upvotes}
                     upvoted={upvoted}
-                    toggleUpvote={() => this.toggleUpvote(response._id)}
+                    toggleUpvote={this.toggleUpvote}
                     toggleRenderState={(newState) => this.toggleRenderState(newState)}
                 />
             );
@@ -128,6 +126,7 @@ export default class Explore extends React.Component{
             }
         });
 
+        // client-side handling edit sent through socket
         this.socket.on("edit", (response) => {
             console.log("edit received via socket");
             let i, star;
@@ -152,6 +151,7 @@ export default class Explore extends React.Component{
             }
         });
 
+        // client-side handling upvote sent through socket
         this.socket.on("upvote", (response) => {
             console.log("upvote received via socket");
             let i, star;
@@ -176,6 +176,7 @@ export default class Explore extends React.Component{
             }
         });
 
+        // client-side handling downvote sent through socket
         this.socket.on("downvote", (response) => {
             console.log("downvote received via socket");
             let i, star;
@@ -201,9 +202,12 @@ export default class Explore extends React.Component{
         });
     }
 
+    // handles personal upvoting and downvoting; to be passed as a prop to Star elements
     toggleUpvote = (responseID) => {
         console.log("Toggle upvote for: " + responseID);
         const starArr = this.state.starArr;
+
+        // find the star that matches the response ID and toggle upvote
         let i, star, remove = false;
         for (i=0; i<starArr.length; i++) {
             star = starArr[i];
@@ -218,21 +222,8 @@ export default class Explore extends React.Component{
             }
         }
         console.log("toggle: " + remove);
-        /*
-        const newStar = React.cloneElement(
-            star,
-            {
-                upvotes: star.props.upvotes + (remove ? -1 : 1),
-                upvoted: !star.props.upvoted
-            }
-        );
-        console.log("new star in toggleUpvote: " + newStar.props.upvotes);
-        starArr[i] = newStar;
-        this.setState({
-            stars: starArr
-        });
-        */
-        console.log("Hi!!");
+
+        // post upvote/downvote request to api
         const body = {
             parent: responseID,
             remove: remove
@@ -247,9 +238,5 @@ export default class Explore extends React.Component{
         .then((res) => {
             console.log("received from post: " + res.upvotes);
         });
-    }
-
-    upvoteTest = () => {
-        this.toggleUpvote(this.props.exploreResponses[0]._id);
     }
 }

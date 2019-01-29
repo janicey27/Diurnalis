@@ -2,9 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
 
-
-
-
 html {
     height: 100%;
     width: 100%;
@@ -70,8 +67,6 @@ body {
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
 }
 
-
-
 .starbox {
     width: 40vw;
     min-width: 300px;
@@ -81,7 +76,7 @@ body {
     background-color:rgba(148, 148, 148, 0.4); 
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.6);
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     text-align: center;
@@ -91,6 +86,12 @@ body {
     /* overflow: auto; */
 }
 
+
+.star-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
 
 .startbox:active:after{
     transition: transform ease-out 400ms;
@@ -174,19 +175,6 @@ body {
     scroll-snap-stop: always;
     position: relative;
 }
-
-
-/* .today {
-    background-color: rgb(126, 126, 228);
-}
-
-.timeline {
-    background-color: rgb(231, 129, 192);
-}
-
-.explore {
-    background-color: rgb(9, 9, 56);
-} */
 
 .navbar{
     position:fixed;
