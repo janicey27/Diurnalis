@@ -130,7 +130,12 @@ h4 {
     width: 52vw;
     height: 70%;
     overflow-y: auto;
+    color: rgb(97, 97, 97);
     /* overflow: scroll; */
+}
+
+.reminder{
+    color: rgb(139, 138, 138);
 }
 
 .question-group{
@@ -201,6 +206,16 @@ h4 {
 .submit:focus{
     outline: none;
     transition: none;
+}
+
+.reminder{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    top: 22vh;
 }
 
 .star{

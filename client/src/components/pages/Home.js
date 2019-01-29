@@ -17,7 +17,7 @@ export default class Home extends React.Component {
     }
 
     login = () => {
-        location.href="/auth/google";
+        window.location.href="/auth/google";
     }
 
     render() {

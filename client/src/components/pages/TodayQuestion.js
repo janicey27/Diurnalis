@@ -93,6 +93,7 @@ export default class TodayQuestion extends React.Component {
         let oldRes;
         let button;
         let form;
+        let reminder;
 
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
                         <option value = "public" >Public</option>
@@ -104,6 +105,8 @@ export default class TodayQuestion extends React.Component {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
                 form = <div>{this.state.value}</div>;
+                
+                
             } else {
                 button = <button id="submit-btn" type="submit" className="submit" value="Submit" onClick={this.handleSubmit}>Submit</button>;
                 form = <form onSubmit={this.handleSubmit}>
@@ -156,6 +159,8 @@ export default class TodayQuestion extends React.Component {
                         {button}
                     </div>
                 </div>
+                {reminder}
+                
             </div>
         )
     }

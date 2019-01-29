@@ -37,6 +37,8 @@ export default class Universe extends React.Component {
 
         let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">View your past entries <i class="fas fa-arrow-down"></i>        </a>):(null)
         let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore public responses <i class="fas fa-arrow-up"></i>        </a>):(null)
+        let reminder = this.state.responded? (<div className="reminder">
+        Come back tomorrow to answer the next question and unlock the next piece of your timeline! </div>) : (null)
 
         return (
             <div className = "universe">
@@ -54,6 +56,7 @@ export default class Universe extends React.Component {
                 <div className = "page today" id="today" ref={this.todayRef}>
                     {explore}
                     {timeline}
+
                     <AnimateOnChange
                         animationClassName="fade-enter"
                         animate={true}>
@@ -68,6 +71,7 @@ export default class Universe extends React.Component {
                             updateResponded={this.updateResponded}
                         />
                     </AnimateOnChange>
+                    {reminder}
                 </div>
                 <div className = "page timeline-p" id="timeline">
                     {explore}

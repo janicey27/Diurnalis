@@ -15,19 +15,19 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            day: 0,
-            month: 0,
-            year: 0,
+            day: 28,
+            month: 1,
+            year: 2019,
             userInfo: {},
             questions: [],
             todayQuestion: "",
             dataRendered: 0,
-            dataToRender: 3, // date, user, questions
+            dataToRender: 2, // date, user, questions
         }
     }
 
     componentDidMount() {
-        this.getDate();
+        //this.getDate();
         this.getUser();
         this.getAllQuestions();
     }

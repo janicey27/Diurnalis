@@ -115,6 +115,7 @@ body {
     height: 20px;
     width: 20px ;
     background-size: 20px 20px;
+    cursor: pointer;
 }
 
 .heart1:visited{
@@ -137,6 +138,7 @@ body {
     height: 20px;
     width: 20px ;
     background-size: 20px 20px;
+    cursor: pointer;
 }
 
 .count{

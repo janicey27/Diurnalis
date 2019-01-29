@@ -121,7 +121,8 @@
 li.active::after {
     content: "";
     /* background:#d0d0d0 !important; */
-    border: 5px solid #568d4e !important;
+    /*border: 5px solid #568d4e !important;*/
+    border: 5px solid rgba(204, 38, 226, 0.541);
     width: 18px !important;
     height: 18px !important;
     box-shadow: 0px 0px 14px rgba(193, 193, 193, 0.7);
