@@ -123,26 +123,26 @@ h4 {
     
 }
 
+.today-response{
+    height:70%
+}
+
 .response{
     position: relative;
-    top: 20px;
+    top: 10px;
     left: 30px;
     text-align: left;
     width: 52vw;
-    height: 70%;
     overflow-y: auto;
     color: rgb(97, 97, 97);
     /* overflow: scroll; */
-}
-
-.reminder{
-    color: rgb(255,255,255,0.5)
 }
 
 .question-group{
     position: relative;
     height: 80%;
     top: 30px;
+    overflow-y: auto;
 }
 
 .button-group{
@@ -217,6 +217,7 @@ h4 {
     display: flex;
     flex-direction: column;
     top: 22vh;
+    color: rgb(255,255,255,0.65)
 }
 
 .star{
@@ -246,15 +247,20 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.4);
+    color:  rgb(255,255,255,0.5);
     transition: 80ms;
 }
 
 .explore-btn:hover{
+    cursor: pointer;
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
     color:  rgb(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
+}
+
+.explore-btn:active{
+    color:  rgb(220,220,220,0.7);
 }
 
 .timeline-btn{
@@ -266,15 +272,19 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.4);
+    color:  rgb(255,255,255,0.5);
 }
 
-
 .timeline-btn:hover{
-    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
     color:  rgb(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
+}
+
+.timeline-btn:active{
+    color:  rgb(220,220,220,0.7);
 }
 
 .question-container{
@@ -296,7 +306,7 @@ h4 {
 
 .daily-response{
     width: 90%;
-    height: 90%;
+    height: 80%;
     word-wrap: break-word;
     background-color:rgb(255, 255, 255, 0.2);
     border-color: rgb(138, 138, 138);

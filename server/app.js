@@ -31,11 +31,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// test routes
-app.get(["/t"], (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"))
-})
-
 // authentication routes
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
@@ -52,7 +47,7 @@ app.get(
 
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/'); 
+  res.redirect('/');
 });
 
 // api route

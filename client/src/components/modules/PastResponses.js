@@ -1,7 +1,6 @@
 import React from "react";
 import  "../../css/timeline.css";
 
-
 class Root extends React.Component {
 
   constructor(props) {
@@ -19,7 +18,7 @@ class Root extends React.Component {
         
         <div>
             {Array.from(Array(this.props.responses.length).keys()).map(y => (
-               <div>  <b>{this.props.responses[y][0]}</b> |    {this.props.responses[y][1]} </div>
+               <div key={y}> <b>{this.props.responses[y][0]}</b> &nbsp; | &nbsp; {this.props.responses[y][1]} </div>
             ))} 
 
         </div>

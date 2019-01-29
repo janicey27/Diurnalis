@@ -2,7 +2,7 @@ import React from "react";
 import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
-import Star from "./Star";
+import Star from "../modules/Star";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
@@ -13,7 +13,7 @@ export default class Explore extends React.Component{
         this.state = {
             stars: [],
             starArr: [],
-            helper: true // a "tutorial" of sorts
+            helper: true // guides user around
         };
 
         this.renderState = true; // determines whether the explore page is currently in a state to allow new stars to appear
@@ -32,6 +32,9 @@ export default class Explore extends React.Component{
     }
 
     render() {
+        console.log("Rerendering!");
+        console.log(this.state.stars);
+        // generates help text
         let helper = this.state.helper ? (
             <ReactCSSTransitionGroup
                     transitionName="helperhint"
@@ -42,7 +45,7 @@ export default class Explore extends React.Component{
                 Click on a star to explore others' responses to today's question!
                 </div>
             </ReactCSSTransitionGroup>
-        ) : (<div className = "helper"><div className = "helper"></div></div>)
+        ) : null;
         
         return (
             <div className = "sky" id="sky" onClick={this.changeHelper}>
@@ -57,10 +60,9 @@ export default class Explore extends React.Component{
 
     // change render state
     toggleRenderState = (newState) => {
-        if (newState) {
+        this.renderState = newState;
+        if (this.renderState) {
             this.rerender();
-        } else {
-            this.renderState = false;
         }
     }
 
@@ -69,7 +71,6 @@ export default class Explore extends React.Component{
         this.setState({
             stars: this.state.starArr
         });
-        this.renderState = true;
     }
 
     // create array of Star elements from exploreResponses
@@ -80,9 +81,9 @@ export default class Explore extends React.Component{
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(<Star
                 key={i}
-                top={String(Math.random()*80)+'vh'}
+                top={String(Math.random()*88+2)+'vh'}
                 left={String(Math.random()*96+1)+'vw'}
-                size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
+                size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
                 responseID={response._id}
                 username={response.creatorUsername}
                 content={response.content}
@@ -100,13 +101,13 @@ export default class Explore extends React.Component{
 
         // client-side handling post sent through socket
         this.socket.on("post", (response) => {
-            upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+            const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(
                 <Star 
                     key={this.state.stars.length}
-                    top={String(Math.random()*80)+'vh'} 
+                    top={String(Math.random()*88+2)+'vh'} 
                     left={String(Math.random()*96+1)+'vw'}
-                    size={String(Math.min(response.upvotes,20)+25)+'px'} // to be updated based on like data
+                    size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
                     responseID={response._id}
                     username={response.creatorUsername}
                     content={response.content}
@@ -153,7 +154,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: star.props.upvotes + 1,
-                            size: String(Math.min(star.props.upvotes+1,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes+1)*3,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;
@@ -175,7 +176,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: ((star.props.upvotes > 0) ? (star.props.upvotes - 1) : 0),
-                            size: String(Math.min(star.props.upvotes-1,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes-1)*3,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;

@@ -1,7 +1,7 @@
 import React from "react";
 import "../../css/home.css";
 import "../../css/app.css";
-import TodayDate from "./TodayDate";
+import TodayDate from "../modules/TodayDate";
 
 export default class TodayQuestion extends React.Component {
     constructor(props) {
@@ -19,12 +19,14 @@ export default class TodayQuestion extends React.Component {
         this.updateResponded();
     }
     
+    // sets state variable for response privacy
     handlePrivacy = (event) => {
         this.setState({
             privacy: event.target.value
         })
     }
 
+    // manages state variable for response content
     handleChange = (event) => {
         this.setState({
             value: event.target.value 
@@ -54,6 +56,7 @@ export default class TodayQuestion extends React.Component {
         })
     };
 
+    // control response submitting
     handleSubmit = (event) => {
         event.preventDefault();
         this.postResponse();
@@ -64,12 +67,14 @@ export default class TodayQuestion extends React.Component {
         
     }
 
+    // enter edit mode
     handleEdit = (event) => {
         this.setState({
             submitted: false,
         });
     }
 
+    // check to see if question has been answered already by current user
     updateResponded = () => {
         if (this.props.myTodayResponses.length > 0){
             if (this.props.myTodayResponses[0].year === this.props.year){
@@ -89,14 +94,15 @@ export default class TodayQuestion extends React.Component {
         let oldRes;
         let button;
         let form;
-        let reminder;
 
+        // create privacy dropdown
         let priv = this.state.submitted ? (null): (<select id="privacy" className="privacy" onChange={this.handlePrivacy} value={this.state.privacy}>
                         <option value = "public" >Public</option>
                         <option value = "anonymous" >Anonymous</option>
                         <option value = "private" >Private</option> 
                     </select>)
         
+        // create submit/edit button
         if (responded) {
             if (submitted) {
                 button = <button id="edit-btn" type="submit" className="submit" value="Edit" onClick={this.handleEdit}>Edit your response</button>;
@@ -135,19 +141,19 @@ export default class TodayQuestion extends React.Component {
             <div className = "today-question" id="today-question">
                 <div className = "question-container">
                     <div className="date">
-                        <TodayDate month = {this.props.month} day = {this.props.day}/>
+                        <TodayDate month = {this.props.month} day = {this.props.day}/> {/* display date */}
                     </div> 
                     <div className="question">
-                        {this.props.todayQuestion}
+                        {this.props.todayQuestion} {/* display question */}
                     </div>
                     
                 </div>
                 <div className="bigbox">
                     <div className="question-group">
-                        <div className="response">
-                            {form}
+                        <div className="response today-response">
+                            {form} {/* display new response form */}
                         </div>
-                        {oldRes}
+                        {oldRes} {/* display old responses */}
                         <div></div>
                     </div>
                     <div className="button-group">
@@ -155,7 +161,6 @@ export default class TodayQuestion extends React.Component {
                         {button}
                     </div>
                 </div>
-                {reminder}
                 
             </div>
         )

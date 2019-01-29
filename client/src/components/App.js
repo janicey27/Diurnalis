@@ -1,13 +1,8 @@
 import React from "react";
 import "../css/app.css";
 import Route from "react-router-dom/es/Route";
-import Switch from "react-router-dom/es/Switch"
-import Home from "./pages/Home"
-import Timeline from "./pages/Timeline"
 import Root from "./pages/Root"
-import TodayQuestion from "./pages/TodayQuestion";
-import Universe from "./pages/Universe";
-import NavBar from "./pages/NavBar";
+import NavBar from "./modules/NavBar";
 
 class App extends React.Component {
 
@@ -15,7 +10,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            day: 28,
+            day: 1,
             month: 1,
             year: 2019,
             userInfo: {},
@@ -27,7 +22,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        //this.getDate();
+        this.getDate();
         this.getUser();
         this.getAllQuestions();
     }
@@ -40,8 +35,7 @@ class App extends React.Component {
                         userInfo={this.state.userInfo}
                         logout={this.logout}
                     />
-                    <Switch>
-                        <Route exact path="/" render={(props) =>
+                    <Route exact path="/" render={(props) =>
                             <Root
                                 {...props}
                                 day={this.state.day}
@@ -51,20 +45,7 @@ class App extends React.Component {
                                 questions={this.state.questions}
                                 todayQuestion={this.state.todayQuestion}
                             />}
-                        />
-                        <Route exact path="/t" render={(props) =>
-                            <Timeline 
-                                {...props}
-                                day={this.state.day}
-                                month={this.state.month}
-                                userInfo={this.state.userInfo}
-                                questions={this.state.questions}
-                                myResponses={this.state.myResponses}
-                                myTodayResponses={this.state.myTodayResponses}
-                                exploreResponses={this.state.exploreResponses}
-                            />}
-                        />
-                    </Switch>
+                    />
                 </div>
             );
         } else {

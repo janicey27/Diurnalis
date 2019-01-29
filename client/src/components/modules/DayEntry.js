@@ -1,11 +1,6 @@
 import React from "react";
 import PastResponses from "./PastResponses";
 import  "../../css/timeline.css";
-import TodayDate from "../pages/TodayDate";
-import AnimateOnChange from 'react-animate-on-change'
-
-
-
 
 class Root extends React.Component {
   
@@ -13,16 +8,17 @@ class Root extends React.Component {
     super(props);
     
     this.state = {
-        selectedMonth: 2, //later change this to default to today!!!!
-        dayIndex: 6,
+        selectedMonth: 1,
+        dayIndex: 0,
         todaysQuestion: "Sorry, the question for this day is currently unavailable.",
         todaysResponses: [],
         hasResponses: false,
         hasSelected: false,
         thisMonth: ""
     }
+  }
 
-}
+  // get question for selected day
   getQuestionOfDay = () => {
     const questions = this.props.questionArray;
     let i;
@@ -33,12 +29,12 @@ class Root extends React.Component {
         gotQuestion = true;
       }
     }
-    // console.log(gotQuestion)
     if (gotQuestion == false) {
       this.setState({todaysQuestion: "Sorry, the question for this day is currently unavailable."})
     }
   }
 
+  // get past responses
   getResponsesOfDay = () => {
     const responses = this.props.responseArray;
     var i;
@@ -58,19 +54,14 @@ class Root extends React.Component {
     
   }
 
+  // get selected month as a string
   getMonth = () => {
       const monthArr = ["January", "February","March", "April", "May", "June", "July", "August", "September", "October", "November","December"];
       let monthStr = monthArr[this.state.selectedMonth-1];
       this.setState({thisMonth: monthStr})
   }
 
-  componentDidMount() {
-    // console.log("day entry mounted!")
-    // this.setState({selectedMonth: 2})
-    // this.setState({dayIndex: 6});
-    // this.setState({})
-  }
-
+  // initialize
   gettem() {
     this.getQuestionOfDay();
     this.getResponsesOfDay();
@@ -101,10 +92,10 @@ class Root extends React.Component {
 }
 
   render() {
-    
-    var questionComponent = this.state.hasResponses ? (this.state.todaysQuestion) : ("This question is hidden.");
+    // create components
+    const questionComponent = this.state.hasResponses ? (this.state.todaysQuestion) : ("This question is hidden.");
     const today = this.state.dayIndex+1;
-    var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("Log in on " + this.state.thisMonth + " " + today + " to reveal this question and enter your response!");
+    const responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("Log in on " + this.state.thisMonth + " " + today + " to reveal this question and enter your response!");
     if (this.state.hasSelected == false) {
       return (
         <div className="selectText"><h2>Please select a month to view your past responses.</h2></div>
@@ -113,15 +104,12 @@ class Root extends React.Component {
     else {
       return (
         <div className="text-container">
-          
-
-          <h4>{this.state.thisMonth} {this.state.dayIndex+1} </h4>
-        
+          {/* display selected date */}
+          <h4>{this.state.thisMonth} {today}</h4>{/*<TodayDate this.state.dayIndex+1} month={this.state.selectedMonth} />*/}
+          {/* display question */}
           <h2>{questionComponent}</h2>
-  
+          {/* display past responses */}
           <div className="responses-cont">{responseComponent}</div>
-          
-          
         </div>
       );
     }

@@ -9,8 +9,8 @@ export default class TodayDate extends React.Component{
         const month = monthArr[this.props.month - 1];
         const todayDate = month + ' ' + this.props.day;
 
+        // create string that represents today's date
         this.state = {
-            
             date: todayDate
         };
     }

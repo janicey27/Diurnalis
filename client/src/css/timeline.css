@@ -7,24 +7,18 @@
     align-content: center;
     align-items: center;
     align-self: center;
-    /* background-color: #efefef; */
 }
 
 .col-centered {
+    width: 90vw;
     float: none;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
     text-align: center;
     /* animation-duration: 5s; */
 }
 
 .container {
     bottom: 0px;
-}
-
-.col-centered {
-    width: 90vw;
-    margin: 0 auto;
 }
 
 .month-bar {
@@ -187,6 +181,6 @@ li.inactive::after {
 
  }
 
-.responses-cont::-webkit-scrollbar-track {
+/* .responses-cont::-webkit-scrollbar-track {
     background: rgba(164, 23, 23, 0.592); 
-  }
+  } */

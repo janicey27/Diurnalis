@@ -20,7 +20,7 @@
     {
         "day": 3,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "Is what you are living the life you want?"
     },
 
     {
@@ -74,61 +74,61 @@
     {
         "day": 12,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "What's the last dream you remember?"
     },
 
     {
         "day": 13,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "Who was your most influential teacher?"
     },
 
     {
         "day": 14,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "What is your favorite pair of socks?"
     },
 
     {
         "day": 15,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "When is the last time you got a haircut?"
     },
 
     {
         "day": 16,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "What is your favorite animal?"
     },
 
     {
         "day": 17,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "When was a time you had a fulfilling conversation?"
     },
 
     {
         "day": 18,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "Where did you take your most recent vacation?"
     },
 
     {
         "day": 19,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "What did you do last weekend?"
     },
 
     {
         "day": 20,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "What do you crave right now?"
     },
 
     {
         "day": 21,
         "month": 1,
-        "content": "What is your name?"
+        "content": "What does your name mean?"
     },
     
     {
@@ -158,7 +158,7 @@
     {
         "day": 26,
         "month": 1,
-        "content": "What do you want to accomplish today?"
+        "content": "What do you want to accomplish this week?"
     },
 
     {
@@ -176,19 +176,19 @@
     {
         "day": 29,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "Where is the place you want to travel to most?"
     },
 
     {
         "day": 30,
         "month": 1,
-        "content": "Is what you are living the real life?"
+        "content": "Who is someone you want to get to know better?"
     },
 
     {
         "day": 31,
         "month": 1,
-        "content": "When is the last time you cooked?"
+        "content": "When is the last time you cried?"
     },
 
     {
@@ -198,21 +198,135 @@
     },
 
     {
+        "day": 2,
+        "month": 2,
+        "content": "Who in your family do you feel closest to?"
+    },
+
+    {
+        "day": 3,
+        "month": 2,
+        "content": "What song is playing in your head right now?"
+    },
+
+    {
+        "day": 4,
+        "month": 2,
+        "content": "Are you sleeping enough?"
+    },
+
+    {
+        "day": 5,
+        "month": 2,
+        "content": "What is one goal you have accomplished this path month?"
+    },
+
+    {
+        "day": 6,
+        "month": 2,
+        "content": "What is one thing you are looking forward to this week?"
+    },
+
+    {
         "day": 7,
         "month": 2,
-        "content": "When's your birthday?"
+        "content": "When is your birthday, and what do you do?"
+    },
+
+    {
+        "day": 14,
+        "month": 2,
+        "content": "Are you in love?"
+    },
+
+    {
+        "day": 23,
+        "month": 2,
+        "content": "What is your favorite drink?"
     },
 
     {
         "day": 1,
         "month": 3,
-        "content": "Who's your favorite person?"
+        "content": "Who is your favorite person?"
+    },
+
+    {
+        "day": 5,
+        "month": 3,
+        "content": "When is the last time you told someone you loved them?"
+    },
+
+    {
+        "day": 17,
+        "month": 3,
+        "content": "What is the chore you most love doing?"
     },
 
     {
         "day": 1,
         "month": 4,
-        "content": "Which finger is your favorite?"
+        "content": "Who did you fool today?"
+    },
+
+    {
+        "day": 5,
+        "month": 4,
+        "content": "What sports do you like to play?"
+    },
+
+    {
+        "day": 13,
+        "month": 4,
+        "content": "What is a new skill or talent you want to acquire?"
+    },
+
+    {
+        "day": 18,
+        "month": 4,
+        "content": "Do you like your job?"
+    },
+
+    {
+        "day": 2,
+        "month": 5,
+        "content": "How many books have you read this past year?"
+    },
+
+    {
+        "day": 9,
+        "month": 5,
+        "content": "What's your favorite movie?"
+    },
+
+    {
+        "day": 23,
+        "month": 6,
+        "content": "What is an interesting thing you learned today?"
+    },
+
+    {
+        "day": 25,
+        "month": 7,
+        "content": "If you got 100 dollars today, what would you spend it on?"
+    },
+
+    {
+        "day": 29,
+        "month": 7,
+        "content": "Who is someone new you met recently?"
+    },
+
+    {
+        "day": 4,
+        "month": 8,
+        "content": "What is something crazy you've done?"
+    },
+
+    {
+        "day": 19,
+        "month": 9,
+        "content": "Where would you go on a friend date?"
     },
 
     {
