@@ -1,28 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
+
 div.label {
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: capitalize;
+    font-family: 'Berkshire Swash', cursive;
+    /* font-weight: bold; */
+    font-size: 24px;
     position: absolute;
     z-index: 5;
     top: 50%; 
     left: 50%; 
     cursor: pointer; 
-
+    pointer-events: none;
     transform: translate(-55%, -50%);
 }
 
 div.label::selection {
     background: none;
+    
 }
 
 div.image {
     height: calc(100vw / 15);
     cursor: pointer;
+    transition: 200ms ease-out;
 }
 
-div.image::hover {
-   border-color: #fff;
+div.image:hover {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6));
+    transition: 100ms ease-out;
 }
+
+/* div.jan:hover {
+    filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
+    transition: 100ms ease-out;
+} */
 
 div.jan {
     content: url("../components/public/month_splat.png");
+    
+    
     
 }
 div.feb {

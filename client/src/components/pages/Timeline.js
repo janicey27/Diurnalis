@@ -1,4 +1,5 @@
 import React from 'react';
+import io from "socket.io-client";
 import "../../css/timeline.css";
 import Month from "../modules/Month.js"
 import Monthline from "../modules/Monthline"
@@ -21,6 +22,7 @@ class Timeline extends React.Component {
     componentDidMount() {
         this.formatQuestions();
         this.formatResponses();
+        this.initializeSocket();
     }
 
     handleClick(inputMonth, inputLength) {
@@ -31,14 +33,11 @@ class Timeline extends React.Component {
     formatQuestions = () => {
         const questionsArr = [];
         let i, question, oneQuestion;
-        // console.log("questions passed")
-        // console.log(this.props.questions);
         for (i=0; i<this.props.questions.length; i++) {
             question = this.props.questions[i];
             oneQuestion = [question.month, question.day, question.content];
             questionsArr.push(oneQuestion);
         }
-        // console.log(questionsArr);
         this.state.questionArray = questionsArr;
     }
 
@@ -51,6 +50,34 @@ class Timeline extends React.Component {
             responsesArr.push(oneResponse);
         }
         this.state.responseArray = responsesArr;
+    }
+    
+    initializeSocket = () => {
+        this.socket = io();
+
+        this.socket.on("post", (response) => {
+            if (response.creatorID === this.props.userInfo._id) {
+                this.setState({
+                    responseArray: responseArray.concat([[response.month, response.day, [response.year, response.content]]])
+                })
+            }
+        });
+
+        this.socket.on("edit", (response) => {
+            const tempArray = this.state.responseArray;
+            if (response.creatorID === this.props.userInfo._id) {
+                let i;
+                for (i=0; i<tempArray.length; i++) {
+                    if ((tempArray[i][0] === response.month) && (tempArray[i][1] === response.day) && (tempArray[i][2][0] === response.year)) {
+                        tempArray[i][2][1] = response.content;
+                        this.setState({
+                            responseArray: tempArray
+                        });
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     render() {

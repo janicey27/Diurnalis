@@ -102,7 +102,9 @@ class Root extends React.Component {
 
   render() {
     
-    var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("You have no entries for this question!");
+    var questionComponent = this.state.hasResponses ? (this.state.todaysQuestion) : ("This question is hidden.");
+    const today = this.state.dayIndex+1;
+    var responseComponent = this.state.hasResponses ? (<PastResponses responses={this.state.todaysResponses}/>) : ("Log in on " + this.state.thisMonth + " " + today + " to reveal this question and enter your response!");
     if (this.state.hasSelected == false) {
       return (
         <div className="selectText"><h2>Please select a month to view your past responses.</h2></div>
@@ -110,14 +112,14 @@ class Root extends React.Component {
     }
     else {
       return (
-        <div>
+        <div className="text-container">
           
 
           <h4>{this.state.thisMonth} {this.state.dayIndex+1} </h4>
         
-          <h2>{this.state.todaysQuestion}</h2>
+          <h2>{questionComponent}</h2>
   
-          <div>{responseComponent}</div>
+          <div className="responses-cont">{responseComponent}</div>
           
           
         </div>

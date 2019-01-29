@@ -35,12 +35,14 @@ export default class Universe extends React.Component {
 
     render() {
 
-        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">Timeline</a>):(null)
-        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore</a>):(null)
+        let timeline = this.state.responded ? (<a href="#timeline" className = "timeline-btn">View your past entries <i className="fas fa-arrow-down"></i>        </a>):(null)
+        let explore = this.state.responded ? (<a href="#explore" className = "explore-btn">Explore public responses <i className="fas fa-arrow-up"></i>        </a>):(null)
+        let reminder = this.state.responded? (<div className="reminder">
+        Come back tomorrow to answer the next question and unlock the next piece of your timeline! </div>) : (null)
 
         return (
             <div className = "universe">
-                <div className = "page explore" id="explore" >
+                <div className = "page explore" id="explore">
                     <Explore
                         day={this.props.day}
                         month={this.props.month} 
@@ -68,6 +70,7 @@ export default class Universe extends React.Component {
                             updateResponded={this.updateResponded}
                         />
                     </AnimateOnChange>
+                    {reminder}
                 </div>
                 <div className = "page timeline-p" id="timeline">
                     {explore}

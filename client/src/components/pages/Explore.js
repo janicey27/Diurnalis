@@ -3,6 +3,8 @@ import io from "socket.io-client";
 import "../../css/home.css";
 import "../../css/app.css";
 import Star from "./Star";
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 export default class Explore extends React.Component{
     constructor(props) {
@@ -25,35 +27,35 @@ export default class Explore extends React.Component{
 
     changeHelper = () => {
         this.setState({
-            helper: !this.state.helper,
+            helper: false,
         });
     }
 
     render() {
         let helper = this.state.helper ? (
-            <div className = "helper">
-                Click on a star to explore other people's responses!
-            </div>
-        ) : (null)
+            <ReactCSSTransitionGroup
+                    transitionName="helperhint"
+                    transitionLeaveTimeout={500}
+                    transitionEnterTimeout={500}
+                    transitionLeave={true}>
+                <div className = "helper">
+                Click on a star to explore others' responses to today's question!
+                </div>
+            </ReactCSSTransitionGroup>
+        ) : (<div className = "helper"><div className = "helper"></div></div>)
         
-        //console.log("Message to toggle: " + this.props.exploreResponses[0].content);
-        //console.log("Starting upvotes: " + this.props.exploreResponses[0].upvotes); // TESTING
         return (
-            <div className = "sky" id="sky">
+            <div className = "sky" id="sky" onClick={this.changeHelper}>
                 <div className = "background-q">
                     {this.props.todayQuestion}
                     {helper}
                 </div>
-                {/*
-                <div>
-                    <button onClick={this.upvoteTest}>This is a test button</button>
-                </div>
-                */}
                 {this.state.stars}
             </div>
         )
     }
 
+    // change render state
     toggleRenderState = (newState) => {
         if (newState) {
             this.rerender();
@@ -62,6 +64,7 @@ export default class Explore extends React.Component{
         }
     }
 
+    // rerender by setting "stars" equal to the changing "starArr"
     rerender = () => {
         this.setState({
             stars: this.state.starArr
@@ -69,6 +72,7 @@ export default class Explore extends React.Component{
         this.renderState = true;
     }
 
+    // create array of Star elements from exploreResponses
     generateStars = () => {
         let i, response, upvoted;
         for (i = 0; i < this.props.exploreResponses.length; i++) {
@@ -84,17 +88,18 @@ export default class Explore extends React.Component{
                 content={response.content}
                 upvotes={response.upvotes}
                 upvoted={upvoted}
-                toggleUpvote={this.toggleUpvote.bind(this, response._id)}
-                toggleRenderState={this.toggleRenderState}
+                toggleUpvote={this.toggleUpvote}
+                toggleRenderState={(newState) => this.toggleRenderState(newState)}
             />);
         }
-        console.log(this.state.starArr);
     }
 
     initializeSocket = () => {
+        // initialize socket
         this.socket = io();
+
+        // client-side handling post sent through socket
         this.socket.on("post", (response) => {
-            console.log("new post received via socket");
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(
                 <Star 
@@ -107,8 +112,8 @@ export default class Explore extends React.Component{
                     content={response.content}
                     upvotes={response.upvotes}
                     upvoted={upvoted}
-                    toggleUpvote={this.toggleUpvote.bind(this, response._id)}
-                    toggleRenderState={this.toggleRenderState}
+                    toggleUpvote={this.toggleUpvote}
+                    toggleRenderState={(newState) => this.toggleRenderState(newState)}
                 />
             );
             if (this.renderState) {
@@ -116,8 +121,30 @@ export default class Explore extends React.Component{
             }
         });
 
+        // client-side handling edit sent through socket
+        this.socket.on("edit", (response) => {
+            let i, star;
+            for (i=0; i<this.state.starArr.length; i++) {
+                star = this.state.starArr[i];
+                if (star.props.responseID === response._id) {
+                    const newStar = React.cloneElement(
+                        star,
+                        {
+                            username: response.creatorUsername,
+                            content: response.content
+                        }
+                    );
+                    this.state.starArr[i] = newStar;
+                    if (this.renderState) {
+                        this.rerender();
+                    }
+                    break;
+                }
+            }
+        });
+
+        // client-side handling upvote sent through socket
         this.socket.on("upvote", (response) => {
-            console.log("upvote received via socket");
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -129,19 +156,17 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes+1,20)+25)+'px'
                         }
                     );
-                    console.log("new star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
                     }
-                    console.log("received from socket: " + this.state.stars[i].props.upvotes);
                     break;
                 }
             }
         });
 
+        // client-side handling downvote sent through socket
         this.socket.on("downvote", (response) => {
-            console.log("downvote received via socket");
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -153,7 +178,6 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes-1,20)+25)+'px'
                         }
                     );
-                    console.log("new star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
@@ -164,31 +188,28 @@ export default class Explore extends React.Component{
         });
     }
 
+    // handles personal upvoting and downvoting; to be passed as a prop to Star elements
     toggleUpvote = (responseID) => {
-        const starArr = this.state.stars;
+        const starArr = this.state.starArr;
+
+        // find the star that matches the response ID and toggle upvote
         let i, star, remove = false;
         for (i=0; i<starArr.length; i++) {
             star = starArr[i];
             if (star.props.responseID === responseID) {
                 remove = star.props.upvoted;
+                const newStar = React.cloneElement(
+                    star,
+                    { upvoted: !remove }
+                );
+                this.state.starArr[i] = newStar;
                 break;
             }
         }
-        const newStar = React.cloneElement(
-            star,
-            {
-                upvotes: star.props.upvotes + (remove ? -1 : 1),
-                upvoted: !star.props.upvoted
-            }
-        );
-        console.log("new star in toggleUpvote: " + newStar.props.upvotes);
-        starArr[i] = newStar;
-        this.setState({
-            stars: starArr
-        });
-        response = Response.findOne({ _id: responseID }, function(err, response) { return response; });
+
+        // post upvote/downvote request to api
         const body = {
-            parent: response,
+            parent: responseID,
             remove: remove
         };
         fetch('/api/upvote', {
@@ -197,13 +218,6 @@ export default class Explore extends React.Component{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
-        }).then(res => res.json())
-        .then((res) => {
-            console.log("received from post: " + res.upvotes);
-        });
-    }
-
-    upvoteTest = () => {
-        this.toggleUpvote(this.props.exploreResponses[0]._id);
+        }).then(res => res.json());
     }
 }
