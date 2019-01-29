@@ -48,10 +48,7 @@ export default class TodayQuestion extends React.Component {
             body: JSON.stringify(body)
         }).then(res => res.json())
         .then(response => {
-            console.log("Response: " + response.content);
             this.props.addMyResponse(response);
-            console.log("posted!");
-            console.log(this.props.myTodayResponses[0]);
         }).then(() => {
             this.updateResponded();
         })
@@ -82,7 +79,6 @@ export default class TodayQuestion extends React.Component {
                     value: this.props.myTodayResponses[0].content,
                 });
             }
-            console.log("user has responded");
             this.props.updateResponded();
         }
     }

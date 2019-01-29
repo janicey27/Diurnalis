@@ -115,8 +115,6 @@ class App extends React.Component {
             .then(
                 questionArr => {
                     this.setState({ questions: questionArr });
-                    console.log("all questions retrieved!");
-                    console.log(this.state.questions);
                 }
             ).then(() => {
                 this.getTodayQuestion();
@@ -131,7 +129,6 @@ class App extends React.Component {
                 this.setState({
                     todayQuestion: this.state.questions[i].content
                 });
-                console.log("question found");
                 break;
             }
         }
@@ -140,7 +137,6 @@ class App extends React.Component {
                 todayQuestion: "Are you ready to answer?"
             });
         }
-        console.log(this.state.todayQuestion);
         this.setState({ dataRendered: this.state.dataRendered + 1 });
     }
 

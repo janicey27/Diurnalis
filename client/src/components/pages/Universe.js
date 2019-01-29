@@ -42,7 +42,7 @@ export default class Universe extends React.Component {
 
         return (
             <div className = "universe">
-                <div className = "page explore" id="explore" >
+                <div className = "page explore" id="explore">
                     <Explore
                         day={this.props.day}
                         month={this.props.month} 

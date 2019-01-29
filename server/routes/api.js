@@ -32,11 +32,11 @@ router.get('/whoami', function(req, res) {
 router.get('/questions', function(req, res) {
     fs.readFile(path.join(__dirname, '..', 'questions.json'), { encoding: 'utf8' }, function(err, data) {
         if (err) {
-            res.send(JSON.stringify({
+            res.send(JSON.stringify([{
                 "day": 0,
                 "month": 0,
                 "content": "Is this a strange question?"
-            }));
+            }]));
             return;
         }
         data = JSON.parse(data);
@@ -61,22 +61,20 @@ router.get('/responses', function(req, res) {
                 res.send(responses);
             });
         } else {
-            console.log("no responses because user not logged in");
             return res.send({});
         }
     } else {
-        let responses = [];
         filters.privacy = "public";
         Response.find(filters, function(err, publicResponses) {
-            responses = responses.concat(publicResponses);
+            let responses = publicResponses;
             filters.privacy = "anonymous";
-            Response.find(filters, function(err, anonResponses) {
+            Response.find(filters, function(err, foundResponses) {
+                const anonResponses = foundResponses;
                 let i, response;
                 for (i=0; i<anonResponses.length; i++) {
                     response = anonResponses[i];
-                    response.username = "anonymous";
+                    response.creatorUsername = "anonymous";
                     anonResponses[i] = response;
-                    //console.log(anonResponses[i]);
                 }
                 responses = responses.concat(anonResponses);
                 res.send(responses);
@@ -88,7 +86,7 @@ router.get('/responses', function(req, res) {
 
 // api POST endpoints
 
-// POST modify user info
+// POST modified user info
 router.post('/user', function(req, res) {
     User.findOne({ username: req.body.username }, function(err, user) {
         if (!user || (user._id === req.user._id)) {
@@ -227,7 +225,6 @@ router.post(
             } else {
                 res.send(parent);
             }
-            console.log("is this working");
         });
     }
 );

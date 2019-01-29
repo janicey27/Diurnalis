@@ -77,10 +77,7 @@ export default class Explore extends React.Component{
         let i, response, upvoted;
         for (i = 0; i < this.props.exploreResponses.length; i++) {
             response = this.props.exploreResponses[i];
-            console.log("upvote users");
-            console.log(response.upvoteUsers);
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
-            console.log(upvoted);
             this.state.starArr.push(<Star
                 key={i}
                 top={String(Math.random()*80)+'vh'}
@@ -95,7 +92,6 @@ export default class Explore extends React.Component{
                 toggleRenderState={(newState) => this.toggleRenderState(newState)}
             />);
         }
-        console.log(this.state.starArr);
     }
 
     initializeSocket = () => {
@@ -104,7 +100,6 @@ export default class Explore extends React.Component{
 
         // client-side handling post sent through socket
         this.socket.on("post", (response) => {
-            console.log("new post received via socket");
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(
                 <Star 
@@ -128,7 +123,6 @@ export default class Explore extends React.Component{
 
         // client-side handling edit sent through socket
         this.socket.on("edit", (response) => {
-            console.log("edit received via socket");
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -140,12 +134,10 @@ export default class Explore extends React.Component{
                             content: response.content
                         }
                     );
-                    console.log("edited star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
                     }
-                    console.log("received from socket: " + this.state.stars[i].props.content);
                     break;
                 }
             }
@@ -153,7 +145,6 @@ export default class Explore extends React.Component{
 
         // client-side handling upvote sent through socket
         this.socket.on("upvote", (response) => {
-            console.log("upvote received via socket");
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -165,12 +156,10 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes+1,20)+25)+'px'
                         }
                     );
-                    console.log("upvoted star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
                     }
-                    console.log("received from socket: " + this.state.starArr[i].props.upvotes);
                     break;
                 }
             }
@@ -178,7 +167,6 @@ export default class Explore extends React.Component{
 
         // client-side handling downvote sent through socket
         this.socket.on("downvote", (response) => {
-            console.log("downvote received via socket");
             let i, star;
             for (i=0; i<this.state.starArr.length; i++) {
                 star = this.state.starArr[i];
@@ -190,12 +178,10 @@ export default class Explore extends React.Component{
                             size: String(Math.min(star.props.upvotes-1,20)+25)+'px'
                         }
                     );
-                    console.log("downvoted star: " + newStar.props.upvotes);
                     this.state.starArr[i] = newStar;
                     if (this.renderState) {
                         this.rerender();
                     }
-                    console.log("received from socket: " + this.state.starArr[i].props.upvotes);
                     break;
                 }
             }
@@ -204,7 +190,6 @@ export default class Explore extends React.Component{
 
     // handles personal upvoting and downvoting; to be passed as a prop to Star elements
     toggleUpvote = (responseID) => {
-        console.log("Toggle upvote for: " + responseID);
         const starArr = this.state.starArr;
 
         // find the star that matches the response ID and toggle upvote
@@ -221,7 +206,6 @@ export default class Explore extends React.Component{
                 break;
             }
         }
-        console.log("toggle: " + remove);
 
         // post upvote/downvote request to api
         const body = {
@@ -234,9 +218,6 @@ export default class Explore extends React.Component{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
-        }).then(res => res.json())
-        .then((res) => {
-            console.log("received from post: " + res.upvotes);
-        });
+        }).then(res => res.json());
     }
 }

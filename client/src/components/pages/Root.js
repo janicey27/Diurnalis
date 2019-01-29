@@ -35,8 +35,6 @@ class Root extends React.Component {
             .then(
                 responses => {
                     this.setState({ myResponses: responses });
-                    console.log("past responses retrieved!");
-                    console.log(this.state.myResponses);
                 } 
             ).then(() => {
                 this.getTodayResponses();
@@ -59,8 +57,6 @@ class Root extends React.Component {
             myTodayResponses: todayResponses,
             dataRendered: this.state.dataRendered + 1
         });
-        console.log("today's responses retrieved!");
-        console.log(this.state.myTodayResponses);
     }
 
     // GET all public/anonymous for today
@@ -73,8 +69,6 @@ class Root extends React.Component {
                         exploreResponses: responses,
                         dataRendered: this.state.dataRendered + 1
                     });
-                    console.log("responses retrieved!");
-                    console.log(this.state.exploreResponses);
                 }
             );
     }
