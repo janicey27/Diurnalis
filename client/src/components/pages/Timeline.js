@@ -53,12 +53,6 @@ class Timeline extends React.Component {
     
     // initialize socket listeners
     initializeSocket = () => {
-<<<<<<< HEAD
-        // initialize socket
-        this.socket = io();
-
-=======
->>>>>>> master
         // listen for post and add to response array
         this.props.socket.on("post", (response) => {
             if (response.creatorID === this.props.userInfo._id) {
