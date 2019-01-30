@@ -50,9 +50,6 @@ export default class TodayQuestion extends React.Component {
             body: JSON.stringify(body)
         }).then(res => res.json())
         .then(response => {
-            if (this.state.privacy === "private") {
-                //
-            }
             this.props.addMyResponse(response);
             return null;
         }).then(() => {

@@ -42,10 +42,8 @@ export default class StarContent extends React.Component{
                         <div className = "user-icon"> 
                             written by <b>{username}</b>
                         </div>
-                        <div className = "heart-icon">
-                            {heart}
-                        </div>
-                            <div className = "count">{this.state.upvotes}</div>
+                        <div className = "count">{this.state.upvotes}</div>
+                        <div className = "heart-icon">{heart}</div>
                     </div>
                     <div className = "star-content">
                         {this.props.content}

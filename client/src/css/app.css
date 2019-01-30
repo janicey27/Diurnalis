@@ -138,7 +138,7 @@ div::-webkit-scrollbar-track {
 }
 .heart-icon{
     position: absolute;
-    right: 47px;
+    right: 30px;
     bottom: 0.1px;
 }
 .heart1{
@@ -194,7 +194,7 @@ div::-webkit-scrollbar-track {
     /* margin: 0px 10px; */
     position: absolute;
     /* transform: translate(0,3px); */
-    right: 31px;
+    right: 56px;
     bottom: 4px;
     /* transition: 2s; */
 }
