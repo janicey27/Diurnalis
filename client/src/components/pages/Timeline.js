@@ -9,7 +9,7 @@ class Timeline extends React.Component {
         super(props);
 
         this.state = {
-            month: "",
+            month: 0,
             monthLength: 0,
             questionArray: [[1, 1, "This is a question for Jan 1?"], [1, 22, "This is a question for Jan 22?"], [2, 7, "“This is a question for Feb 7?”"]],
             responseArray: [[1, 1, [2018, "“Here’s my response to Jan 1 2018.”"]], [1, 1, [2014, "“Here’s my response to Jan 1 2014!!!!!!.”"]],[1, 22, [2017, "“Here’s my response to Jan 22 2017.”"]], [2, 7, [2018, "“Here’s my response to Feb 7 2018”"]]],
@@ -90,6 +90,8 @@ class Timeline extends React.Component {
                         monthLength={this.state.monthLength}
                         questionArray={this.state.questionArray}
                         responseArray={this.state.responseArray}
+                        userInfo={this.props.userInfo}
+                        socket={this.props.socket}
                     />
                 </div>
                 

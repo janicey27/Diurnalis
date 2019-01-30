@@ -97,7 +97,6 @@ div::-webkit-scrollbar-track {
     min-width: 300px;
     height: 20vh;
     padding: 15px;
-    margin: 25px;
     background-color:rgba(82, 81, 81, 0.4); 
     box-shadow: 0px 0px 5px rgb(55, 55, 55,0.9);
     position: absolute;
