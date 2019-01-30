@@ -43,6 +43,7 @@ class Root extends React.Component {
             .then(
                 responses => {
                     this.setState({ myResponses: responses });
+                    return null;
                 } 
             ).then(() => {
                 this.getTodayResponses();
