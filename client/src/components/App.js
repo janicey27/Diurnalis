@@ -16,7 +16,7 @@ class App extends React.Component {
             questions: [],
             todayQuestion: "",
             dataRendered: 0,
-            dataToRender: 2 // date, user, questions
+            dataToRender: 3 // date, user, questions
         }
     }
 
