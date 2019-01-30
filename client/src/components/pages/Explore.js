@@ -76,6 +76,7 @@ export default class Explore extends React.Component{
     // create array of Star elements from exploreResponses
     generateStars = () => {
         let sampleStars, i, response, upvoted;
+        console.log(MAX_STARS);
         sampleStars = Array.from(Array(this.props.exploreResponses.length).keys());
         if (this.props.exploreResponses.length > MAX_STARS) {
             sampleStars = _.sample(sampleStars, MAX_STARS);
