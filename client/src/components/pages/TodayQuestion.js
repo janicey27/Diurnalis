@@ -85,8 +85,8 @@ export default class TodayQuestion extends React.Component {
                     value: this.props.myTodayResponses[0].content,
                     privacy: this.props.myTodayResponses[0].privacy
                 });
+                this.props.updateResponded();
             }
-            this.props.updateResponded();
         }
     }
 
