@@ -1,9 +1,12 @@
 import React from "react";
+import _ from "underscore";
 import "../../css/home.css";
 import "../../css/app.css";
 import Star from "../modules/Star";
+import config_data from "../../../../config";
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+const MAX_STARS = config_data.MAX_STARS;
 
 export default class Explore extends React.Component{
     constructor(props) {
@@ -72,15 +75,19 @@ export default class Explore extends React.Component{
 
     // create array of Star elements from exploreResponses
     generateStars = () => {
-        let i, response, upvoted;
-        for (i = 0; i < this.props.exploreResponses.length; i++) {
-            response = this.props.exploreResponses[i];
+        let sampleStars, i, response, upvoted;
+        sampleStars = Array.from(Array(this.props.exploreResponses.length).keys());
+        if (this.props.exploreResponses.length > MAX_STARS) {
+            sampleStars = _.sample(sampleStars, MAX_STARS);
+        }
+        for (i = 0; i < sampleStars.length; i++) {
+            response = this.props.exploreResponses[sampleStars[i]];
             upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
             this.state.starArr.push(<Star
                 key={i}
                 top={String(Math.random()*88+2)+'vh'}
                 left={String(Math.random()*96+1)+'vw'}
-                size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
+                size={String(Math.min(response.upvotes*2,20)+25)+'px'} // to be updated based on like data
                 responseID={response._id}
                 username={response.creatorUsername}
                 content={response.content}
@@ -110,24 +117,26 @@ export default class Explore extends React.Component{
     initializeSocket = () => {
         // client-side handling post sent through socket
         this.props.socket.on("post", (response) => {
-            const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
-            this.state.starArr.push(
-                <Star 
-                    key={this.state.stars.length}
-                    top={String(Math.random()*88+2)+'vh'} 
-                    left={String(Math.random()*96+1)+'vw'}
-                    size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
-                    responseID={response._id}
-                    username={response.creatorUsername}
-                    content={response.content}
-                    upvotes={response.upvotes}
-                    upvoted={upvoted}
-                    toggleUpvote={this.toggleUpvote}
-                    toggleRenderState={(newState) => this.toggleRenderState(newState)}
-                />
-            );
-            if (this.renderState) {
-                this.rerender();
+            if (this.state.starArr.length < MAX_STARS) {
+                const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
+                this.state.starArr.push(
+                    <Star 
+                        key={this.state.starArr.length}
+                        top={String(Math.random()*88+2)+'vh'} 
+                        left={String(Math.random()*96+1)+'vw'}
+                        size={String(Math.min(response.upvotes*2,20)+25)+'px'} // to be updated based on like data
+                        responseID={response._id}
+                        username={response.creatorUsername}
+                        content={response.content}
+                        upvotes={response.upvotes}
+                        upvoted={upvoted}
+                        toggleUpvote={this.toggleUpvote}
+                        toggleRenderState={(newState) => this.toggleRenderState(newState)}
+                    />
+                );
+                if (this.renderState) {
+                    this.rerender();
+                }
             }
         });
 
@@ -152,14 +161,14 @@ export default class Explore extends React.Component{
                     break;
                 }
             }
-            if (!found) {
+            if ((!found) && (this.state.starArr.length < MAX_STARS)) {
                 const upvoted = response.upvoteUsers.includes(this.props.userInfo._id);
                 this.state.starArr.push(
                     <Star 
-                        key={this.state.stars.length}
-                        top={String(Math.random()*88+2)+'vh'} 
+                        key={this.state.starArr.length}
+                        top={String(Math.random()*88+2)+'vh'}
                         left={String(Math.random()*96+1)+'vw'}
-                        size={String(Math.min(response.upvotes*3,20)+25)+'px'} // to be updated based on like data
+                        size={String(Math.min(response.upvotes*2,20)+25)+'px'} // to be updated based on like data
                         responseID={response._id}
                         username={response.creatorUsername}
                         content={response.content}
@@ -185,7 +194,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: star.props.upvotes + 1,
-                            size: String(Math.min((star.props.upvotes+1)*3,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes+1)*2,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;
@@ -207,7 +216,7 @@ export default class Explore extends React.Component{
                         star,
                         {
                             upvotes: ((star.props.upvotes > 0) ? (star.props.upvotes - 1) : 0),
-                            size: String(Math.min((star.props.upvotes-1)*3,20)+25)+'px'
+                            size: String(Math.min((star.props.upvotes-1)*2,20)+25)+'px'
                         }
                     );
                     this.state.starArr[i] = newStar;

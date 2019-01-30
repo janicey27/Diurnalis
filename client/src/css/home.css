@@ -48,7 +48,7 @@ h4 {
     height: 14vw;
     /* padding:10px; */
     color: rgba(0, 0, 0);
-    text-shadow: 0px 0px 5px rgb(255, 255, 255);
+    text-shadow: 0px 0px 5px rgba(255, 255, 255);
     /* margin: 4vh 0 0 0 ; */
     /* position: absolute; */
 
@@ -142,7 +142,7 @@ h4 {
     text-align: left;
     width: 52vw;
     overflow-y: auto;
-    color: rgb(97, 97, 97);
+    color: rgba(97, 97, 97);
     /* overflow: scroll; */
 }
 
@@ -161,7 +161,7 @@ h4 {
 
 .submit{
     background-color: rgba(255,255,255,0.5);
-    border-color: rgb(39, 132, 219);
+    border-color: rgba(39, 132, 219);
     border: 10px;
     border-radius: 5px;
     margin: 5px;
@@ -179,7 +179,7 @@ h4 {
 
 .login{
     background-color: rgba(133, 133, 133, 0.219);
-    border-color: rgb(39, 132, 219);
+    border-color: rgba(39, 132, 219);
     border: 10px;
     border-radius: 5px;
     margin: 5px;
@@ -322,13 +322,14 @@ h4 {
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
-    text-shadow: 0px 0px 1px rgb(255, 255, 255);
+    text-shadow: 0px 0px 1px rgba(255, 255, 255);
     
 
 }
 
 .question{
     font-size: 3.5vw;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .daily-response{
@@ -336,7 +337,7 @@ h4 {
     height: 80%;
     word-wrap: break-word;
     background-color:rgba(255, 255, 255, 0.2);
-    border-color: rgb(138, 138, 138);
+    border-color: rgba(138, 138, 138);
     border-style: none;
     border-width: 1px;
     resize: none;
@@ -378,6 +379,6 @@ form:focus{
     text-align: center;
     position: relative;
     top: 15px;
-    color: rgb(97, 97, 97);
+    color: rgba(97, 97, 97);
     
 }
