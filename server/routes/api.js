@@ -103,12 +103,6 @@ router.post('/user', function(req, res) {
     });
 });
 
-router.get('/getUsers', function(req, res) {
-    User.find({}, function(err, users) {
-        res.send(users);
-    });
-});
-
 // POST new or edit response
 router.post(
     '/response',
