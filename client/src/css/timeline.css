@@ -138,8 +138,8 @@ li.active:hover:after {
 }
 
 li.inactive::after {
-    /* background:rgba(216, 216, 216, 0.7) !important; */
-    box-shadow: 0px 0px 5px rgb(55, 55, 55,0.7);
+    /* background:rgaa(216, 216, 216, 0.7) !important; */
+    box-shadow: 0px 0px 5px rgba(55, 55, 55,0.7);
 }
 
 
@@ -155,7 +155,7 @@ li.inactive::after {
     white-space: pre-line;
     display: inline-block;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
+    box-shadow: 0px 0px 5px rgba(55, 55, 55,0.3);
     /* overflow: auto; */
     
  }

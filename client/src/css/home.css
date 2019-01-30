@@ -11,11 +11,11 @@ html {
 }
 
 ::selection
-{ background: rgb(255, 255, 255, 0.3); }
+{ background: rgba(255, 255, 255, 0.3); }
 
 body {
     font-family: 'Arvo', serif;
-    color: rgb(5,5,5,0.6);
+    color: rgba(5,5,5,0.6);
     font-size: 1.2vw;
     /* font-weight: 300; */
     
@@ -23,13 +23,13 @@ body {
 
 h2 {
     font-family: 'Berkshire Swash', cursive;
-    color: rgb(5,5,5,0.6);
+    color: rgba(5,5,5,0.6);
     font-size: 2.7vw;
 }
 
 h4 {
     font-family: 'Berkshire Swash', cursive;
-    color: rgb(5,5,5,0.6);
+    color: rgba(5,5,5,0.6);
     font-size: 2.3vw;
     margin: 0;
 }
@@ -48,7 +48,7 @@ h4 {
     height: 14vw;
     /* padding:10px; */
     color: rgba(0, 0, 0);
-    text-shadow: 0px 0px 5px rgb(255, 255, 255);
+    text-shadow: 0px 0px 5px rgba(255, 255, 255);
     /* margin: 4vh 0 0 0 ; */
     /* position: absolute; */
 
@@ -90,7 +90,7 @@ h4 {
     height: 50vh;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3);
+    box-shadow: 0px 0px 5px rgba(55, 55, 55,0.3);
     position: relative;
     top: calc(20vh);
     left: 50%;
@@ -142,7 +142,7 @@ h4 {
     text-align: left;
     width: 52vw;
     overflow-y: auto;
-    color: rgb(97, 97, 97);
+    color: rgba(97, 97, 97);
     /* overflow: scroll; */
 }
 
@@ -160,8 +160,8 @@ h4 {
 }
 
 .submit{
-    background-color: rgb(255,255,255,0.5);
-    border-color: rgb(39, 132, 219);
+    background-color: rgba(255,255,255,0.5);
+    border-color: rgba(39, 132, 219);
     border: 10px;
     border-radius: 5px;
     margin: 5px;
@@ -179,22 +179,22 @@ h4 {
 
 .login{
     background-color: rgba(133, 133, 133, 0.219);
-    border-color: rgb(39, 132, 219);
+    border-color: rgba(39, 132, 219);
     border: 10px;
     border-radius: 5px;
     margin: 5px;
     padding: 10px;
     transition: 300ms ease-in;
     color: rgba(5, 5, 5, 0.871);
-    box-shadow: 0px 0px 5px rgb(255,255,255,0.8);
+    box-shadow: 0px 0px 5px rgba(255,255,255,0.8);
     /* position: absolute; */
     /* margin: 0 auto; */
     /* left: 50%; */
 }
 
 .login:hover{
-    background-color: rgb(255,255,255,1);
-    box-shadow: 0px 0px 15px rgb(255,255,255,1);
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0px 0px 15px rgba(255,255,255,1);
     cursor: pointer;
     transition: 300ms ease-out;
 }
@@ -204,30 +204,30 @@ h4 {
 }
 
 .privacy{
-    background-color: rgb(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.3);
     border: none;
     padding: 10px;
     height: 45px;
     transition: background-color 300ms;
     outline: none;
-    color: rgb(5,5,5,0.6);
+    color: rgba(5,5,5,0.6);
 
 }
 
 .privacy:hover{
-    background-color: rgb(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.5);
     /* box-shadow */
     cursor: pointer;
 }
 
 .privacy:hover{
-    background-color: rgb(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.5);
     cursor: pointer;
     outline: none;
 }
 
 .submit:hover{
-    background-color: rgb(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.7);
     cursor: pointer;
 }
 
@@ -244,7 +244,7 @@ h4 {
     display: flex;
     flex-direction: column;
     top: 22vh;
-    color: rgb(255,255,255,0.65)
+    color: rgba(255,255,255,0.65)
 }
 
 .star{
@@ -274,20 +274,20 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.5);
+    color:  rgba(255,255,255,0.5);
     transition: 80ms;
 }
 
 .explore-btn:hover{
     cursor: pointer;
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.7);
+    color:  rgba(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
 }
 
 .explore-btn:active{
-    color:  rgb(220,220,220,0.7);
+    color:  rgba(220,220,220,0.7);
 }
 
 .timeline-btn{
@@ -299,19 +299,19 @@ h4 {
     scroll-behavior: smooth;
     z-index: 5;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.5);
+    color:  rgba(255,255,255,0.5);
 }
 
 .timeline-btn:hover{
     cursor: pointer;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
-    color:  rgb(255,255,255,0.7);
+    color:  rgba(255,255,255,0.7);
     text-decoration: none;
     transition: 100ms;
 }
 
 .timeline-btn:active{
-    color:  rgb(220,220,220,0.7);
+    color:  rgba(220,220,220,0.7);
 }
 
 .question-container{
@@ -322,21 +322,22 @@ h4 {
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
-    text-shadow: 0px 0px 1px rgb(255, 255, 255);
+    text-shadow: 0px 0px 1px rgba(255, 255, 255);
     
 
 }
 
 .question{
     font-size: 3.5vw;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .daily-response{
     width: 97%;
     height: 80%;
     word-wrap: break-word;
-    background-color:rgb(255, 255, 255, 0.2);
-    border-color: rgb(138, 138, 138);
+    background-color:rgba(255, 255, 255, 0.2);
+    border-color: rgba(138, 138, 138);
     border-style: none;
     border-width: 1px;
     resize: none;
@@ -344,7 +345,7 @@ h4 {
     padding: 10px 15px;
     transition: ease-out 400ms;
     /* transition: 0.1s; */
-    /* box-shadow: 0px 0px 5px rgb(55, 55, 55,0.3); */
+    /* box-shadow: 0px 0px 5px rgba(55, 55, 55,0.3); */
 }
 
 .daily-response::selection{
@@ -378,6 +379,6 @@ form:focus{
     text-align: center;
     position: relative;
     top: 15px;
-    color: rgb(97, 97, 97);
+    color: rgba(97, 97, 97);
     
 }
