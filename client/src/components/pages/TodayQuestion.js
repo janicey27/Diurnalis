@@ -54,6 +54,7 @@ export default class TodayQuestion extends React.Component {
                 //
             }
             this.props.addMyResponse(response);
+            return null;
         }).then(() => {
             this.updateResponded();
         })

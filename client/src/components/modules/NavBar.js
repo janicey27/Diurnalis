@@ -14,7 +14,7 @@ class NavBar extends Component {
                             <a className="nav-item nav-link" href="/auth/google">Login</a>
                         ) : (
                             <React.Fragment>
-                                <a className="nav-item nav-link" href="/logout" onClick={this.props.logout}>Logout <i class="fas fa-sign-out-alt"></i></a>
+                                <a className="nav-item nav-link" href="/logout" onClick={this.props.logout}>Logout <i className="fas fa-sign-out-alt"></i></a>
                             </React.Fragment>
                         )}
                 </div>

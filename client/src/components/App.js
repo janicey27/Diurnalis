@@ -90,6 +90,7 @@ class App extends React.Component {
             .then(
                 questionArr => {
                     this.setState({ questions: questionArr });
+                    return null;
                 }
             ).then(() => {
                 this.getTodayQuestion();

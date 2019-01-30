@@ -88,8 +88,8 @@ router.get('/responses', function(req, res) {
 
 // POST modified user info
 router.post('/user', function(req, res) {
-    User.findOne({ username: req.body.username }, function(err, user) {
-        if (!user || (user._id === req.user._id)) {
+    User.findOne({ username: req.body.username }, function(err, user) { // checks if there is a user with the new username
+        if (!user || (user._id === req.user._id)) { // true if no such user exists, or if the current user is not changing username
             const updatedUser = {};
             if (req.body.name) updatedUser.name = req.body.name;
             if (req.body.username) updatedUser.username = req.body.username;

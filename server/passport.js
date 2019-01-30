@@ -14,38 +14,52 @@ passport.use(new GoogleStrategy({
   }, function(err, user) {
     if (err) return done(err);
     if (!user) {
-      let username = profile.name.givenName + ((profile.name.familyName.length > 0) ? profile.name.familyName[0] : "");
-      username = findValidUsername(username, 1);
-      console.log(username);
-      const user = new User({
-        name: profile.name.givenName,
-        username: username,
-        googleid: profile.id,
-        defaultPrivacy: "private"
-      });
-
-      user.save(function(err) {
-        if (err) console.log(err);
-
-        return done(err, user);
-      });
+      manageNewUser(profile)
+        .then((res) => {
+          return done(err, res)
+        });
     } else {
       return done(err, user);
     }
   });
 }));
 
+// create new user
+manageNewUser = (profile) => {
+  return new Promise(function(resolve, reject) {
+    let username = profile.name.givenName + ((profile.name.familyName.length > 0) ? profile.name.familyName[0] : "");
+    findValidUsername(username, 1)
+      .then(res => {
+        const user = new User({
+          name: profile.name.givenName,
+          username: res,
+          googleid: profile.id,
+          defaultPrivacy: "private"
+        });
+        user.save(function(err) {
+          if (err) console.log(err);
+  
+          resolve(user);
+        });
+      });
+  });
+}
+
+// find username that is not taken
 findValidUsername = (username, i) => {
-  console.log("Testing: " + i);
-  const testUsername = username + i;
-  console.log("Test username: " + testUsername);
-  User.findOne({ username: testUsername }, function(err, user) {
-    if (err) return "no_username";
-    if (!user) {
-      return testUsername;
-    }
-    console.log("Shouldn't reach here?");
-    return findValidUsername(username, i+1);
+  return new Promise(function(resolve, reject) {
+    const testUsername = username + i;
+    User.findOne({ username: testUsername }, function(err, user) {
+      if (err) {
+        resolve("anonymous");
+      }
+      if (!user) {
+        resolve(testUsername);
+      } else {
+        findValidUsername(username, i+1)
+          .then(res => { resolve(res) });
+      }
+    });
   });
 }
 
