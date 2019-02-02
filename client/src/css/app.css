@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
 
-
-
 html {
     height: 100%;
     width: 100%;
@@ -14,37 +12,35 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
-    /* background-image: url('../components/public/paper.jpg'); */
     background-size: contain;
     background-repeat: no-repeat;
-    
 }
 
 div::-webkit-scrollbar-track {
     /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px; */
     background-color: rgba(255, 255, 255, 0);
-  }
+}
   
-  div::-webkit-scrollbar {
+div::-webkit-scrollbar {
     width: 10px;
     height: 10px;
     background-color: rgba(245, 245, 245, 0.3);
     border-radius: 5px;
-  }
+}
   
-  div::-webkit-scrollbar-thumb {
+div::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
     background-color: rgba(205, 205, 205, 0.363);
     width: 80%;
-  }
+}
   
-  div::-webkit-scrollbar-corner{
-      background: rgba(0,0,0,0)
-  }
+div::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0)
+}
 
-.background-q{
+.background-q {
     color: white;
     top: 45vh;
     position: relative;
@@ -56,7 +52,7 @@ div::-webkit-scrollbar-track {
     cursor: default;
 }
 
-.helper{
+.helper {
     font-size: 1.6vw;
     font-family: Arvo;
     font-weight: 100;
@@ -115,14 +111,13 @@ div::-webkit-scrollbar-track {
     /* overflow: auto; */
 }
 
-
 .star-container {
     position: absolute;
     top: 0%;
     left: 0%;
 }
 
-.startbox:active:after{
+.startbox:active:after {
     transition: transform ease-out 400ms;
 }
 
@@ -133,19 +128,21 @@ div::-webkit-scrollbar-track {
     width: 100%;
 }
 
-.user-icon{
+.user-icon {
     left: 2px;
     color: rgba(240, 240, 240, .1);
     text-shadow: 0px 0px 0px rgba(228, 228, 228, 0.507);
     position: absolute;
     bottom: 4px;
 }
-.heart-icon{
+
+.heart-icon {
     position: absolute;
     right: 30px;
     bottom: 0.1px;
 }
-.heart1{
+
+.heart1 {
     background-image: url('../components/public/heart.png');
     height: 20px;
     width: 20px ;
@@ -155,7 +152,7 @@ div::-webkit-scrollbar-track {
     
 }
 
-.heart1:hover{
+.heart1:hover {
     /* background-image: url('../components/public/pink_heart.png'); */
     height: 20px;
     width: 20px ;
@@ -165,14 +162,14 @@ div::-webkit-scrollbar-track {
 
 }
 
-.heart1:visited{
+.heart1:visited {
     background-image: url('../components/public/pink_heart.png');
     height: 20px;
     width: 20px ;
     background-size: 20px 20px;
 }
 
-.heart2{
+.heart2 {
     background-image: url('../components/public/pink_heart.png');
     height: 20px;
     width: 20px ;
@@ -181,17 +178,16 @@ div::-webkit-scrollbar-track {
     transition: 100ms;
 }
 
-.heart2:hover{
+.heart2:hover {
     /* background-image: url('../components/public/heart.png'); */
     height: 20px;
     width: 20px ;
     background-size: 20px 20px;
     cursor: pointer;
     filter: drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.6));
-
 }
 
-.count{
+.count {
     /* display: inline-block; */
     color: rgba(234, 234, 234, 0.158);
     text-shadow: 0px 0px 0px rgba(228, 228, 228);
@@ -203,16 +199,16 @@ div::-webkit-scrollbar-track {
     /* transition: 2s; */
 }
 
-.count::selection{
+.count::selection {
     background:none;
 }
 
-.heart-icon{
+.heart-icon {
     float: right;
     z-index: 8;
 }
 
-.star-content{
+.star-content {
     clear: both;
     margin: 10px;
     text-shadow: none;
@@ -220,11 +216,8 @@ div::-webkit-scrollbar-track {
     overflow: auto;
 }
 
-
-
 .settings {
-    position: fixed; 
-
+    position: fixed;
 }
 
 .page {
@@ -236,7 +229,7 @@ div::-webkit-scrollbar-track {
     position: relative;
 }
 
-.navbar{
+.navbar {
     position:fixed;
     background-color: transparent;
     /* display: inline-block; */
@@ -247,7 +240,7 @@ div::-webkit-scrollbar-track {
     font-family: 'Berkshire Swash', cursive;
 }
 
-.navbar-nav{
+.navbar-nav {
     position: fixed;
     right: 20px;
     /* transition: 200ms; */
@@ -274,8 +267,6 @@ div::-webkit-scrollbar-track {
     /* float: right; */
     color: rgba(255, 255, 255, 0.199);
     transition: 200ms;
-
-    
 }
 
 .nav-item:hover {
@@ -285,7 +276,6 @@ div::-webkit-scrollbar-track {
     color: rgba(255, 255, 255, 0.397);
     text-shadow: 0px 0px 5px rgba(75, 75, 75, .5);
     transition: 200ms;
-
 }
 
 .nav-item:active {
@@ -295,12 +285,12 @@ div::-webkit-scrollbar-track {
     color: rgba(220,220,220,0.7);
 }
 
-.tester{
+.tester {
     position: absolute; 
     top: 10vh;
 }
 
-.universe{
+.universe {
     /* background-size: 50px 100px; */
     z-index: 1;
     background-size: 100vw calc(100vh * 3);
@@ -310,21 +300,21 @@ div::-webkit-scrollbar-track {
     height: 100vh;
 }
 
-.universe::-webkit-scrollbar{
+.universe::-webkit-scrollbar {
     display:none;
 }
 
-.explore{
+.explore {
     background-image: url('../components/public/background1.png');
     background-size: 100vw 100vh;
 }
 
-.today{
+.today {
     background-image: url('../components/public/background2_fix.png');
     background-size: 100vw 100vh;
 }
 
-.timeline-p{
+.timeline-p {
     background-image: url('../components/public/background3.png');
     background-size: 100vw 100vh;
 }
@@ -399,20 +389,20 @@ div::-webkit-scrollbar-track {
     transition: opacity 300ms ease-in;
 }
 
-.helperhint-leave{
+.helperhint-leave {
     opacity: 1;
 }
 
-.helperhint-leave.helperhint-leave-active{
+.helperhint-leave.helperhint-leave-active {
     opacity: 0.01;
     transition: opacity 1s ease-in;
 }
 
-.helperhint-appear{
+.helperhint-appear {
     opacity: 0.01
 }
 
-.helperhint-appear.helperhint-appear-active{
+.helperhint-appear.helperhint-appear-active {
     opacity: 1;
     transition: opacity 0.3s ease-in;
 }

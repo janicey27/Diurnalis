@@ -3,22 +3,19 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo');
 @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash');
 
-
-
 html {
     scroll-behavior: smooth;
-    
 }
 
-::selection
-{ background: rgba(255, 255, 255, 0.3); }
+::selection {
+    background: rgba(255, 255, 255, 0.3);
+}
 
 body {
     font-family: 'Arvo', serif;
     color: rgba(5,5,5,0.6);
     font-size: 1.2vw;
     /* font-weight: 300; */
-    
 }
 
 h2 {
@@ -41,7 +38,7 @@ h4 {
     background-repeat: no-repeat;
 }
 
-.title{
+.title {
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
     font-size: 9vw;
@@ -51,15 +48,12 @@ h4 {
     text-shadow: 0px 0px 5px rgba(255, 255, 255);
     /* margin: 4vh 0 0 0 ; */
     /* position: absolute; */
-
 }
 
-.subtitle{
+.subtitle {
     font-weight: 400;
     color: rgba(0, 0, 0);
 }
-
-
 
 .typewriter {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -68,23 +62,23 @@ h4 {
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .15em; /* Adjust as needed */
     animation: 
-      typing 2.5s steps(20, end),
-      blink-caret .75s step-end infinite;
-  }
+    typing 2.5s steps(20, end),
+    blink-caret .75s step-end infinite;
+}
   
-  /* The typing effect */
-  @keyframes typing {
+/* The typing effect */
+@keyframes typing {
     from { width: 0 }
     to { width: 80% }
-  }
+}
   
-  /* The typewriter cursor effect */
-  @keyframes blink-caret {
+/* The typewriter cursor effect */
+@keyframes blink-caret {
     from, to { border-color: transparent }
     50% { border-color: orange; }
-  }
+}
 
-  .bigbox{
+.bigbox{
     width: 60vw;
     min-width: 300px;
     height: 50vh;
@@ -92,7 +86,7 @@ h4 {
     background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0px 0px 5px rgba(55, 55, 55, 0.3);
     position: relative;
-    top: calc(20vh);
+    top: calc(16vh);
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -100,11 +94,9 @@ h4 {
     flex-direction: column;
     color: black;
     border-radius: 5px;
+}
 
-  }
-
-
-  .btn {
+.btn {
     align-self: center;
     cursor: pointer;
     font-size: 30px;
@@ -119,26 +111,25 @@ h4 {
     text-decoration-line: none;
 }
 
-
-.btn:hover{
+.btn:hover {
     background-color: #3281ff;
     color: white;
     
 }
 
-.today-response{
+.today-response {
     height:40%;
     text-align: center;
 } 
 
-.todaytip{
+.todaytip {
     position: relative;
 }
 
-.response{
+.response {
     position: relative;
-    top: 10px;
-    left: 30px;
+    margin: 0 auto;
+    top: 1vh;
     text-align: left;
     width: 52vw;
     overflow-y: auto;
@@ -146,20 +137,20 @@ h4 {
     /* overflow: scroll; */
 }
 
-.question-group{
+.question-group {
     position: relative;
     height: 83%;
     top: 1px;
     /* overflow-y: auto; */
 }
 
-.button-group{
+.button-group {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
-.submit{
+.submit {
     background-color: rgba(255,255,255,0.5);
     border-color: rgba(39, 132, 219);
     border: 10px;
@@ -170,14 +161,14 @@ h4 {
     color: rgba(29, 26, 26, 0.6);
 }
 
-.enter{
+.enter {
     /* position: absolute;
     bottom: 25px; */
     /* text-align: center; */
     transform: translate(0,30px);
 }
 
-.login{
+.login {
     background-color: rgba(133, 133, 133, 0.219);
     border-color: rgba(39, 132, 219);
     border: 10px;
@@ -192,18 +183,18 @@ h4 {
     /* left: 50%; */
 }
 
-.login:hover{
+.login:hover {
     background-color: rgba(255,255,255,1);
     box-shadow: 0px 0px 15px rgba(255,255,255,1);
     cursor: pointer;
     transition: 300ms ease-out;
 }
 
-.login:focus{
+.login:focus {
     outline: none;
 }
 
-.privacy{
+.privacy {
     background-color: rgba(255,255,255,0.3);
     border: none;
     padding: 10px;
@@ -211,43 +202,40 @@ h4 {
     transition: background-color 300ms;
     outline: none;
     color: rgba(5,5,5,0.6);
-
 }
 
-.privacy:hover{
+.privacy:hover {
     background-color: rgba(255,255,255,0.5);
     /* box-shadow */
     cursor: pointer;
 }
 
-.privacy:hover{
+.privacy:hover {
     background-color: rgba(255,255,255,0.5);
     cursor: pointer;
     outline: none;
 }
 
-.submit:hover{
+.submit:hover {
     background-color: rgba(255,255,255,0.7);
     cursor: pointer;
 }
 
-.submit:focus{
+.submit:focus {
     outline: none;
     transition: none;
 }
 
-.reminder{
+.reminder {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     text-align: center;
     display: flex;
     flex-direction: column;
-    top: 22vh;
+    top: 20vh;
     color: rgba(255,255,255,0.65)
 }
 
-.star{
+.star {
     position:absolute;
     background-image: url('../components/public/star_inactive.png');
     height: 30px;
@@ -256,7 +244,7 @@ h4 {
     transition: ease-out 300ms;
 }
 
-.star:hover{
+.star:hover {
     background-image: url('../components/public/star_active.png');
     transition: 200ms;
     
@@ -265,11 +253,11 @@ h4 {
     cursor: pointer;
 }
 
-.explore-btn{
+.explore-btn {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    top: 17px;
+    top: 3vh;
     /* padding: 10px; */
     scroll-behavior: smooth;
     z-index: 5;
@@ -278,7 +266,7 @@ h4 {
     transition: 80ms;
 }
 
-.explore-btn:hover{
+.explore-btn:hover {
     cursor: pointer;
     text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
     color:  rgba(255,255,255,0.7);
@@ -286,14 +274,14 @@ h4 {
     transition: 100ms;
 }
 
-.explore-btn:active{
+.explore-btn:active {
     color:  rgba(220,220,220,0.7);
 }
 
-.timeline-btn{
+.timeline-btn {
     position: absolute;
     left: 50%;
-    bottom: 17px;
+    bottom: 3vh;
     transform: translate(-50%);
     /* padding: 10px; */
     scroll-behavior: smooth;
@@ -302,7 +290,7 @@ h4 {
     color:  rgba(255,255,255,0.5);
 }
 
-.timeline-btn:hover{
+.timeline-btn:hover {
     cursor: pointer;
     text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
     color:  rgba(255,255,255,0.7);
@@ -310,30 +298,28 @@ h4 {
     transition: 100ms;
 }
 
-.timeline-btn:active{
+.timeline-btn:active {
     color:  rgba(220,220,220,0.7);
 }
 
-.question-container{
+.question-container {
     position: relative;
-    top: 17vh;
+    top: 12vh;
     text-align: center;
     margin: 0 auto;
     font-family: 'Berkshire Swash', cursive;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.6);
     text-shadow: 0px 0px 1px rgba(255, 255, 255);
-    
-
 }
 
-.question{
+.question {
     font-size: 3.5vw;
     color: rgba(0, 0, 0, 0.6);
 }
 
-.daily-response{
-    width: 97%;
+.daily-response {
+    width: 100%;
     height: 80%;
     word-wrap: break-word;
     background-color:rgba(255, 255, 255, 0.2);
@@ -348,18 +334,18 @@ h4 {
     /* box-shadow: 0px 0px 5px rgba(55, 55, 55, 0.3); */
 }
 
-.daily-response::selection{
+.daily-response::selection {
     background: rgba(255, 255, 255, 0.6);
 }
 
-.daily-response:focus{
+.daily-response:focus {
     outline: none;
     transition: 0.1s;
     transition-timing-function: ease-in;
     box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
 }
 
-.daily-response:hover{
+.daily-response:hover {
     border-color: black;
 }
 
@@ -368,11 +354,11 @@ form {
     width: 52vw;
 }
 
-form:focus{
+form:focus {
     border: none;
 }
 
-.old-responses{
+.old-responses {
     overflow-y:auto;
     overflow-x: hidden;
     height: 20vh;
@@ -380,5 +366,4 @@ form:focus{
     position: relative;
     top: 15px;
     color: rgba(97, 97, 97);
-    
 }
