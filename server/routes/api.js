@@ -73,6 +73,7 @@ router.get('/responses', function(req, res) {
                 let i, response;
                 for (i=0; i<anonResponses.length; i++) {
                     response = anonResponses[i];
+                    response.creatorID = "anonymous";
                     response.creatorUsername = "anonymous";
                     anonResponses[i] = response;
                 }
@@ -137,18 +138,20 @@ router.post(
                         upvotes         : 0,
                         upvoteUsers     : [],
                     });
-                    newResponse.save(function(err, newResponse) {
-                        switch (newResponse.privacy) {
+                    newResponse.save(function(err, response) {
+                        newRes = response;
+                        switch (newRes.privacy) {
                             case "anonymous":
-                                newResponse.creatorUsername = "anonymous";
+                                newRes.creatorID = "anonymous";
+                                newRes.creatorUsername = "anonymous";
                             case "public":
                                 const io = req.app.get('socketio');
-                                io.emit("post", newResponse);
+                                io.emit("post", newRes);
                                 break;
                             default:
                                 break;
                         }
-                        res.send(newResponse);
+                        res.send(newRes);
                     });
                 } else {
                     Response.findOneAndUpdate(
@@ -163,6 +166,7 @@ router.post(
                             editedResponse.privacy = req.body.privacy;
                             switch (editedResponse.privacy) {
                                 case "anonymous":
+                                    editedResponse.creatorID = "anonymous";
                                     editedResponse.creatorUsername = "anonymous";
                                 case "public":
                                     const io = req.app.get('socketio');
