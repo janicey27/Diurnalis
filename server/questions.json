@@ -230,7 +230,43 @@
     {
         "day": 7,
         "month": 2,
-        "content": "When is your birthday, and what do you want to do?"
+        "content": "When is your birthday, and what do you want to do on that day?"
+    },
+
+    {
+        "day": 8,
+        "month": 2,
+        "content": "What did you dream about last night?"
+    },
+
+    {
+        "day": 9,
+        "month": 2,
+        "content": "If you could make one thing come true today, what would it be?"
+    },
+
+    {
+        "day": 10,
+        "month": 2,
+        "content": "What was the most recent meal you had?"
+    },
+
+    {
+        "day": 11,
+        "month": 2,
+        "content": "What are 3 things on your wishlist?"
+    },
+
+    {
+        "day": 12,
+        "month": 2,
+        "content": "Who are you most thankful for right now?"
+    },
+
+    {
+        "day": 13,
+        "month": 2,
+        "content": "What is something you are wearing right now, and what is its backstory?"
     },
 
     {
@@ -240,9 +276,93 @@
     },
 
     {
+        "day": 15,
+        "month": 2,
+        "content": "When is the last time you danced?"
+    },
+
+    {
+        "day": 16,
+        "month": 2,
+        "content": "What is something you would tell a 10-year-old you?"
+    },
+
+    {
+        "day": 17,
+        "month": 2,
+        "content": "When is the last time you went on an adventure?"
+    },
+
+    {
+        "day": 18,
+        "month": 2,
+        "content": "What do you really want to eat right now?"
+    },
+
+    {
+        "day": 19,
+        "month": 2,
+        "content": "Who is someone you recently met?"
+    },
+
+    {
+        "day": 20,
+        "month": 2,
+        "content": "When is the last time you went into nature?"
+    },
+
+        {
+        "day": 21,
+        "month": 2,
+        "content": "What is a challenge you are working on right now?"
+    },
+
+    {
+        "day": 22,
+        "month": 2,
+        "content": "Is there something you are saving up for?"
+    },
+
+    {
         "day": 23,
         "month": 2,
         "content": "What is your favorite drink?"
+    },
+
+    {
+        "day": 24,
+        "month": 2,
+        "content": "What did you do last weekend?"
+    },
+
+    {
+        "day": 25,
+        "month": 2,
+        "content": "What is a problem you are pondering?"
+    },
+
+    {
+        "day": 26,
+        "month": 2,
+        "content": "Where do you want to go for your next vacation?"
+    },
+
+    {
+        "day": 27,
+        "month": 2,
+        "content": "What is something you are excited for this week?"
+    },
+
+    {
+        "day": 28,
+        "month": 2,
+        "content": "Cat person, dog person, neither?"
+    },
+
+    {
+        "day": 29,
+        "month": 2,
+        "content": "How do you think you have changed over the last 4 years?"
     },
 
     {
@@ -252,9 +372,93 @@
     },
 
     {
+        "day": 2,
+        "month": 3,
+        "content": "What is the most used app on your phone?"
+    },
+
+    {
+        "day": 3,
+        "month": 3,
+        "content": "What is a sport you've always wanted to try?"
+    },
+
+    {
+        "day": 4,
+        "month": 3,
+        "content": "What brings you joy?"
+    },
+
+    {
         "day": 5,
         "month": 3,
         "content": "When is the last time you told someone you loved them?"
+    },
+
+    {
+        "day": 6,
+        "month": 3,
+        "content": "What are you reading right now?"
+    },
+
+    {
+        "day": 7,
+        "month": 3,
+        "content": "What do you remember from elementary school?"
+    },
+
+    {
+        "day": 8,
+        "month": 3,
+        "content": "Do you have any bad habits that you want to change?"
+    },
+
+    {
+        "day": 9,
+        "month": 3,
+        "content": "What is a skill you wish you had?"
+    },
+
+    {
+        "day": 10,
+        "month": 3,
+        "content": "If you had only one day left to live, what would you do?"
+    },
+
+    {
+        "day": 11,
+        "month": 3,
+        "content": "Money, health, or happiness?"
+    },
+
+    {
+        "day": 12,
+        "month": 3,
+        "content": "What is your favorite day of the week?"
+    },
+
+    {
+        "day": 13,
+        "month": 3,
+        "content": "What is your favorite dish?"
+    },
+
+    {
+        "day": 14,
+        "month": 3,
+        "content": "How many digits of Pi can you memorize?"
+    },
+
+    {
+        "day": 15,
+        "month": 3,
+        "content": "Do you have a spirit animal?"
+    },
+
+    {
+        "day": 16,
+        "month": 3,
+        "content": "Do you have any regrets from the past month?"
     },
 
     {
